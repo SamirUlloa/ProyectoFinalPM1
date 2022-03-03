@@ -32,6 +32,8 @@ public class ActivityRegisUsu extends AppCompatActivity {
     EditText txtRegisTelefono;
     EditText txtRegisDirec;
 
+    //EditText
+
     Button btnRegisCrear;
     Button btnRegisCancelar;
 
