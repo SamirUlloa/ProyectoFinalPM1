@@ -31,7 +31,7 @@ public class ActivityLogin extends AppCompatActivity {
     EditText txtLoginContra;
     Button btnLoginIng;
     Button btnLoginReg;
-    //Button btnLoginMostrar;
+    Button btnLoginRest;
 
     AwesomeValidation awesomeValidation;
     FirebaseAuth firebaseAuth;
@@ -103,6 +103,15 @@ public class ActivityLogin extends AppCompatActivity {
             public void onClick(View view) {
                 Intent i = new Intent(ActivityLogin.this, ActivityRegisUsu.class);
                 startActivity(i);
+            }
+        });
+
+        //LLeva a la pantalla de Recuperar la Contraseña
+        btnLoginRest = (Button) findViewById(R.id.btnLoginRest);
+        btnLoginRest.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(ActivityLogin.this, ActivityRestablecer.class));
             }
         });
     }

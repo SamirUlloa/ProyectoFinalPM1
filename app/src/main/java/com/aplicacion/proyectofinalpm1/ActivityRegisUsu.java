@@ -147,8 +147,11 @@ public class ActivityRegisUsu extends AppCompatActivity {
                         @Override
                         public void onComplete(@NonNull Task<Void> task2) {
                             if (task2.isSuccessful()){
-                                startActivity(new Intent(ActivityRegisUsu.this, MainActivity.class));
-                                finish();
+                                //Nos envia al Login despues de crear la sesión
+                                startActivity(new Intent(ActivityRegisUsu.this, ActivityLogin.class));
+                                //Cierra la sesión para que la persistencia de datos no abra el Menu de la aplicación
+                                FirebaseAuth.getInstance().signOut();
+                                finish();//cierra la pantalla de registro de usuario.
                             } else {
                                 Toast.makeText(ActivityRegisUsu.this, "No se pudieron crear los datos", Toast.LENGTH_LONG).show();
                             }

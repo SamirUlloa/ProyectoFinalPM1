@@ -51,7 +51,7 @@
         android:text="Crear Usuario" />
 
     <Button
-        android:id="@+id/btnLoginRecu"
+        android:id="@+id/btnLoginRest"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="10dp"
