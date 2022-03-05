@@ -31,6 +31,8 @@
         android:layout_height="wrap_content"
         android:ems="10"
         android:layout_margin="10dp"
+        android:textColor="@android:color/black"
+        android:textColorHint="@android:color/black"
         android:hint="Correo"
         android:inputType="textEmailAddress" />
 
@@ -40,6 +42,8 @@
         android:layout_height="wrap_content"
         android:ems="10"
         android:layout_margin="10dp"
+        android:textColor="@android:color/black"
+        android:textColorHint="@android:color/black"
         android:hint="Contraseña"
         android:inputType="textPassword" />
 
