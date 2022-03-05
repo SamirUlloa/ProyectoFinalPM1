@@ -51,6 +51,8 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
                 android:ems="10"
+                android:textColor="@android:color/black"
+                android:textColorHint="@android:color/black"
                 android:hint="Nombre"
                 android:inputType="textPersonName" />
 
