@@ -5,13 +5,22 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="@android:color/white"
     tools:context=".ActivityLogin">
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="match_parent"
+        android:layout_height="318dp"
+        android:layout_marginTop="-50dp"
+        app:srcCompat="@mipmap/logo_economico" />
 
     <TextView
         android:id="@+id/textView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="10dp"
+        android:layout_marginTop="-20dp"
+        android:textColor="@android:color/black"
         android:text="Inicia Sesión"
         android:textAlignment="center"
         android:textSize="20sp" />
@@ -22,6 +31,8 @@
         android:layout_height="wrap_content"
         android:ems="10"
         android:layout_margin="10dp"
+        android:textColor="@android:color/black"
+        android:textColorHint="@android:color/black"
         android:hint="Correo"
         android:inputType="textEmailAddress" />
 
@@ -31,6 +42,8 @@
         android:layout_height="wrap_content"
         android:ems="10"
         android:layout_margin="10dp"
+        android:textColor="@android:color/black"
+        android:textColorHint="@android:color/black"
         android:hint="Contraseña"
         android:inputType="textPassword" />
 
@@ -40,6 +53,7 @@
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="10dp"
         android:layout_marginVertical="2dp"
+        android:textColor="@android:color/black"
         android:text="Ingresar" />
 
     <Button
@@ -48,6 +62,7 @@
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="10dp"
         android:layout_marginVertical="2dp"
+        android:textColor="@android:color/black"
         android:text="Crear Usuario" />
 
     <Button
@@ -55,6 +70,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="10dp"
+        android:textColor="@android:color/black"
         android:layout_marginVertical="2dp"
         android:text="Recuperar Contraseña" />
 

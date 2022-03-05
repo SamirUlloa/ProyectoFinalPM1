@@ -1,27 +1,46 @@
 package com.aplicacion.proyectofinalpm1;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.basgeekball.awesomevalidation.AwesomeValidation;
 import com.basgeekball.awesomevalidation.ValidationStyle;
+import com.google.android.gms.tasks.Continuation;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
+import com.squareup.picasso.Picasso;
+import com.theartofdev.edmodo.cropper.CropImage;
+import com.theartofdev.edmodo.cropper.CropImageView;
 
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
+
+import id.zelory.compressor.Compressor;
 
 public class ActivityRegisUsu extends AppCompatActivity {
 
@@ -37,6 +56,16 @@ public class ActivityRegisUsu extends AppCompatActivity {
 
     AwesomeValidation awesomeValidation;
     FirebaseAuth firebaseAuth;
+
+    //codigo para subida de imagen
+    ImageView foto;
+    Button btnRegisImagen;
+
+    DatabaseReference imgref;
+    StorageReference storageReference;
+    ProgressDialog cargando;
+    private Bitmap thumb_bitmap = null;
+    //
 
     //Codigo para BD
     String nombre = "";
@@ -54,6 +83,22 @@ public class ActivityRegisUsu extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_regis_usu);
 
+        //Codigo subida de imagen
+        foto = (ImageView) findViewById(R.id.imgFoto);
+        btnRegisImagen = (Button) findViewById(R.id.btnRegisImagen);
+
+        imgref = FirebaseDatabase.getInstance().getReference().child("usuarios");
+        storageReference = FirebaseStorage.getInstance().getReference().child("img_perfil");
+        cargando = new ProgressDialog(this);
+
+        btnRegisImagen.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                CropImage.startPickImageActivity(ActivityRegisUsu.this);
+            }
+        });
+        //termina codigo subida de imagen
+
         //Codigo para base de datos
         mAuth = FirebaseAuth.getInstance();
         mDatabase = FirebaseDatabase.getInstance().getReference();
@@ -62,7 +107,7 @@ public class ActivityRegisUsu extends AppCompatActivity {
         firebaseAuth = FirebaseAuth.getInstance();
         awesomeValidation = new AwesomeValidation(ValidationStyle.BASIC);
         awesomeValidation.addValidation(this, R.id.txtRegisCorreo, Patterns.EMAIL_ADDRESS, R.string.invalid_mail);
-        awesomeValidation.addValidation(this, R.id.txtRegisContra, ".{6,}", R.string.invalid_password);
+        awesomeValidation.addValidation(this, R.id.txtRegisContra, ".{8,}", R.string.invalid_password);
 
         txtRegisCorreo = (EditText) findViewById(R.id.txtRegisCorreo);
         txtRegisNombre = (EditText) findViewById(R.id.txtRegisNombre);
@@ -85,36 +130,17 @@ public class ActivityRegisUsu extends AppCompatActivity {
         btnRegisCrear.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                /*String mail = txtRegisCorreo.getText().toString();
-                String pass = txtRegisContra.getText().toString();
-
-                if (awesomeValidation.validate()){
-                    firebaseAuth.createUserWithEmailAndPassword(mail,pass).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                        @Override
-                        public void onComplete(@NonNull Task<AuthResult> task) {
-                            if (task.isSuccessful()){
-                                Toast.makeText(ActivityRegisUsu.this, "Usuario creado con exito", Toast.LENGTH_SHORT).show();
-                                finish();
-                            } else {
-                                String errorCode = ((FirebaseAuthException) task.getException()).getErrorCode();
-                                Toasterror(errorCode);
-                            }
-                        }
-                    });
-                } else {
-                    Toast.makeText(ActivityRegisUsu.this, "Revisa los datos", Toast.LENGTH_SHORT).show();
-                }*/
 
                 //Codigo base de datos
-                correo = txtRegisCorreo.getText().toString();
+                /*correo = txtRegisCorreo.getText().toString();
                 nombre = txtRegisNombre.getText().toString();
                 apellido = txtRegisApellido.getText().toString();
                 telefono = txtRegisTelefono.getText().toString();
                 direccion = txtRegisDirec.getText().toString();
-                contra = txtRegisContra.getText().toString();
+                contra = txtRegisContra.getText().toString();*/
 
                 if (!correo.isEmpty() && !nombre.isEmpty() && !contra.isEmpty()){
-                    if (contra.length() >= 6){
+                    if (contra.length() >= 8){
                         registrarUsuario();
                     } else {
                         Toast.makeText(ActivityRegisUsu.this, "La contraseña debe contener al menos 6 digitos", Toast.LENGTH_LONG).show();
@@ -130,43 +156,125 @@ public class ActivityRegisUsu extends AppCompatActivity {
 
     private void registrarUsuario() {
         //Codigo para base de datos
-        mAuth.createUserWithEmailAndPassword(correo, contra).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-            @Override
-            public void onComplete(@NonNull Task<AuthResult> task) {
-                if (task.isSuccessful()) {
 
-                    Map<String, Object> map = new HashMap<>();
-                    map.put("nombre", nombre);
-                    map.put("apellido", apellido);
-                    map.put("telefono", telefono);
-                    map.put("direccion", direccion);
-                    map.put("correo", correo);
+    }
 
-                    String id = mAuth.getCurrentUser().getUid();
-                    mDatabase.child("usuarios").child(id).setValue(map).addOnCompleteListener(new OnCompleteListener<Void>() {
-                        @Override
-                        public void onComplete(@NonNull Task<Void> task2) {
-                            if (task2.isSuccessful()){
-                                //Nos envia al Login despues de crear la sesión
-                                startActivity(new Intent(ActivityRegisUsu.this, ActivityLogin.class));
-                                //Cierra la sesión para que la persistencia de datos no abra el Menu de la aplicación
-                                FirebaseAuth.getInstance().signOut();
-                                finish();//cierra la pantalla de registro de usuario.
-                            } else {
-                                Toast.makeText(ActivityRegisUsu.this, "No se pudieron crear los datos", Toast.LENGTH_LONG).show();
-                            }
-                        }
-                    });
-                } else {
-                    Toast.makeText(ActivityRegisUsu.this, "No se pudo registrar el usuario", Toast.LENGTH_LONG).show();
+    //Subida de imagen
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode == CropImage.PICK_IMAGE_CHOOSER_REQUEST_CODE && resultCode == Activity.RESULT_OK){
+            Uri imageuri = CropImage.getPickImageResultUri(this, data);
+
+            //Recortar imagen
+            CropImage.activity(imageuri).setGuidelines(CropImageView.Guidelines.ON)
+                    .setRequestedSize(480, 480)
+                    .setAspectRatio(1,1).start(ActivityRegisUsu.this);
+        }
+
+        if (requestCode == CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE){
+            CropImage.ActivityResult result = CropImage.getActivityResult(data);
+            if (resultCode == RESULT_OK){
+                Uri resultUri = result.getUri();
+
+                File url = new File(resultUri.getPath());
+
+                Picasso.with(this).load(url).into(foto);
+
+                //COmprimir la Imagen
+                try {
+                    thumb_bitmap = new Compressor(this).setMaxWidth(480).setMaxHeight(480).setQuality(90).compressToBitmap(url);
+                } catch (IOException e){
+                    e.printStackTrace();
                 }
-                //Lleva al login despues de crear el usuario
-                Intent i = new Intent(ActivityRegisUsu.this, ActivityLogin.class);
-                startActivity(i);
-            }
-        });
 
-        //
+                ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+                thumb_bitmap.compress(Bitmap.CompressFormat.JPEG, 90, byteArrayOutputStream);
+                final byte [] thumb_byte = byteArrayOutputStream.toByteArray();
+                //Finaliza el compresor
+
+                int p = (int) (Math.random() * 25 + 1); int s = (int) (Math.random() * 25 + 1);
+                int t = (int) (Math.random() * 25 + 1); int c = (int) (Math.random() * 25 + 1);
+                int numero1 = (int) (Math.random() * 1012 +2111);
+                int numero2 = (int) (Math.random() * 1012 +2111);
+
+                String[] elementos = {"a", "b", "c", "d","e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p",
+                        "q", "r","s", "t","u", "v","w", "x", "y", "x"};
+
+                final String aleatorio = elementos[p] + elementos[s] + numero1 + elementos[t] + elementos[c] +
+                        numero2 + "app.jpg";
+
+                //Subir la imagen
+                btnRegisCrear.setOnClickListener(new View.OnClickListener() {
+                    //btnSubirFoto.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        cargando.setTitle("Creando Usuario");
+                        cargando.setMessage("Espere por favor...");
+                        cargando.show();
+
+                        StorageReference ref = storageReference.child(aleatorio);
+                        UploadTask uploadTask = ref.putBytes(thumb_byte);
+
+                        //Subir la imagen a la Base de Datos
+                        Task<Uri> uriTask = uploadTask.continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
+                            @Override
+                            public Task<Uri> then(@NonNull Task<UploadTask.TaskSnapshot> task) throws Exception {
+                                if (!task.isSuccessful()){
+                                    throw Objects.requireNonNull(task.getException());
+                                }
+                                return ref.getDownloadUrl();
+                            }
+                        }).addOnCompleteListener(new OnCompleteListener<Uri>() {
+                            @Override
+                            public void onComplete(@NonNull Task<Uri> task) {
+                                Uri dowloaduri = task.getResult();
+
+                                correo = txtRegisCorreo.getText().toString();
+                                nombre = txtRegisNombre.getText().toString();
+                                apellido = txtRegisApellido.getText().toString();
+                                telefono = txtRegisTelefono.getText().toString();
+                                direccion = txtRegisDirec.getText().toString();
+                                contra = txtRegisContra.getText().toString();
+
+                                //Creación de usuario en la tabla de Authenticación
+                                mAuth.createUserWithEmailAndPassword(correo, contra).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                                    @Override
+                                    public void onComplete(@NonNull Task<AuthResult> task) {
+                                        if (task.isSuccessful()) {
+
+                                            //Registra los usuario en la BD
+                                            Map<String, Object> map = new HashMap<>();
+                                            map.put("nombre", txtRegisNombre.getText().toString());
+                                            map.put("apellido", txtRegisApellido.getText().toString());
+                                            map.put("telefono", txtRegisTelefono.getText().toString());
+                                            map.put("direccion", txtRegisDirec.getText().toString());
+                                            map.put("correo", txtRegisCorreo.getText().toString());
+                                            map.put("imagenUrl", dowloaduri.toString());
+
+                                            String id = mAuth.getCurrentUser().getUid();
+
+                                            imgref.child(id).setValue(map);
+                                            //imgref.push().child("usuarios").setValue(map);
+                                            cargando.dismiss();
+                                            Toast.makeText(ActivityRegisUsu.this, "Usuario Creado con Exito", Toast.LENGTH_LONG).show();
+
+                                        } else {
+                                            Toast.makeText(ActivityRegisUsu.this, "No se pudo registrar el usuario", Toast.LENGTH_LONG).show();
+                                        }
+                                        //Lleva al login despues de crear el usuario
+                                        FirebaseAuth.getInstance().signOut();
+                                        Intent i = new Intent(ActivityRegisUsu.this, ActivityLogin.class);
+                                        startActivity(i);
+                                    }
+                                });
+                            }
+                        });
+                    }
+                });
+            }
+        }
     }
 
     private void Toasterror(String error) {
@@ -245,7 +353,6 @@ public class ActivityRegisUsu extends AppCompatActivity {
                 txtRegisContra.setError("La contraseña no es válida, debe tener al menos 6 caracteres");
                 txtRegisContra.requestFocus();
                 break;
-
         }
 
     }
