@@ -12,6 +12,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ProyectoFinalPM1">
         <activity
+            android:name=".ActivityCategoria"
+            android:exported="false" />
+        <activity
+            android:name=".ActivityLogin"
+            android:exported="false" />
+        <activity
             android:name=".ActivityRestablecer"
             android:exported="false" />
         <activity
@@ -21,7 +27,7 @@
             android:name=".ActivityRegisUsu"
             android:exported="false" />
         <activity
-            android:name=".ActivityLogin"
+            android:name=".ActivitySplash"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -31,12 +37,10 @@
         </activity>
         <activity
             android:name=".MainActivity"
-            android:exported="true">
-        </activity>
+            android:exported="true" />
         <activity
             android:name="com.theartofdev.edmodo.cropper.CropImageActivity"
             android:theme="@style/Base.Theme.AppCompat" />
-
     </application>
 
 </manifest>

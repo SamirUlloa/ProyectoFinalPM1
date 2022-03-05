@@ -107,7 +107,7 @@ public class ActivityLogin extends AppCompatActivity {
         });
 
         //LLeva a la pantalla de Recuperar la Contraseña
-        btnLoginRest = (Button) findViewById(R.id.btnLoginRest);
+        btnLoginRest = (Button) findViewById(R.id.btnLoginRecu);
         btnLoginRest.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

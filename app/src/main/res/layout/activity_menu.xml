@@ -14,9 +14,66 @@
         android:text="Usuario:"
         android:textSize="20sp" />
 
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="match_parent"
+        android:layout_height="167dp"
+        app:srcCompat="@drawable/logo1" />
+
+    <Button
+        android:id="@+id/btnCategoria"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#34978D"
+        android:backgroundTint="#009688"
+        android:text="CATEGORIA"
+        app:icon="@drawable/opciones"
+        app:iconTint="@color/common_google_signin_btn_text_dark_disabled"
+        app:iconTintMode="screen"
+        app:rippleColor="#009688" />
+
+    <Button
+        android:id="@+id/btnVerCarrito"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="VER CARRITO"
+        app:icon="@drawable/carrito_de_compras"
+        app:iconTint="@color/common_google_signin_btn_text_dark_disabled"
+        app:iconTintMode="screen" />
+
+    <Button
+        android:id="@+id/btnUbicacion"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="UBICACION"
+        app:icon="@drawable/mapa"
+        app:iconTint="@color/common_google_signin_btn_text_dark_disabled"
+        app:iconTintMode="screen" />
+
+    <Button
+        android:id="@+id/button4"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="DASHBOARD"
+        app:icon="@drawable/dashboard"
+        app:iconTint="@color/common_google_signin_btn_text_dark_disabled"
+        app:iconTintMode="screen" />
+
+    <Button
+        android:id="@+id/btnAcercaD"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="ACERCA DE..."
+        app:icon="@drawable/ordenador_portatil"
+        app:iconTint="@color/common_google_signin_btn_text_dark_disabled"
+        app:iconTintMode="screen" />
+
     <Button
         android:id="@+id/btnCerrarSesion"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Cerrar Sesión" />
+        android:text="Cerrar Sesión"
+        app:icon="@drawable/flecha"
+        app:iconTint="@color/common_google_signin_btn_text_dark_disabled"
+        app:iconTintMode="screen" />
 </LinearLayout>

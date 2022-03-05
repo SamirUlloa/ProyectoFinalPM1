@@ -13,7 +13,7 @@ import com.google.firebase.auth.FirebaseAuth;
 
 public class ActivityMenu extends AppCompatActivity {
 
-    Button btnCerrarSesion;
+    Button btnCerrarSesion, btncategoria;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +35,17 @@ public class ActivityMenu extends AppCompatActivity {
                 sesionCerrada();    //Retorna al Login
             }
         });
+
+
+        btncategoria = (Button) findViewById(R.id.btnCategoria);
+        btncategoria.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(ActivityMenu.this, ActivityCategoria.class);
+                startActivity(intent);
+            }
+        });
+
     }
 
     private void sesionCerrada() {
