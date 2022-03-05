@@ -19,6 +19,7 @@ import com.google.firebase.auth.FirebaseAuth;
 public class ActivityRestablecer extends AppCompatActivity {
 
     EditText txtRestCorreo;
+    EditText txtRestCo;
     Button btnRestContra;
 
     String correo = "";
