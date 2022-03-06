@@ -12,10 +12,19 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ProyectoFinalPM1">
         <activity
+            android:name=".ActivityRepartidor"
+            android:exported="false" />
+        <activity
+            android:name=".ActivityAdministrador"
+            android:exported="false" />
+        <activity
             android:name=".ActivityCategoria"
             android:exported="false" />
         <activity
             android:name=".ActivityLogin"
+            android:exported="false" />
+        <activity
+            android:name=".ActivityPerfilUsuario"
             android:exported="false" />
         <activity
             android:name=".ActivityRestablecer"

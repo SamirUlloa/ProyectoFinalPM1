@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@android:color/white"
+    tools:context=".ActivityRepartidor">
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:textColor="@android:color/black"
+        android:textColorHint="@android:color/black"
+        android:textAlignment="center"
+        android:text="Perfil Repartidor"
+        android:textSize="20sp" />
+
+    <TextView
+        android:id="@+id/textViewRepar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:textColor="@android:color/black"
+        android:textColorHint="@android:color/black"
+        android:text="Bienvenido: "
+        android:textSize="20sp" />
+
+    <Button
+        android:id="@+id/btnReparCerrar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:text="Cerrar Sesión" />
+
+</LinearLayout>

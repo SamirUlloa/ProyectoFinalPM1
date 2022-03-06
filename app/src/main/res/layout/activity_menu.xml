@@ -8,10 +8,10 @@
     tools:context=".ActivityMenu">
 
     <TextView
-        android:id="@+id/tvUser"
+        android:id="@+id/tvMenuUser"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Usuario:"
+        android:text="Bienvenido: "
         android:textSize="20sp" />
 
     <ImageView

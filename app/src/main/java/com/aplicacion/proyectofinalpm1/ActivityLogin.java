@@ -24,6 +24,11 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthException;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 public class ActivityLogin extends AppCompatActivity {
 
@@ -35,6 +40,7 @@ public class ActivityLogin extends AppCompatActivity {
 
     AwesomeValidation awesomeValidation;
     FirebaseAuth firebaseAuth;
+    DatabaseReference mDatabase;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,12 +51,13 @@ public class ActivityLogin extends AppCompatActivity {
         txtLoginContra = (EditText) findViewById(R.id.txtLoginContra);
 
         firebaseAuth = FirebaseAuth.getInstance();
+        mDatabase = FirebaseDatabase.getInstance().getReference();
 
         //Persistencia de Datos
         FirebaseAuth mAuth = FirebaseAuth.getInstance();
         FirebaseUser user = mAuth.getCurrentUser();
         if (user != null){
-            menuPrincipal();
+            tipoUsuario();
         }
 
         awesomeValidation = new AwesomeValidation(ValidationStyle.BASIC);
@@ -71,7 +78,8 @@ public class ActivityLogin extends AppCompatActivity {
                             @Override
                             public void onComplete(@NonNull Task<AuthResult> task) {
                                 if (task.isSuccessful()) {
-                                    menuPrincipal();
+                                    //Verificación del perfil de usuario para enviarlo a su Activity
+                                    tipoUsuario();
                                  } else {
                                     String errorCode = ((FirebaseAuthException) task.getException()).getErrorCode();
                                     Toasterror(errorCode);
@@ -121,6 +129,59 @@ public class ActivityLogin extends AppCompatActivity {
         i.putExtra("email", txtLoginCorreo.getText().toString());
         i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP |Intent.FLAG_ACTIVITY_CLEAR_TASK |Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(i);
+    }
+
+    private void tipoUsuario(){
+
+        String id = firebaseAuth.getCurrentUser().getUid();
+
+        //Evalua los usuarios clientes en la BD
+        mDatabase.child("usuarios").child("clientes").child(id).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                if (dataSnapshot.exists()) {
+                    startActivity(new Intent(ActivityLogin.this, ActivityMenu.class));
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+        //Evalua los usuarios repartidores en la BD
+        mDatabase.child("usuarios").child("repartidores").child(id).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                if (dataSnapshot.exists()) {
+                    startActivity(new Intent(ActivityLogin.this, ActivityRepartidor.class));
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+        //Evalua los usuarios Administradores dentro de la BD
+        mDatabase.child("usuarios").child("administradores").child(id).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                if (dataSnapshot.exists()) {
+                    startActivity(new Intent(ActivityLogin.this, ActivityAdministrador.class));
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
     }
 
     private void Toasterror(String error) {

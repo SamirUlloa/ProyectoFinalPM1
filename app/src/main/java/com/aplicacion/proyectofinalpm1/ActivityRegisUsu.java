@@ -96,8 +96,7 @@ public class ActivityRegisUsu extends AppCompatActivity {
             public void onClick(View view) {
                 CropImage.startPickImageActivity(ActivityRegisUsu.this);
             }
-        });
-        //termina codigo subida de imagen
+        }); //termina codigo subida de imagen
 
         //Codigo para base de datos
         mAuth = FirebaseAuth.getInstance();
@@ -130,14 +129,6 @@ public class ActivityRegisUsu extends AppCompatActivity {
         btnRegisCrear.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-                //Codigo base de datos
-                /*correo = txtRegisCorreo.getText().toString();
-                nombre = txtRegisNombre.getText().toString();
-                apellido = txtRegisApellido.getText().toString();
-                telefono = txtRegisTelefono.getText().toString();
-                direccion = txtRegisDirec.getText().toString();
-                contra = txtRegisContra.getText().toString();*/
 
                 if (!correo.isEmpty() && !nombre.isEmpty() && !contra.isEmpty()){
                     if (contra.length() >= 8){
@@ -255,7 +246,8 @@ public class ActivityRegisUsu extends AppCompatActivity {
 
                                             String id = mAuth.getCurrentUser().getUid();
 
-                                            imgref.child(id).setValue(map);
+                                            //imgref.child(id).setValue(map);
+                                            imgref.child("clientes").child(id).setValue(map);
                                             //imgref.push().child("usuarios").setValue(map);
                                             cargando.dismiss();
                                             Toast.makeText(ActivityRegisUsu.this, "Usuario Creado con Exito", Toast.LENGTH_LONG).show();

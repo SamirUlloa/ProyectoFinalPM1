@@ -8,7 +8,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -17,10 +16,10 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-public class ActivityMenu extends AppCompatActivity {
+public class ActivityRepartidor extends AppCompatActivity {
 
-    Button btnCerrarSesion;
-    TextView tvMenuUsuario;
+    TextView textViewRepar;
+    Button btnReparCerrar;
 
     FirebaseAuth mAuth;
     DatabaseReference mDatabase;
@@ -28,23 +27,23 @@ public class ActivityMenu extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_menu);
+        setContentView(R.layout.activity_repartidor);
 
         mAuth = FirebaseAuth.getInstance();
         mDatabase = FirebaseDatabase.getInstance().getReference();
 
-        btnCerrarSesion = (Button) findViewById(R.id.btnCerrarSesion);
-        tvMenuUsuario = (TextView) findViewById(R.id.tvMenuUser);
+        textViewRepar = findViewById(R.id.textViewRepar);
 
-        btnCerrarSesion.setOnClickListener(new View.OnClickListener() {
+        btnReparCerrar = (Button) findViewById(R.id.btnReparCerrar);
+        btnReparCerrar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 mAuth.signOut();
-                startActivity(new Intent(ActivityMenu.this, ActivityLogin.class));
+                startActivity(new Intent(ActivityRepartidor.this, ActivityLogin.class));
                 finish();
             }
         });
-        //Extrae de la BD el identificador del usuario logueado
+
         tipoUsuario();
     }
 
@@ -52,14 +51,14 @@ public class ActivityMenu extends AppCompatActivity {
 
         String id = mAuth.getCurrentUser().getUid();
 
-        //Evalua los usuarios clientes en la BD
-        mDatabase.child("usuarios").child("clientes").child(id).addValueEventListener(new ValueEventListener() {
+        //Evalua los usuarios repartidores en la BD
+        mDatabase.child("usuarios").child("repartidores").child(id).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
                 if (dataSnapshot.exists()) {
                     String nombre = dataSnapshot.child("nombre").getValue().toString();
-                    tvMenuUsuario.setText("Bienvenido: "+ nombre);
+                    textViewRepar.setText("Bienvenido: "+ nombre);
                 }
             }
 
