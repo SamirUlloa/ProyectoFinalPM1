@@ -1,4 +1,4 @@
-package com.aplicacion.proyectofinalpm1;
+package com.aplicacion.proyectofinalpm1.ActivityRepartidor;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -9,6 +9,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.aplicacion.proyectofinalpm1.ActivityLogin;
+import com.aplicacion.proyectofinalpm1.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -16,10 +18,10 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-public class ActivityAdministrador extends AppCompatActivity {
+public class ActivityRepartidor extends AppCompatActivity {
 
-    TextView textViewAdmin;
-    Button btnAdminCerrar;
+    TextView textViewRepar;
+    Button btnReparCerrar;
 
     FirebaseAuth mAuth;
     DatabaseReference mDatabase;
@@ -27,19 +29,19 @@ public class ActivityAdministrador extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_administrador);
+        setContentView(R.layout.activity_repartidor);
 
         mAuth = FirebaseAuth.getInstance();
         mDatabase = FirebaseDatabase.getInstance().getReference();
 
-        textViewAdmin = findViewById(R.id.textViewAdmin);
+        textViewRepar = findViewById(R.id.textViewRepar);
 
-        btnAdminCerrar = (Button) findViewById(R.id.btnAdminCerrar);
-        btnAdminCerrar.setOnClickListener(new View.OnClickListener() {
+        btnReparCerrar = (Button) findViewById(R.id.btnReparCerrar);
+        btnReparCerrar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 mAuth.signOut();
-                startActivity(new Intent(ActivityAdministrador.this, ActivityLogin.class));
+                startActivity(new Intent(ActivityRepartidor.this, ActivityLogin.class));
                 finish();
             }
         });
@@ -51,14 +53,14 @@ public class ActivityAdministrador extends AppCompatActivity {
 
         String id = mAuth.getCurrentUser().getUid();
 
-        //Evalua los usuarios Administradores dentro de la BD
-        mDatabase.child("usuarios").child("administradores").child(id).addValueEventListener(new ValueEventListener() {
+        //Evalua los usuarios repartidores en la BD
+        mDatabase.child("usuarios").child("repartidores").child(id).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
                 if (dataSnapshot.exists()) {
                     String nombre = dataSnapshot.child("nombre").getValue().toString();
-                    textViewAdmin.setText("Bienvenido: "+ nombre);
+                    textViewRepar.setText("Bienvenido: "+ nombre);
                 }
             }
 

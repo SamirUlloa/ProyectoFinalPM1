@@ -6,39 +6,39 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="@android:color/white"
-    tools:context=".ActivityRegisUsu">
+    tools:context=".ActivityAdmin.ActivityRegisRepartidor">
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/textViewRepaT"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
-        android:text="Registro de Usuario"
-        android:textColor="@android:color/black"
+        android:text="Registrar un Repartidor"
         android:textAlignment="center"
+        android:textColor="@android:color/black"
         android:textSize="20sp" />
 
 
     <ScrollView
+        android:id="@+id/scrolRepa"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         >
 
         <LinearLayout
-            android:id="@+id/lineSec2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
 
             <ImageView
-                android:id="@+id/imgFoto"
+                android:id="@+id/imgFotoRepartidor"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 tools:srcCompat="@tools:sample/avatars" />
 
             <Button
-                android:id="@+id/btnRegisImagen"
+                android:id="@+id/btnRepartImagen"
                 android:layout_width="match_parent"
                 android:textColor="@android:color/black"
                 android:textColorHint="@android:color/black"
@@ -47,7 +47,7 @@
                 android:text="Agregar Imagen" />
 
             <EditText
-                android:id="@+id/txtRegisNombre"
+                android:id="@+id/txtReparNombre"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
@@ -58,7 +58,7 @@
                 android:inputType="textPersonName" />
 
             <EditText
-                android:id="@+id/txtRegisApellido"
+                android:id="@+id/txtReparApellido"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
@@ -69,7 +69,7 @@
                 android:inputType="textPersonName" />
 
             <EditText
-                android:id="@+id/txtRegisTelefono"
+                android:id="@+id/txtReparTelefono"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
@@ -80,7 +80,7 @@
                 android:inputType="number" />
 
             <EditText
-                android:id="@+id/txtRegisDirec"
+                android:id="@+id/txtReparDirec"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
@@ -91,18 +91,19 @@
                 android:inputType="textPersonName" />
 
             <EditText
-                android:id="@+id/txtRegisCorreo"
+                android:id="@+id/txtReparCorreo"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textColor="@android:color/black"
                 android:textColorHint="@android:color/black"
                 android:layout_margin="10dp"
+
                 android:ems="10"
                 android:hint="Correo"
                 android:inputType="textEmailAddress" />
 
             <EditText
-                android:id="@+id/txtRegisContra"
+                android:id="@+id/txtReparContra"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
@@ -113,19 +114,19 @@
                 android:inputType="textPassword" />
 
             <Button
-                android:id="@+id/btnRegisCrear"
+                android:id="@+id/btnReparCrear"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
                 android:text="Crear Usuario" />
 
             <Button
-                android:id="@+id/btnRegisCancelar"
+                android:id="@+id/btnReparCancelar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="10dp"
                 android:layout_marginVertical="2dp"
-                android:text="Regresar al Login" />
+                android:text="Regresar al Menu" />
 
         </LinearLayout>
     </ScrollView>

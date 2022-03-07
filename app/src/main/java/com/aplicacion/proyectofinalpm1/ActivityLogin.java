@@ -6,16 +6,15 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
-import android.text.InputType;
 import android.util.Patterns;
-import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.aplicacion.proyectofinalpm1.ActivityAdmin.ActivityAdministrador;
+import com.aplicacion.proyectofinalpm1.ActivityRepartidor.ActivityRepartidor;
 import com.basgeekball.awesomevalidation.AwesomeValidation;
 import com.basgeekball.awesomevalidation.ValidationStyle;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -61,8 +60,8 @@ public class ActivityLogin extends AppCompatActivity {
         }
 
         awesomeValidation = new AwesomeValidation(ValidationStyle.BASIC);
-        awesomeValidation.addValidation(this, R.id.txtRegisCorreo, Patterns.EMAIL_ADDRESS, R.string.invalid_mail);
-        awesomeValidation.addValidation(this, R.id.txtRegisContra, ".{6,}", R.string.invalid_password);
+        awesomeValidation.addValidation(this, R.id.txtLoginCorreo, Patterns.EMAIL_ADDRESS, R.string.invalid_mail);
+        awesomeValidation.addValidation(this, R.id.txtLoginContra, ".{6,}", R.string.invalid_password);
 
         //Loguear usuario
         btnLoginIng = (Button) findViewById(R.id.btnLoginIng);
@@ -124,6 +123,7 @@ public class ActivityLogin extends AppCompatActivity {
         });
     }
 
+    //Se inhabilita
     private void menuPrincipal() {
         Intent i = new Intent(ActivityLogin.this, ActivityMenu.class);
         i.putExtra("email", txtLoginCorreo.getText().toString());
@@ -142,6 +142,7 @@ public class ActivityLogin extends AppCompatActivity {
 
                 if (dataSnapshot.exists()) {
                     startActivity(new Intent(ActivityLogin.this, ActivityMenu.class));
+                    finish();
                 }
             }
 
@@ -158,6 +159,7 @@ public class ActivityLogin extends AppCompatActivity {
 
                 if (dataSnapshot.exists()) {
                     startActivity(new Intent(ActivityLogin.this, ActivityRepartidor.class));
+                    finish();
                 }
             }
 
@@ -174,6 +176,7 @@ public class ActivityLogin extends AppCompatActivity {
 
                 if (dataSnapshot.exists()) {
                     startActivity(new Intent(ActivityLogin.this, ActivityAdministrador.class));
+                    finish();
                 }
             }
 
@@ -260,8 +263,6 @@ public class ActivityLogin extends AppCompatActivity {
                 txtLoginContra.setError("La contraseña no es válida, debe tener al menos 6 caracteres");
                 txtLoginContra.requestFocus();
                 break;
-
         }
-
     }
 }

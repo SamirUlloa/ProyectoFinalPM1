@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="@android:color/white"
     tools:context=".ActivityRestablecer">
 
     <TextView
@@ -12,6 +13,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Restablezca si Contraseña"
+        android:textColor="@android:color/black"
+        android:textColorHint="@android:color/black"
         android:layout_margin="10dp"
         android:textAlignment="center"
         android:textSize="20sp" />
@@ -21,9 +24,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
+        android:textColor="@android:color/black"
+        android:textColorHint="@android:color/black"
         android:ems="10"
-        android:hint="Correo"
-        android:inputType="textPersonName" />
+        android:hint="Ingrese el Correo"
+        android:inputType="textEmailAddress" />
 
     <Button
         android:id="@+id/btnRestContra"

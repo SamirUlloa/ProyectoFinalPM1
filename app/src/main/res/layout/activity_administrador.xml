@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="@android:color/white"
-    tools:context=".ActivityAdministrador">
+    tools:context=".ActivityAdmin.ActivityAdministrador">
 
     <TextView
         android:id="@+id/textView6"
@@ -30,6 +30,34 @@
         android:textSize="20sp"
         tools:layout_editor_absoluteX="208dp"
         tools:layout_editor_absoluteY="162dp" />
+
+    <Button
+        android:id="@+id/btnPedidosPendientes"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:text="Pedidos Pendientes" />
+
+    <Button
+        android:id="@+id/btnPedidosEntregados"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:text="Pedidos Entregados" />
+
+    <Button
+        android:id="@+id/btnRegisRepartidor"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:text="Registrar Repartidor" />
+
+    <Button
+        android:id="@+id/btnRegisAdmin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:text="Registrar Administrador" />
 
     <Button
         android:id="@+id/btnAdminCerrar"

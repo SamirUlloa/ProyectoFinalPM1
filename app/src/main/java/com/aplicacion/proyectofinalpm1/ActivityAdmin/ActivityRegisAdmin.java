@@ -1,4 +1,4 @@
-package com.aplicacion.proyectofinalpm1;
+package com.aplicacion.proyectofinalpm1.ActivityAdmin;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -17,6 +17,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.aplicacion.proyectofinalpm1.R;
 import com.basgeekball.awesomevalidation.AwesomeValidation;
 import com.basgeekball.awesomevalidation.ValidationStyle;
 import com.google.android.gms.tasks.Continuation;
@@ -24,7 +25,6 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseAuthException;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
@@ -43,24 +43,24 @@ import java.util.Objects;
 
 import id.zelory.compressor.Compressor;
 
-public class ActivityRegisUsu extends AppCompatActivity {
+public class ActivityRegisAdmin extends AppCompatActivity {
 
-    EditText txtRegisCorreo;
-    EditText txtRegisContra;
-    EditText txtRegisNombre;
-    EditText txtRegisApellido;
-    EditText txtRegisTelefono;
-    EditText txtRegisDirec;
+    EditText txtAdminCorreo;
+    EditText txtAdminContra;
+    EditText txtAdminNombre;
+    EditText txtAdminApellido;
+    EditText txtAdminTelefono;
+    EditText txtAdminDirec;
 
-    Button btnRegisCrear;
-    Button btnRegisCancelar;
+    Button btnAdminCrear;
+    Button btnAdminCancelar;
 
     AwesomeValidation awesomeValidation;
     FirebaseAuth firebaseAuth;
 
     //codigo para subida de imagen
     ImageView foto;
-    Button btnRegisImagen;
+    Button btnAdminImage;
 
     DatabaseReference imgref;
     StorageReference storageReference;
@@ -82,20 +82,30 @@ public class ActivityRegisUsu extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_regis_usu);
+        setContentView(R.layout.activity_regis_admin);
 
-        //Codigo subida de imagen
-        foto = (ImageView) findViewById(R.id.imgFoto);
-        btnRegisImagen = (Button) findViewById(R.id.btnRegisImagen);
-
-        imgref = FirebaseDatabase.getInstance().getReference().child("usuarios");
-        storageReference = FirebaseStorage.getInstance().getReference().child("img_perfil_clientes");
-        cargando = new ProgressDialog(this);
-
-        btnRegisImagen.setOnClickListener(new View.OnClickListener() {
+        //Regresa al menu Administrador
+        btnAdminCancelar = (Button) findViewById(R.id.btnAdminCancelar);
+        btnAdminCancelar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                CropImage.startPickImageActivity(ActivityRegisUsu.this);
+                startActivity(new Intent(ActivityRegisAdmin.this, ActivityAdministrador.class));
+                finish();
+            }
+        });
+
+        //Codigo subida de imagen
+        foto = (ImageView) findViewById(R.id.imagFotoAdmin);
+        btnAdminImage = (Button) findViewById(R.id.btnAdminImage);
+
+        imgref = FirebaseDatabase.getInstance().getReference().child("usuarios");
+        storageReference = FirebaseStorage.getInstance().getReference().child("img_perfil_administradores");
+        cargando = new ProgressDialog(this);
+
+        btnAdminImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                CropImage.startPickImageActivity(ActivityRegisAdmin.this);
             }
         }); //termina codigo subida de imagen
 
@@ -106,51 +116,32 @@ public class ActivityRegisUsu extends AppCompatActivity {
 
         firebaseAuth = FirebaseAuth.getInstance();
         awesomeValidation = new AwesomeValidation(ValidationStyle.BASIC);
-        awesomeValidation.addValidation(this, R.id.txtRegisCorreo, Patterns.EMAIL_ADDRESS, R.string.invalid_mail);
-        awesomeValidation.addValidation(this, R.id.txtRegisContra, ".{8,}", R.string.invalid_password);
+        awesomeValidation.addValidation(this, R.id.txtAdminCorreo, Patterns.EMAIL_ADDRESS, R.string.invalid_mail);
+        awesomeValidation.addValidation(this, R.id.txtAdminContra, ".{8,}", R.string.invalid_password);
 
-        txtRegisCorreo = (EditText) findViewById(R.id.txtRegisCorreo);
-        txtRegisNombre = (EditText) findViewById(R.id.txtRegisNombre);
-        txtRegisApellido = (EditText) findViewById(R.id.txtRegisApellido);
-        txtRegisTelefono = (EditText) findViewById(R.id.txtRegisTelefono);
-        txtRegisDirec = (EditText) findViewById(R.id.txtRegisDirec);
-        txtRegisContra = (EditText) findViewById(R.id.txtRegisContra);
+        txtAdminCorreo = (EditText) findViewById(R.id.txtAdminCorreo);
+        txtAdminNombre = (EditText) findViewById(R.id.txtAdminNombre);
+        txtAdminApellido = (EditText) findViewById(R.id.txtAdminApellido);
+        txtAdminTelefono = (EditText) findViewById(R.id.txtAdminTelefono);
+        txtAdminDirec = (EditText) findViewById(R.id.txtAdminDirec);
+        txtAdminContra = (EditText) findViewById(R.id.txtAdminContra);
 
-        //Cancela la creación del usuario
-        btnRegisCancelar = (Button) findViewById(R.id.btnRegisCancelar);
-        btnRegisCancelar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent i = new Intent(ActivityRegisUsu.this, ActivityLogin.class);
-                startActivity(i);
-            }
-        });
-
-        btnRegisCrear = (Button) findViewById(R.id.btnRegisCrear);
-        btnRegisCrear.setOnClickListener(new View.OnClickListener() {
+        btnAdminCrear = (Button) findViewById(R.id.btnAdminCrear);
+        btnAdminCrear.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
                 if (!correo.isEmpty() && !nombre.isEmpty() && !contra.isEmpty()){
                     if (contra.length() >= 8){
-                        registrarUsuario();
+                        //registrarUsuario();
                     } else {
-                        Toast.makeText(ActivityRegisUsu.this, "La contraseña debe contener al menos 8 digitos", Toast.LENGTH_LONG).show();
+                        Toast.makeText(ActivityRegisAdmin.this, "La contraseña debe contener al menos 8 digitos", Toast.LENGTH_LONG).show();
                     }
                 } else {
-                    //String errorCode = ((FirebaseAuthException) task.getException()).getErrorCode();
-                    //Toasterror(errorCode);
-                    Toast.makeText(ActivityRegisUsu.this, "Complete todos los campos", Toast.LENGTH_LONG).show();
+                    Toast.makeText(ActivityRegisAdmin.this, "COmplete todos los campos", Toast.LENGTH_LONG).show();
                 }
-
-                //
             }
         });
-    }
-
-    private void registrarUsuario() {
-        //Codigo para base de datos
-
     }
 
     //Subida de imagen
@@ -164,7 +155,7 @@ public class ActivityRegisUsu extends AppCompatActivity {
             //Recortar imagen
             CropImage.activity(imageuri).setGuidelines(CropImageView.Guidelines.ON)
                     .setRequestedSize(480, 480)
-                    .setAspectRatio(1,1).start(ActivityRegisUsu.this);
+                    .setAspectRatio(1,1).start(ActivityRegisAdmin.this);
         }
 
         if (requestCode == CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE){
@@ -200,7 +191,7 @@ public class ActivityRegisUsu extends AppCompatActivity {
                         numero2 + "app.jpg";
 
                 //Subir la imagen
-                btnRegisCrear.setOnClickListener(new View.OnClickListener() {
+                btnAdminCrear.setOnClickListener(new View.OnClickListener() {
                     //btnSubirFoto.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
@@ -225,12 +216,12 @@ public class ActivityRegisUsu extends AppCompatActivity {
                             public void onComplete(@NonNull Task<Uri> task) {
                                 Uri dowloaduri = task.getResult();
 
-                                correo = txtRegisCorreo.getText().toString();
-                                nombre = txtRegisNombre.getText().toString();
-                                apellido = txtRegisApellido.getText().toString();
-                                telefono = txtRegisTelefono.getText().toString();
-                                direccion = txtRegisDirec.getText().toString();
-                                contra = txtRegisContra.getText().toString();
+                                correo = txtAdminCorreo.getText().toString();
+                                nombre = txtAdminNombre.getText().toString();
+                                apellido = txtAdminApellido.getText().toString();
+                                telefono = txtAdminTelefono.getText().toString();
+                                direccion = txtAdminDirec.getText().toString();
+                                contra = txtAdminContra.getText().toString();
 
                                 //Creación de usuario en la tabla de Authenticación
                                 mAuth.createUserWithEmailAndPassword(correo, contra).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
@@ -240,27 +231,25 @@ public class ActivityRegisUsu extends AppCompatActivity {
 
                                             //Registra los usuario en la BD
                                             Map<String, Object> map = new HashMap<>();
-                                            map.put("nombre", txtRegisNombre.getText().toString().trim());
-                                            map.put("apellido", txtRegisApellido.getText().toString().trim());
-                                            map.put("telefono", txtRegisTelefono.getText().toString().trim());
-                                            map.put("direccion", txtRegisDirec.getText().toString().trim());
-                                            map.put("correo", txtRegisCorreo.getText().toString().trim());
+                                            map.put("nombre", txtAdminNombre.getText().toString().trim());
+                                            map.put("apellido", txtAdminApellido.getText().toString().trim());
+                                            map.put("telefono", txtAdminTelefono.getText().toString().trim());
+                                            map.put("direccion", txtAdminDirec.getText().toString().trim());
+                                            map.put("correo", txtAdminCorreo.getText().toString().trim());
                                             map.put("imagenUrl", dowloaduri.toString());
 
                                             String id = mAuth.getCurrentUser().getUid();
 
-                                            //imgref.child(id).setValue(map);
-                                            imgref.child("clientes").child(id).setValue(map);
-                                            //imgref.push().child("usuarios").setValue(map);
+                                            imgref.child("administradores").child(id).setValue(map);
                                             cargando.dismiss();
-                                            Toast.makeText(ActivityRegisUsu.this, "Usuario Creado con Exito", Toast.LENGTH_LONG).show();
+                                            Toast.makeText(ActivityRegisAdmin.this, "Usuario Creado con Exito", Toast.LENGTH_LONG).show();
 
                                         } else {
-                                            Toast.makeText(ActivityRegisUsu.this, "No se pudo registrar el usuario", Toast.LENGTH_LONG).show();
+                                            Toast.makeText(ActivityRegisAdmin.this, "No se pudo registrar el usuario", Toast.LENGTH_LONG).show();
                                         }
                                         //Lleva al login despues de crear el usuario
                                         FirebaseAuth.getInstance().signOut();
-                                        Intent i = new Intent(ActivityRegisUsu.this, ActivityLogin.class);
+                                        Intent i = new Intent(ActivityRegisAdmin.this, ActivityAdministrador.class);
                                         startActivity(i);
                                     }
                                 });
@@ -277,78 +266,77 @@ public class ActivityRegisUsu extends AppCompatActivity {
         switch (error) {
 
             case "ERROR_INVALID_CUSTOM_TOKEN":
-                Toast.makeText(ActivityRegisUsu.this, "El formato del token personalizado es incorrecto. Por favor revise la documentación", Toast.LENGTH_LONG).show();
+                Toast.makeText(ActivityRegisAdmin.this, "El formato del token personalizado es incorrecto. Por favor revise la documentación", Toast.LENGTH_LONG).show();
                 break;
 
             case "ERROR_CUSTOM_TOKEN_MISMATCH":
-                Toast.makeText(ActivityRegisUsu.this, "El token personalizado corresponde a una audiencia diferente.", Toast.LENGTH_LONG).show();
+                Toast.makeText(ActivityRegisAdmin.this, "El token personalizado corresponde a una audiencia diferente.", Toast.LENGTH_LONG).show();
                 break;
 
             case "ERROR_INVALID_CREDENTIAL":
-                Toast.makeText(ActivityRegisUsu.this, "La credencial de autenticación proporcionada tiene un formato incorrecto o ha caducado.", Toast.LENGTH_LONG).show();
+                Toast.makeText(ActivityRegisAdmin.this, "La credencial de autenticación proporcionada tiene un formato incorrecto o ha caducado.", Toast.LENGTH_LONG).show();
                 break;
 
             case "ERROR_INVALID_EMAIL":
-                Toast.makeText(ActivityRegisUsu.this, "La dirección de correo electrónico está mal formateada.", Toast.LENGTH_LONG).show();
-                txtRegisCorreo.setError("La dirección de correo electrónico está mal formateada.");
-                txtRegisCorreo.requestFocus();
+                Toast.makeText(ActivityRegisAdmin.this, "La dirección de correo electrónico está mal formateada.", Toast.LENGTH_LONG).show();
+                txtAdminCorreo.setError("La dirección de correo electrónico está mal formateada.");
+                txtAdminCorreo.requestFocus();
                 break;
 
             case "ERROR_WRONG_PASSWORD":
-                Toast.makeText(ActivityRegisUsu.this, "La contraseña no es válida o el usuario no tiene contraseña.", Toast.LENGTH_LONG).show();
-                txtRegisContra.setError("la contraseña es incorrecta ");
-                txtRegisContra.requestFocus();
-                txtRegisContra.setText("");
+                Toast.makeText(ActivityRegisAdmin.this, "La contraseña no es válida o el usuario no tiene contraseña.", Toast.LENGTH_LONG).show();
+                txtAdminContra.setError("la contraseña es incorrecta ");
+                txtAdminContra.requestFocus();
+                txtAdminContra.setText("");
                 break;
 
             case "ERROR_USER_MISMATCH":
-                Toast.makeText(ActivityRegisUsu.this, "Las credenciales proporcionadas no corresponden al usuario que inició sesión anteriormente..", Toast.LENGTH_LONG).show();
+                Toast.makeText(ActivityRegisAdmin.this, "Las credenciales proporcionadas no corresponden al usuario que inició sesión anteriormente..", Toast.LENGTH_LONG).show();
                 break;
 
             case "ERROR_REQUIRES_RECENT_LOGIN":
-                Toast.makeText(ActivityRegisUsu.this, "Esta operación es sensible y requiere autenticación reciente. Inicie sesión nuevamente antes de volver a intentar esta solicitud.", Toast.LENGTH_LONG).show();
+                Toast.makeText(ActivityRegisAdmin.this, "Esta operación es sensible y requiere autenticación reciente. Inicie sesión nuevamente antes de volver a intentar esta solicitud.", Toast.LENGTH_LONG).show();
                 break;
 
             case "ERROR_ACCOUNT_EXISTS_WITH_DIFFERENT_CREDENTIAL":
-                Toast.makeText(ActivityRegisUsu.this, "Ya existe una cuenta con la misma dirección de correo electrónico pero diferentes credenciales de inicio de sesión. Inicie sesión con un proveedor asociado a esta dirección de correo electrónico.", Toast.LENGTH_LONG).show();
+                Toast.makeText(ActivityRegisAdmin.this, "Ya existe una cuenta con la misma dirección de correo electrónico pero diferentes credenciales de inicio de sesión. Inicie sesión con un proveedor asociado a esta dirección de correo electrónico.", Toast.LENGTH_LONG).show();
                 break;
 
             case "ERROR_EMAIL_ALREADY_IN_USE":
-                Toast.makeText(ActivityRegisUsu.this, "La dirección de correo electrónico ya está siendo utilizada por otra cuenta..   ", Toast.LENGTH_LONG).show();
-                txtRegisCorreo.setError("La dirección de correo electrónico ya está siendo utilizada por otra cuenta.");
-                txtRegisCorreo.requestFocus();
+                Toast.makeText(ActivityRegisAdmin.this, "La dirección de correo electrónico ya está siendo utilizada por otra cuenta..   ", Toast.LENGTH_LONG).show();
+                txtAdminCorreo.setError("La dirección de correo electrónico ya está siendo utilizada por otra cuenta.");
+                txtAdminCorreo.requestFocus();
                 break;
 
             case "ERROR_CREDENTIAL_ALREADY_IN_USE":
-                Toast.makeText(ActivityRegisUsu.this, "Esta credencial ya está asociada con una cuenta de usuario diferente.", Toast.LENGTH_LONG).show();
+                Toast.makeText(ActivityRegisAdmin.this, "Esta credencial ya está asociada con una cuenta de usuario diferente.", Toast.LENGTH_LONG).show();
                 break;
 
             case "ERROR_USER_DISABLED":
-                Toast.makeText(ActivityRegisUsu.this, "La cuenta de usuario ha sido inhabilitada por un administrador..", Toast.LENGTH_LONG).show();
+                Toast.makeText(ActivityRegisAdmin.this, "La cuenta de usuario ha sido inhabilitada por un administrador..", Toast.LENGTH_LONG).show();
                 break;
 
             case "ERROR_USER_TOKEN_EXPIRED":
-                Toast.makeText(ActivityRegisUsu.this, "La credencial del usuario ya no es válida. El usuario debe iniciar sesión nuevamente.", Toast.LENGTH_LONG).show();
+                Toast.makeText(ActivityRegisAdmin.this, "La credencial del usuario ya no es válida. El usuario debe iniciar sesión nuevamente.", Toast.LENGTH_LONG).show();
                 break;
 
             case "ERROR_USER_NOT_FOUND":
-                Toast.makeText(ActivityRegisUsu.this, "No hay ningún registro de usuario que corresponda a este identificador. Es posible que se haya eliminado al usuario.", Toast.LENGTH_LONG).show();
+                Toast.makeText(ActivityRegisAdmin.this, "No hay ningún registro de usuario que corresponda a este identificador. Es posible que se haya eliminado al usuario.", Toast.LENGTH_LONG).show();
                 break;
 
             case "ERROR_INVALID_USER_TOKEN":
-                Toast.makeText(ActivityRegisUsu.this, "La credencial del usuario ya no es válida. El usuario debe iniciar sesión nuevamente.", Toast.LENGTH_LONG).show();
+                Toast.makeText(ActivityRegisAdmin.this, "La credencial del usuario ya no es válida. El usuario debe iniciar sesión nuevamente.", Toast.LENGTH_LONG).show();
                 break;
 
             case "ERROR_OPERATION_NOT_ALLOWED":
-                Toast.makeText(ActivityRegisUsu.this, "Esta operación no está permitida. Debes habilitar este servicio en la consola.", Toast.LENGTH_LONG).show();
+                Toast.makeText(ActivityRegisAdmin.this, "Esta operación no está permitida. Debes habilitar este servicio en la consola.", Toast.LENGTH_LONG).show();
                 break;
 
             case "ERROR_WEAK_PASSWORD":
-                Toast.makeText(ActivityRegisUsu.this, "La contraseña proporcionada no es válida..", Toast.LENGTH_LONG).show();
-                txtRegisContra.setError("La contraseña no es válida, debe tener al menos 6 caracteres");
-                txtRegisContra.requestFocus();
+                Toast.makeText(ActivityRegisAdmin.this, "La contraseña proporcionada no es válida..", Toast.LENGTH_LONG).show();
+                txtAdminContra.setError("La contraseña no es válida, debe tener al menos 6 caracteres");
+                txtAdminContra.requestFocus();
                 break;
         }
-
     }
 }
