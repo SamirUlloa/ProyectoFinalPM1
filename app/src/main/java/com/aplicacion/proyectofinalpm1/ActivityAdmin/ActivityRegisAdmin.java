@@ -94,7 +94,7 @@ public class ActivityRegisAdmin extends AppCompatActivity {
             }
         });
 
-        //Codigo subida de imagen
+        ///Codigo subida de imagen
         foto = (ImageView) findViewById(R.id.imagFotoAdmin);
         btnAdminImage = (Button) findViewById(R.id.btnAdminImage);
 

@@ -53,7 +53,7 @@ public class ActivityRepartidor extends AppCompatActivity {
 
         String id = mAuth.getCurrentUser().getUid();
 
-        //Evalua los usuarios repartidores en la BD
+        ///Evalua los usuarios repartidores en la BD
         mDatabase.child("usuarios").child("repartidores").child(id).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {

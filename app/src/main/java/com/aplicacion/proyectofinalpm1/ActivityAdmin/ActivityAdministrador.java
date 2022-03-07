@@ -25,7 +25,7 @@ public class ActivityAdministrador extends AppCompatActivity {
     Button btnRegisRepartidor;
     Button btnRegisAdmin;
     Button btnPedidosPendientes;
-    Button btnPedidosEntregados;
+    Button btnPedidosEntregados;//
 
     FirebaseAuth mAuth;
     DatabaseReference mDatabase;

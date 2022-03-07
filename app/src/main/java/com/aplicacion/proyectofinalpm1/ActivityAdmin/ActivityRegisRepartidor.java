@@ -58,7 +58,7 @@ public class ActivityRegisRepartidor extends AppCompatActivity {
     AwesomeValidation awesomeValidation;
     FirebaseAuth firebaseAuth;
 
-    //codigo para subida de imagen
+    ///codigo para subida de imagen
     ImageView foto;
     Button btnReparImagen;
 
