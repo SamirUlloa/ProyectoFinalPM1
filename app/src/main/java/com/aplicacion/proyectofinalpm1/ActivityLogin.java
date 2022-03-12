@@ -14,6 +14,8 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.aplicacion.proyectofinalpm1.ActivityAdmin.ActivityAdministrador;
+import com.aplicacion.proyectofinalpm1.ActivityClientes.ActivityMenu;
+import com.aplicacion.proyectofinalpm1.ActivityClientes.ActivityRegisUsu;
 import com.aplicacion.proyectofinalpm1.ActivityRepartidor.ActivityRepartidor;
 import com.basgeekball.awesomevalidation.AwesomeValidation;
 import com.basgeekball.awesomevalidation.ValidationStyle;
@@ -51,13 +53,6 @@ public class ActivityLogin extends AppCompatActivity {
 
         firebaseAuth = FirebaseAuth.getInstance();
         mDatabase = FirebaseDatabase.getInstance().getReference();
-
-        //Persistencia de Datos
-        FirebaseAuth mAuth = FirebaseAuth.getInstance();
-        FirebaseUser user = mAuth.getCurrentUser();
-        if (user != null){
-            tipoUsuario();
-        }
 
         awesomeValidation = new AwesomeValidation(ValidationStyle.BASIC);
         awesomeValidation.addValidation(this, R.id.txtLoginCorreo, Patterns.EMAIL_ADDRESS, R.string.invalid_mail);

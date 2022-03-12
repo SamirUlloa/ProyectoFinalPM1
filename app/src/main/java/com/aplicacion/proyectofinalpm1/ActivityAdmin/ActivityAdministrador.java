@@ -25,7 +25,8 @@ public class ActivityAdministrador extends AppCompatActivity {
     Button btnRegisRepartidor;
     Button btnRegisAdmin;
     Button btnPedidosPendientes;
-    Button btnPedidosEntregados;//
+    Button btnPedidosEntregados;
+    Button btnAdminPerfil;
 
     FirebaseAuth mAuth;
     DatabaseReference mDatabase;
@@ -75,6 +76,15 @@ public class ActivityAdministrador extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(ActivityAdministrador.this, ActivityRegisAdmin.class));
+            }
+        });
+
+        //Boton Perfil del Administrador
+        btnAdminPerfil = (Button) findViewById(R.id.btnAdminPerfil);
+        btnAdminPerfil.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(ActivityAdministrador.this, ActivityPerfilAdmin.class));
             }
         });
 

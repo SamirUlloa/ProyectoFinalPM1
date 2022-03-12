@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="@android:color/white"
-    tools:context=".ActivityRegisUsu">
+    tools:context=".ActivityClientes.ActivityRegisUsu">
 
     <TextView
         android:id="@+id/textView2"
@@ -35,7 +35,8 @@
                 android:id="@+id/imgFoto"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                tools:srcCompat="@tools:sample/avatars" />
+                app:srcCompat="@drawable/perfil_logo"
+                tools:srcCompat="@drawable/perfil_logo" />
 
             <Button
                 android:id="@+id/btnRegisImagen"

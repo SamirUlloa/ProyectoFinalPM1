@@ -12,6 +12,15 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ProyectoFinalPM1">
         <activity
+            android:name=".ActivityAdmin.ActivityPerfilAdmin"
+            android:exported="false" />
+        <activity
+            android:name=".ActivityRepartidor.ActivityPerfilRepartidor"
+            android:exported="false" />
+        <activity
+            android:name=".ActivityClientes.ActivityPerfilCliente"
+            android:exported="false" />
+        <activity
             android:name=".ActivityAdmin.ActivityRegisAdmin"
             android:exported="false" />
         <activity
@@ -24,22 +33,19 @@
             android:name=".ActivityAdmin.ActivityAdministrador"
             android:exported="false" />
         <activity
-            android:name=".ActivityCategoria"
+            android:name=".ActivityClientes.ActivityCategoria"
             android:exported="false" />
         <activity
             android:name=".ActivityLogin"
             android:exported="false" />
         <activity
-            android:name=".ActivityAdmin.ActivityPerfilUsuario"
-            android:exported="false" />
-        <activity
             android:name=".ActivityRestablecer"
             android:exported="false" />
         <activity
-            android:name=".ActivityMenu"
+            android:name=".ActivityClientes.ActivityMenu"
             android:exported="false" />
         <activity
-            android:name=".ActivityRegisUsu"
+            android:name=".ActivityClientes.ActivityRegisUsu"
             android:exported="false" />
         <activity
             android:name=".ActivitySplash"

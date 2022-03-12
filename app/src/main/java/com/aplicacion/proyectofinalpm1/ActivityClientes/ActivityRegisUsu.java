@@ -1,4 +1,4 @@
-package com.aplicacion.proyectofinalpm1;
+package com.aplicacion.proyectofinalpm1.ActivityClientes;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -17,6 +17,8 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.aplicacion.proyectofinalpm1.ActivityLogin;
+import com.aplicacion.proyectofinalpm1.R;
 import com.basgeekball.awesomevalidation.AwesomeValidation;
 import com.basgeekball.awesomevalidation.ValidationStyle;
 import com.google.android.gms.tasks.Continuation;
@@ -24,7 +26,6 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseAuthException;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
@@ -163,7 +164,7 @@ public class ActivityRegisUsu extends AppCompatActivity {
 
             //Recortar imagen
             CropImage.activity(imageuri).setGuidelines(CropImageView.Guidelines.ON)
-                    .setRequestedSize(480, 480)
+                    .setRequestedSize(250, 250)
                     .setAspectRatio(1,1).start(ActivityRegisUsu.this);
         }
 
@@ -178,7 +179,7 @@ public class ActivityRegisUsu extends AppCompatActivity {
 
                 //COmprimir la Imagen
                 try {
-                    thumb_bitmap = new Compressor(this).setMaxWidth(480).setMaxHeight(480).setQuality(90).compressToBitmap(url);
+                    thumb_bitmap = new Compressor(this).setMaxWidth(250).setMaxHeight(250).setQuality(90).compressToBitmap(url);
                 } catch (IOException e){
                     e.printStackTrace();
                 }

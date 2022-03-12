@@ -60,6 +60,13 @@
         android:text="Registrar Administrador" />
 
     <Button
+        android:id="@+id/btnAdminPerfil"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:text="Mi Perfil" />
+
+    <Button
         android:id="@+id/btnAdminCerrar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

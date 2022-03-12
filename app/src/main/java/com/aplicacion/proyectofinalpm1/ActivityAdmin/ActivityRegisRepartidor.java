@@ -154,7 +154,7 @@ public class ActivityRegisRepartidor extends AppCompatActivity {
 
             //Recortar imagen
             CropImage.activity(imageuri).setGuidelines(CropImageView.Guidelines.ON)
-                    .setRequestedSize(480, 480)
+                    .setRequestedSize(250, 250)
                     .setAspectRatio(1,1).start(ActivityRegisRepartidor.this);
         }
 
@@ -169,7 +169,7 @@ public class ActivityRegisRepartidor extends AppCompatActivity {
 
                 //COmprimir la Imagen
                 try {
-                    thumb_bitmap = new Compressor(this).setMaxWidth(480).setMaxHeight(480).setQuality(90).compressToBitmap(url);
+                    thumb_bitmap = new Compressor(this).setMaxWidth(250).setMaxHeight(250).setQuality(90).compressToBitmap(url);
                 } catch (IOException e){
                     e.printStackTrace();
                 }

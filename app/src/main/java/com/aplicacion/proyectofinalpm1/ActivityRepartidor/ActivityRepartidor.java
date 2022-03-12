@@ -22,6 +22,8 @@ public class ActivityRepartidor extends AppCompatActivity {
 
     TextView textViewRepar;
     Button btnReparCerrar;
+    Button btnReparPerfil;
+    String idUsuario = "";
 
     FirebaseAuth mAuth;
     DatabaseReference mDatabase;
@@ -32,6 +34,7 @@ public class ActivityRepartidor extends AppCompatActivity {
         setContentView(R.layout.activity_repartidor);
 
         mAuth = FirebaseAuth.getInstance();
+        idUsuario = mAuth.getCurrentUser().getUid();
         mDatabase = FirebaseDatabase.getInstance().getReference();
 
         textViewRepar = findViewById(R.id.textViewRepar);
@@ -43,6 +46,15 @@ public class ActivityRepartidor extends AppCompatActivity {
                 mAuth.signOut();
                 startActivity(new Intent(ActivityRepartidor.this, ActivityLogin.class));
                 finish();
+            }
+        });
+
+        //Ir al perfil del repartidor
+        btnReparPerfil = (Button) findViewById(R.id.btnReparPerfil);
+        btnReparPerfil.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(ActivityRepartidor.this, ActivityPerfilRepartidor.class));
             }
         });
 

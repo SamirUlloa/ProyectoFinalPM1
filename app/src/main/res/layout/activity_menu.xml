@@ -5,13 +5,15 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".ActivityMenu">
+    android:background="@android:color/white"
+    tools:context=".ActivityClientes.ActivityMenu">
 
     <TextView
         android:id="@+id/tvMenuUser"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Bienvenido: "
+        android:textColor="@android:color/black"
         android:textSize="20sp" />
 
     <ImageView
@@ -19,6 +21,18 @@
         android:layout_width="match_parent"
         android:layout_height="167dp"
         app:srcCompat="@drawable/logo1" />
+
+    <Button
+        android:id="@+id/btnPerfilCliente"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#34978D"
+        android:backgroundTint="#009688"
+        android:text="Mi Perfil"
+        app:icon="@drawable/opciones"
+        app:iconTint="@color/common_google_signin_btn_text_dark_disabled"
+        app:iconTintMode="screen"
+        app:rippleColor="#009688" />
 
     <Button
         android:id="@+id/btnCategoria"

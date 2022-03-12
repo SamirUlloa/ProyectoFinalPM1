@@ -30,6 +30,13 @@
         android:textSize="20sp" />
 
     <Button
+        android:id="@+id/btnReparPerfil"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:text="Perfil de Usuario" />
+
+    <Button
         android:id="@+id/btnReparCerrar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
