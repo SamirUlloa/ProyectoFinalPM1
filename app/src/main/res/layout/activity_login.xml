@@ -9,7 +9,7 @@
     tools:context=".ActivityLogin">
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/arroz"
         android:layout_width="match_parent"
         android:layout_height="48dp"
         android:layout_margin="10dp"
@@ -20,7 +20,7 @@
         android:textStyle="bold|italic" />
 
     <ImageView
-        android:id="@+id/imageView2"
+        android:id="@+id/imgvArroz"
         android:layout_width="match_parent"
         android:layout_height="147dp"
         app:srcCompat="@drawable/logo1" />

@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.aplicacion.proyectofinalpm1.ActivityCarritoCompras;
 import com.aplicacion.proyectofinalpm1.ActivityLogin;
 import com.aplicacion.proyectofinalpm1.R;
 import com.google.firebase.auth.FirebaseAuth;
@@ -22,6 +23,7 @@ public class ActivityMenu extends AppCompatActivity {
 
     Button btnCerrarSesion;
     Button btnPerfilClientes;
+    Button btnCategorias,btnAcercaDe,btnCarrito;
     TextView tvMenuUsuario;
 
     FirebaseAuth mAuth;
@@ -59,6 +61,36 @@ public class ActivityMenu extends AppCompatActivity {
                 //finish();
             }
         });
+
+        btnCategorias = (Button) findViewById(R.id.btnCategoria);
+        btnCategorias.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(ActivityMenu.this, ActivityCategoria.class));
+                //finish();
+            }
+        });
+
+
+        btnAcercaDe = (Button) findViewById(R.id.btnAcercaD);
+        btnAcercaDe.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(ActivityMenu.this, ActivityAcercaD.class));
+                //finish();
+            }
+        });
+
+        btnCarrito = (Button) findViewById(R.id.btnVerCarrito);
+        btnCarrito.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(ActivityMenu.this, ActivityCarritoCompras.class));
+                //finish();
+            }
+        });
+
+
     }
 
     private void tipoUsuario(){

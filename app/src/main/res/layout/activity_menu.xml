@@ -17,27 +17,15 @@
         android:textSize="20sp" />
 
     <ImageView
-        android:id="@+id/imageView"
+        android:id="@+id/imgvChuleta"
         android:layout_width="match_parent"
         android:layout_height="167dp"
         app:srcCompat="@drawable/logo1" />
 
     <Button
-        android:id="@+id/btnPerfilCliente"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="#34978D"
-        android:backgroundTint="#009688"
-        android:text="Mi Perfil"
-        app:icon="@drawable/opciones"
-        app:iconTint="@color/common_google_signin_btn_text_dark_disabled"
-        app:iconTintMode="screen"
-        app:rippleColor="#009688" />
-
-    <Button
         android:id="@+id/btnCategoria"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="73dp"
         android:background="#34978D"
         android:backgroundTint="#009688"
         android:text="CATEGORIA"
@@ -58,7 +46,7 @@
     <Button
         android:id="@+id/btnUbicacion"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="73dp"
         android:text="UBICACION"
         app:icon="@drawable/mapa"
         app:iconTint="@color/common_google_signin_btn_text_dark_disabled"
@@ -76,11 +64,23 @@
     <Button
         android:id="@+id/btnAcercaD"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="81dp"
         android:text="ACERCA DE..."
         app:icon="@drawable/ordenador_portatil"
         app:iconTint="@color/common_google_signin_btn_text_dark_disabled"
         app:iconTintMode="screen" />
+
+    <Button
+        android:id="@+id/btnPerfilCliente"
+        android:layout_width="match_parent"
+        android:layout_height="63dp"
+        android:background="#34978D"
+        android:backgroundTint="#009688"
+        android:text="Mi Perfil"
+        app:icon="@drawable/red_social"
+        app:iconTint="@color/common_google_signin_btn_text_dark_disabled"
+        app:iconTintMode="screen"
+        app:rippleColor="#009688" />
 
     <Button
         android:id="@+id/btnCerrarSesion"

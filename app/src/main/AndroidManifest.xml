@@ -12,6 +12,27 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ProyectoFinalPM1">
         <activity
+            android:name=".ActivityCarritoCompras"
+            android:exported="false" />
+        <activity
+            android:name=".ActivityClientes.ActivityABebes"
+            android:exported="false" />
+        <activity
+            android:name=".ActivityClientes.ActivityAcercaD"
+            android:exported="false" />
+        <activity
+            android:name=".ActivityClientes.ActivityBebidasA"
+            android:exported="false" />
+        <activity
+            android:name=".ActivityClientes.ActivityGranosB"
+            android:exported="false" />
+        <activity
+            android:name=".ActivityClientes.ActivityCarnes"
+            android:exported="false" />
+        <activity
+            android:name=".ActivityClientes.ActivityLacteos"
+            android:exported="false" />
+        <activity
             android:name=".ActivityAdmin.ActivityPerfilAdmin"
             android:exported="false" />
         <activity
