@@ -12,6 +12,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ProyectoFinalPM1">
         <activity
+            android:name=".ActivityClientes.ActivityEvaluarStars"
+            android:exported="false" />
+        <activity
             android:name=".ActivityCarritoCompras"
             android:exported="false" />
         <activity
