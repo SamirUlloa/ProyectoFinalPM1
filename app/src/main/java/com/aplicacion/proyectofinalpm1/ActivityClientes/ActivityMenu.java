@@ -23,7 +23,7 @@ public class ActivityMenu extends AppCompatActivity {
 
     Button btnCerrarSesion;
     Button btnPerfilClientes;
-    Button btnCategorias,btnAcercaDe,btnCarrito;
+    Button btnCategorias,btnAcercaDe,btnCarrito, btndash;
     TextView tvMenuUsuario;
 
     FirebaseAuth mAuth;
@@ -67,6 +67,15 @@ public class ActivityMenu extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(ActivityMenu.this, ActivityCategoria.class));
+                //finish();
+            }
+        });
+
+        btndash = (Button) findViewById(R.id.btnDashb);
+        btndash.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(ActivityMenu.this, ActivityDashboard.class));
                 //finish();
             }
         });
