@@ -36,14 +36,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
-        android:text="Pedidos Pendientes" />
-
-    <Button
-        android:id="@+id/btnPedidosEntregados"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:text="Pedidos Entregados" />
+        android:text="Pedidos" />
 
     <Button
         android:id="@+id/btnRegisRepartidor"

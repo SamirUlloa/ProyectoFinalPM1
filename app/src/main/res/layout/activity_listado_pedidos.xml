@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/white"
+    tools:context=".ActivityAdmin.ActivityListadoPedidos">
+
+    <TextView
+        android:id="@+id/textView40"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="22dp"
+        android:layout_margin="10dp"
+        android:textAlignment="center"
+        android:textColor="@color/black"
+        android:text="Listado de Pedidos" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:orientation="horizontal"
+        android:layout_height="75dp">
+
+    <Button
+        android:id="@+id/btnAdminPPen"
+        android:layout_width="110dp"
+        android:layout_margin="5dp"
+        android:layout_height="match_parent"
+        android:text="Pedidos Nuevos" />
+
+    <Button
+        android:id="@+id/btnAdminPCer"
+        android:layout_width="120dp"
+        android:layout_margin="5dp"
+        android:layout_height="match_parent"
+        android:text="Pedidos Cerrados" />
+
+    <Button
+        android:id="@+id/btnAdminPEva"
+        android:layout_width="120dp"
+        android:layout_margin="5dp"
+        android:layout_height="match_parent"
+        android:text="Pedidos Evaluados" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tvTipoPedido"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/black"
+        android:textSize="22dp"
+        android:layout_margin="10dp"
+        android:textAlignment="center"
+        android:text="Pedidos Pendientes" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="550dp"
+        android:orientation="vertical"
+        android:background="#4282DA">
+
+        <ListView
+            android:id="@+id/listaPedidosPenA"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+        <ListView
+            android:id="@+id/listaPedidosCerrA"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+        <ListView
+            android:id="@+id/listaPedidosEvaA"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+    </LinearLayout>
+
+
+</LinearLayout>

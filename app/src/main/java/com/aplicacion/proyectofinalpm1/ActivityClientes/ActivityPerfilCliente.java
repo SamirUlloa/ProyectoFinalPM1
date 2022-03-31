@@ -19,7 +19,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.aplicacion.proyectofinalpm1.ActivityLogin;
+import com.aplicacion.proyectofinalpm1.ActivityControl.ActivityLogin;
 import com.aplicacion.proyectofinalpm1.R;
 import com.google.android.gms.tasks.Continuation;
 import com.google.android.gms.tasks.OnCompleteListener;

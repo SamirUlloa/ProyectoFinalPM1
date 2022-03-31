@@ -12,13 +12,25 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ProyectoFinalPM1">
         <activity
+            android:name=".ActivityAdmin.ActivityDetallePedidos"
+            android:exported="false" />
+        <activity
             android:name=".ActivityClientes.ActivityDashboard"
+            android:exported="false" />
+        <activity
+            android:name=".ActivityClientes.ActivityPedidosRegistro"
+            android:exported="false" />
+        <activity
+            android:name=".ActivityAdmin.ActivityListadoPedidos"
+            android:exported="false" />
+        <activity
+            android:name=".ActivityRepartidor.ActivityPedidosN"
             android:exported="false" />
         <activity
             android:name=".ActivityClientes.ActivityEvaluarStars"
             android:exported="false" />
         <activity
-            android:name=".ActivityCarritoCompras"
+            android:name=".ActivityClientes.ActivityCarritoCompras"
             android:exported="false" />
         <activity
             android:name=".ActivityClientes.ActivityABebes"
@@ -63,10 +75,10 @@
             android:name=".ActivityClientes.ActivityCategoria"
             android:exported="false" />
         <activity
-            android:name=".ActivityLogin"
+            android:name=".ActivityControl.ActivityLogin"
             android:exported="false" />
         <activity
-            android:name=".ActivityRestablecer"
+            android:name=".ActivityControl.ActivityRestablecer"
             android:exported="false" />
         <activity
             android:name=".ActivityClientes.ActivityMenu"
@@ -84,7 +96,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".MainActivity"
+            android:name=".ActivityControl.MainActivity"
             android:exported="true" />
         <activity
             android:name="com.theartofdev.edmodo.cropper.CropImageActivity"

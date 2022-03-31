@@ -11,6 +11,7 @@ import android.view.WindowManager;
 
 import com.aplicacion.proyectofinalpm1.ActivityAdmin.ActivityAdministrador;
 import com.aplicacion.proyectofinalpm1.ActivityClientes.ActivityMenu;
+import com.aplicacion.proyectofinalpm1.ActivityControl.ActivityLogin;
 import com.aplicacion.proyectofinalpm1.ActivityRepartidor.ActivityRepartidor;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -42,9 +43,6 @@ public class ActivitySplash extends AppCompatActivity {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                //Intent intent = new Intent(ActivitySplash.this, ActivityLogin.class);
-                //startActivity(intent);
-                //finish();
                 //Persistencia de Datos
                 FirebaseAuth mAuth = FirebaseAuth.getInstance();
                 FirebaseUser user = mAuth.getCurrentUser();

@@ -17,7 +17,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-import com.aplicacion.proyectofinalpm1.ActivityLogin;
+import com.aplicacion.proyectofinalpm1.ActivityControl.ActivityLogin;
 import com.aplicacion.proyectofinalpm1.R;
 import com.basgeekball.awesomevalidation.AwesomeValidation;
 import com.basgeekball.awesomevalidation.ValidationStyle;
@@ -45,6 +45,7 @@ import java.util.Objects;
 import id.zelory.compressor.Compressor;
 
 public class ActivityRegisUsu extends AppCompatActivity {
+
 
     EditText txtRegisCorreo;
     EditText txtRegisContra;

@@ -6,17 +6,23 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ListView;
 import android.widget.TextView;
 
-import com.aplicacion.proyectofinalpm1.ActivityLogin;
+import com.aplicacion.proyectofinalpm1.ActivityControl.ActivityLogin;
 import com.aplicacion.proyectofinalpm1.R;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
 
 public class ActivityRepartidor extends AppCompatActivity {
 
@@ -25,8 +31,13 @@ public class ActivityRepartidor extends AppCompatActivity {
     Button btnReparPerfil;
     String idUsuario = "";
 
+    ListView listaPedidosNR;
+
     FirebaseAuth mAuth;
     DatabaseReference mDatabase;
+
+    private ArrayAdapter<String> adapter;
+    private ArrayList<String> arrayList =new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +49,8 @@ public class ActivityRepartidor extends AppCompatActivity {
         mDatabase = FirebaseDatabase.getInstance().getReference();
 
         textViewRepar = findViewById(R.id.textViewRepar);
+
+        tipoUsuario();
 
         btnReparCerrar = (Button) findViewById(R.id.btnReparCerrar);
         btnReparCerrar.setOnClickListener(new View.OnClickListener() {
@@ -58,7 +71,21 @@ public class ActivityRepartidor extends AppCompatActivity {
             }
         });
 
-        tipoUsuario();
+        //Selecciona el pedido.
+        listaPedidosNR = (ListView) findViewById(R.id.listaPedidosNR);
+        listaPedidosNR.setOnItemClickListener(new AdapterView.OnItemClickListener(){
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                int un = i;
+                String textItemList = (String) listaPedidosNR.getItemAtPosition(un);
+
+                Intent intent = new Intent(getApplicationContext(), ActivityPedidosN.class);
+                intent.putExtra("identificador", textItemList);
+                startActivity(intent);
+            }
+        });
+
+        mostrarPedidos();
     }
 
     private void tipoUsuario(){
@@ -78,6 +105,43 @@ public class ActivityRepartidor extends AppCompatActivity {
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
+
+    public void mostrarPedidos(){
+        DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
+        DatabaseReference mRootChild = mDatabase.child("pedidos").child("registroNue");
+
+        adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, arrayList);
+
+        listaPedidosNR = (ListView) findViewById(R.id.listaPedidosNR);
+        listaPedidosNR.setAdapter(adapter);
+
+        mRootChild.addChildEventListener(new ChildEventListener(){
+            @Override
+            public void onChildAdded(DataSnapshot dataSnapshot, String s){
+                String string = dataSnapshot.getValue(String.class);
+                arrayList.add(string);
+                adapter.notifyDataSetChanged();
+            }
+            @Override
+            public void onChildChanged(DataSnapshot dataSnapshot, String s){
+
+            }
+            @Override
+            public void onChildRemoved(DataSnapshot dataSnapshot){
+                String string = dataSnapshot.getValue(String.class);
+                arrayList.remove(string);
+                adapter.notifyDataSetChanged();
+            }
+            @Override
+            public void onChildMoved(DataSnapshot dataSnapshot, String s){
+
+            }
+            @Override
+            public void onCancelled(DatabaseError databaseError){
 
             }
         });

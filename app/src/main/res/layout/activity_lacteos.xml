@@ -6,8 +6,8 @@
     android:layout_height="match_parent"
     tools:context=".ActivityClientes.ActivityLacteos"
     tools:layout_editor_absoluteX="-1dp"
+    android:background="@color/white"
     tools:layout_editor_absoluteY="-41dp">
-
 
     <TextView
         android:id="@+id/lechec"
@@ -74,6 +74,7 @@
         app:layout_constraintHorizontal_bias="0.189"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        android:textColor="@android:color/black"
         app:layout_constraintVertical_bias="0.795" />
 
     <Button
@@ -93,13 +94,14 @@
         android:id="@+id/btnAggCaritoL"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:backgroundTint="#162785"
+        android:backgroundTint="#335EFF"
         android:text="Añadir al Carrito"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        android:textColor="@android:color/white"
         app:layout_constraintVertical_bias="0.976" />
 
     <TextView
@@ -112,6 +114,7 @@
         app:layout_constraintHorizontal_bias="0.855"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        android:textColor="@android:color/black"
         app:layout_constraintVertical_bias="0.734" />
 
     <TextView
@@ -119,8 +122,9 @@
         android:layout_width="60dp"
         android:layout_height="24dp"
         android:textAlignment="center"
-        android:textColor="#000000"
+        android:textColor="@android:color/black"
         android:textStyle="bold"
+        android:text="0"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.82"
@@ -138,6 +142,7 @@
         app:layout_constraintHorizontal_bias="0.677"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        android:textColor="@android:color/black"
         app:layout_constraintVertical_bias="0.79" />
 
     <TextView
@@ -145,6 +150,7 @@
         android:layout_width="30dp"
         android:layout_height="23dp"
         android:text="Lps."
+        android:textColor="@android:color/black"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.913"

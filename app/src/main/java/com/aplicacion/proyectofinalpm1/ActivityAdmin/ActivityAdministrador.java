@@ -9,7 +9,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.aplicacion.proyectofinalpm1.ActivityLogin;
+import com.aplicacion.proyectofinalpm1.ActivityControl.ActivityLogin;
 import com.aplicacion.proyectofinalpm1.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -46,16 +46,7 @@ public class ActivityAdministrador extends AppCompatActivity {
         btnPedidosPendientes.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //startActivity(new Intent(ActivityAdministrador.this, ActivityRegisRepartidor.class));
-            }
-        });
-
-        //Vista de Pedidos que estan pendientes ya entregados
-        btnPedidosEntregados = (Button) findViewById(R.id.btnPedidosEntregados);
-        btnPedidosEntregados.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                //startActivity(new Intent(ActivityAdministrador.this, ActivityRegisRepartidor.class));
+                startActivity(new Intent(ActivityAdministrador.this, ActivityListadoPedidos.class));
             }
         });
 

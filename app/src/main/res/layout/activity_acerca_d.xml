@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="@color/white"
     tools:context=".ActivityClientes.ActivityAcercaD">
 
     <LinearLayout
@@ -32,6 +33,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="CREADORES"
+            android:textColor="@android:color/black"
             android:textAppearance="@style/TextAppearance.AppCompat.Large"
             android:textSize="28sp" />
     </LinearLayout>
@@ -53,6 +55,7 @@
             android:layout_width="349dp"
             android:layout_height="wrap_content"
             android:text="Samir Ulloa - 201510070120"
+            android:textColor="@android:color/black"
             android:textAppearance="@style/TextAppearance.AppCompat.Body2"
             android:textSize="20sp" />
 
@@ -75,6 +78,7 @@
             android:layout_width="349dp"
             android:layout_height="wrap_content"
             android:text="Jonatan Rivas - 201530070034"
+            android:textColor="@android:color/black"
             android:textAppearance="@style/TextAppearance.AppCompat.Body2"
             android:textSize="20sp" />
     </LinearLayout>
@@ -96,6 +100,7 @@
             android:layout_width="350dp"
             android:layout_height="wrap_content"
             android:text="Angie Nuñez - 201810070042"
+            android:textColor="@android:color/black"
             android:textAppearance="@style/TextAppearance.AppCompat.Body2"
             android:textSize="20sp" />
     </LinearLayout>
@@ -117,6 +122,7 @@
             android:layout_width="350dp"
             android:layout_height="wrap_content"
             android:text="Jennifer Ardon - 201810070048"
+            android:textColor="@android:color/black"
             android:textAppearance="@style/TextAppearance.AppCompat.Body2"
             android:textSize="20sp" />
     </LinearLayout>
@@ -138,6 +144,7 @@
             android:layout_width="349dp"
             android:layout_height="wrap_content"
             android:text="Anny Alvarado - 201820070015"
+            android:textColor="@android:color/black"
             android:textAppearance="@style/TextAppearance.AppCompat.Body2"
             android:textSize="20sp" />
     </LinearLayout>
@@ -159,6 +166,7 @@
             android:layout_width="349dp"
             android:layout_height="wrap_content"
             android:text="Aylin Funez - 201830070020"
+            android:textColor="@android:color/black"
             android:textAppearance="@style/TextAppearance.AppCompat.Body2"
             android:textSize="20sp" />
     </LinearLayout>
@@ -177,6 +185,7 @@
             android:id="@+id/textView32"
             android:layout_width="match_parent"
             android:layout_height="90dp"
+            android:textColor="@android:color/black"
             android:text="Esta aplicacion te facilita la compra de los productos mas vendidos en nuestro supermercado"
             android:textAlignment="center"
             android:textSize="16sp" />

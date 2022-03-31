@@ -1,4 +1,4 @@
-package com.aplicacion.proyectofinalpm1;
+package com.aplicacion.proyectofinalpm1.ActivityControl;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -17,6 +17,7 @@ import com.aplicacion.proyectofinalpm1.ActivityAdmin.ActivityAdministrador;
 import com.aplicacion.proyectofinalpm1.ActivityClientes.ActivityMenu;
 import com.aplicacion.proyectofinalpm1.ActivityClientes.ActivityRegisUsu;
 import com.aplicacion.proyectofinalpm1.ActivityRepartidor.ActivityRepartidor;
+import com.aplicacion.proyectofinalpm1.R;
 import com.basgeekball.awesomevalidation.AwesomeValidation;
 import com.basgeekball.awesomevalidation.ValidationStyle;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -24,7 +25,6 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthException;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
