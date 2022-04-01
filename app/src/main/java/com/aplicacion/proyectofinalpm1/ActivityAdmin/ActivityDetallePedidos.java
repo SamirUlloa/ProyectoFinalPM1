@@ -50,7 +50,7 @@ public class ActivityDetallePedidos extends AppCompatActivity {
     double impBebes = 0, impBebidas = 0, impCarnes = 0, impGranosB = 0, impLacteos = 0, impuesto = 0;
     double totalBebes = 0, totalBebidas = 0, totalCarnes = 0, totalGranosB = 0, totalLacteos = 0, total = 0;
     double precUBebes = 0, precUBebidas = 0, PrecUCarnes = 0, precGranosB = 0, precULacteos = 0;
-    String nombreCliente, apellidoCliente, telefonoCliente, direccionCliente, correoCliente;
+    String idCliente, nombreCliente, apellidoCliente, telefonoCliente, direccionCliente, correoCliente;
     String comentarioDB, evaluacionDB;
 
     TextView tvRepNomP1, tvRepPreP1, tvRepCantP1, tvRepSubP1;
@@ -138,7 +138,6 @@ public class ActivityDetallePedidos extends AppCompatActivity {
     }
 
     public void infoPedido(){
-        //if (tvDetallePedA.getText().toString() == "Estado del pedido: Cerrado con Evaluación"){
         mDatabase.child("pedidos").child(tipoPedido).child(identificador).child("infoPedido").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -159,19 +158,20 @@ public class ActivityDetallePedidos extends AppCompatActivity {
             public void onCancelled(@NonNull DatabaseError error) {
 
             }
-        });//}
+        });
     }
 
     public void infoUsuario(){
-        mDatabase.child("usuarios").child("clientes").child(identificador).addValueEventListener(new ValueEventListener() {
+        mDatabase.child("pedidos").child(tipoPedido).child(identificador).child("infoCliente").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if (dataSnapshot.exists()){
-                    nombreCliente = dataSnapshot.child("nombre").getValue().toString();
-                    apellidoCliente = dataSnapshot.child("apellido").getValue().toString();
-                    telefonoCliente = dataSnapshot.child("telefono").getValue().toString();
-                    direccionCliente = dataSnapshot.child("direccion").getValue().toString();
-                    correoCliente = dataSnapshot.child("correo").getValue().toString();
+                    idCliente = dataSnapshot.child("idCliente").getValue().toString();
+                    nombreCliente = dataSnapshot.child("nomCliente").getValue().toString();
+                    apellidoCliente = dataSnapshot.child("apeCliente").getValue().toString();
+                    telefonoCliente = dataSnapshot.child("telCliente").getValue().toString();
+                    direccionCliente = dataSnapshot.child("dirCliente").getValue().toString();
+                    correoCliente = dataSnapshot.child("corCliente").getValue().toString();
 
                     tvIdPedidoRNom.setText("Cliente:            " + nombreCliente + " " + apellidoCliente);
                     tvIdPedidoRTel.setText("Teléfono:         " + telefonoCliente);
@@ -697,7 +697,6 @@ public class ActivityDetallePedidos extends AppCompatActivity {
     public void cerrarPedido(){
         if (!NomProBebes.isEmpty()) {
             Map<String, Object> pBebes = new HashMap<>();
-            pBebes.put("id", identificador);
             pBebes.put("NomProBebes", NomProBebes);
             pBebes.put("cantidadPañales", cantidadPañales);
             pBebes.put("precioPañales", precioPañales);
@@ -753,6 +752,7 @@ public class ActivityDetallePedidos extends AppCompatActivity {
         mDatabase.child("pedidos").child("cerrados").child(identificador).child("infoPedido").setValue(pPedidoInfo);
 
         Map<String, Object> pClienteInfo = new HashMap<>();
+        pClienteInfo.put("idCliente", idCliente);
         pClienteInfo.put("nomCliente", nombreCliente);
         pClienteInfo.put("apeCliente", apellidoCliente);
         pClienteInfo.put("telCliente", telefonoCliente);

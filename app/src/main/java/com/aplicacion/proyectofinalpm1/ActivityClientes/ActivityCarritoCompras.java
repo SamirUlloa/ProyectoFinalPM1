@@ -49,6 +49,7 @@ public class ActivityCarritoCompras extends AppCompatActivity {
     DatabaseReference mDatabase;
     FirebaseAuth mAuth;
     String idUsuario = "";
+    String idGenerado = "";
 
     String NomProBebes = "", cantidadPañales = "", precioPañales = "";
     String NomProBebidas = "", cantidadBebidas = "", precioBebidas = "";
@@ -464,6 +465,9 @@ public class ActivityCarritoCompras extends AppCompatActivity {
     }
 
     public void realizarPedido(){
+
+        idGenerado = mDatabase.push().getKey();
+
         if (!NomProBebes.isEmpty()) {
             Map<String, Object> pBebes = new HashMap<>();
             pBebes.put("id", idUsuario);
@@ -472,7 +476,8 @@ public class ActivityCarritoCompras extends AppCompatActivity {
             pBebes.put("precioPañales", precioPañales);
             pBebes.put("precUPañales", "120.00");
             pBebes.put("imgUrlBebes", "https://firebasestorage.googleapis.com/v0/b/appsupermercado-37259.appspot.com/o/img_productos%2Fpaniales.png?alt=media&token=cd9f01a7-1159-49d5-9f2c-5a791793e0c6");
-            mDatabase.child("pedidos").child("nuevos").child(idUsuario).child("catBebes").setValue(pBebes);
+            //mDatabase.child("pedidos").child("nuevos").child(idUsuario).child("catBebes").setValue(pBebes);
+            mDatabase.child("pedidos").child("nuevos").child(idGenerado).child("catBebes").setValue(pBebes);
         }
 
         if (!NomProBebidas.isEmpty()) {
@@ -482,7 +487,8 @@ public class ActivityCarritoCompras extends AppCompatActivity {
             pBebidas.put("precioBebidas", precioBebidas);
             pBebidas.put("precUBebidas", "150.00");
             pBebidas.put("imgUrlBebidas", "https://firebasestorage.googleapis.com/v0/b/appsupermercado-37259.appspot.com/o/img_productos%2FbebidaCoronaC.png?alt=media&token=6805fb9f-3bdd-4541-90c7-95e8a9dcec20");
-            mDatabase.child("pedidos").child("nuevos").child(idUsuario).child("catBebidas").setValue(pBebidas);
+            mDatabase.child("pedidos").child("nuevos").child(idGenerado).child("catBebidas").setValue(pBebidas);
+            //mDatabase.child("pedidos").child("nuevos").child(idUsuario).child("catBebidas").setValue(pBebidas);
         }
 
         if(!NomProCarnes.isEmpty()) {
@@ -492,7 +498,8 @@ public class ActivityCarritoCompras extends AppCompatActivity {
             pCarnes.put("precioCarnes", precioCarnes);
             pCarnes.put("precUCarnes", "100.00");
             pCarnes.put("imgUrlCarnes", "https://firebasestorage.googleapis.com/v0/b/appsupermercado-37259.appspot.com/o/img_productos%2Fchuleta.jpg?alt=media&token=36715cc1-23ee-43b6-92ab-a6d5a2a258d4");
-            mDatabase.child("pedidos").child("nuevos").child(idUsuario).child("catCarnes").setValue(pCarnes);
+            mDatabase.child("pedidos").child("nuevos").child(idGenerado).child("catCarnes").setValue(pCarnes);
+            //mDatabase.child("pedidos").child("nuevos").child(idUsuario).child("catCarnes").setValue(pCarnes);
         }
 
         if(!NomProGranosB.isEmpty()) {
@@ -502,7 +509,8 @@ public class ActivityCarritoCompras extends AppCompatActivity {
             pGranosB.put("precioGranosB", precioGranosB);
             pGranosB.put("precUGranosB", "14.00");
             pGranosB.put("imgUrlGranosB", "https://firebasestorage.googleapis.com/v0/b/appsupermercado-37259.appspot.com/o/img_productos%2Farroz.jpg?alt=media&token=8e691cc4-1b32-4cd8-bb6f-7e07e07f6831");
-            mDatabase.child("pedidos").child("nuevos").child(idUsuario).child("catGranosB").setValue(pGranosB);
+            mDatabase.child("pedidos").child("nuevos").child(idGenerado).child("catGranosB").setValue(pGranosB);
+            //mDatabase.child("pedidos").child("nuevos").child(idUsuario).child("catGranosB").setValue(pGranosB);
         }
 
         if (!NomProLacteos.isEmpty()) {
@@ -512,22 +520,26 @@ public class ActivityCarritoCompras extends AppCompatActivity {
             pLacteos.put("precioLacteos", precioLacteos);
             pLacteos.put("precULacteos", "30.00");
             pLacteos.put("imgUrlLacteos", "https://firebasestorage.googleapis.com/v0/b/appsupermercado-37259.appspot.com/o/img_productos%2FlecheCeteco.png?alt=media&token=7bc5a649-956e-42e7-b00b-adf651115661");
-            mDatabase.child("pedidos").child("nuevos").child(idUsuario).child("catLacteos").setValue(pLacteos);
+            mDatabase.child("pedidos").child("nuevos").child(idGenerado).child("catLacteos").setValue(pLacteos);
+            //mDatabase.child("pedidos").child("nuevos").child(idUsuario).child("catLacteos").setValue(pLacteos);
         }
 
         Map<String, Object> pPedidoInfo = new HashMap<>();
         pPedidoInfo.put("subtotal", subtotal);
         pPedidoInfo.put("impuesto", impuesto);
         pPedidoInfo.put("total", total);
-        mDatabase.child("pedidos").child("nuevos").child(idUsuario).child("infoPedido").setValue(pPedidoInfo);
+        //mDatabase.child("pedidos").child("nuevos").child(idUsuario).child("infoPedido").setValue(pPedidoInfo);
+        mDatabase.child("pedidos").child("nuevos").child(idGenerado).child("infoPedido").setValue(pPedidoInfo);
 
         Map<String, Object> pClienteInfo = new HashMap<>();
+        pClienteInfo.put("idCliente", idUsuario);
         pClienteInfo.put("nomCliente", nombreCliente);
         pClienteInfo.put("apeCliente", apellidoCliente);
         pClienteInfo.put("telCliente", telefonoCliente);
         pClienteInfo.put("dirCliente", direccionCliente);
         pClienteInfo.put("corCliente", correoCliente);
-        mDatabase.child("pedidos").child("nuevos").child(idUsuario).child("infoCliente").setValue(pClienteInfo);
+        mDatabase.child("pedidos").child("nuevos").child(idGenerado).child("infoCliente").setValue(pClienteInfo);
+        //mDatabase.child("pedidos").child("nuevos").child(idUsuario).child("infoCliente").setValue(pClienteInfo);
 
         registroPedidos();
 
@@ -536,8 +548,16 @@ public class ActivityCarritoCompras extends AppCompatActivity {
 
     public void registroPedidos(){
         Map<String, Object> Regpedido = new HashMap<>();
-        Regpedido.put(idUsuario, idUsuario);
+        //Regpedido.put(idUsuario, idUsuario);
+        //mDatabase.child("pedidos").child("registroNue").updateChildren(Regpedido);
+        Regpedido.put(idGenerado, idGenerado);
         mDatabase.child("pedidos").child("registroNue").updateChildren(Regpedido);
+
+        Map<String, Object> RegpedidoID = new HashMap<>();
+        //Regpedido.put(idUsuario, idUsuario);
+        //mDatabase.child("pedidos").child("registroNue").updateChildren(Regpedido);
+        RegpedidoID.put(idGenerado, idGenerado);
+        mDatabase.child("pedidos").child("registroNueID").child(idUsuario).updateChildren(RegpedidoID);
     }
 
     public void eliminarCarrito(){

@@ -49,7 +49,7 @@ public class ActivityPedidosN extends AppCompatActivity {
     double impBebes = 0, impBebidas = 0, impCarnes = 0, impGranosB = 0, impLacteos = 0, impuesto = 0;
     double totalBebes = 0, totalBebidas = 0, totalCarnes = 0, totalGranosB = 0, totalLacteos = 0, total = 0;
     double precUBebes = 0, precUBebidas = 0, PrecUCarnes = 0, precGranosB = 0, precULacteos = 0;
-    String nombreCliente, apellidoCliente, telefonoCliente, direccionCliente, correoCliente;
+    String idCliente, nombreCliente, apellidoCliente, telefonoCliente, direccionCliente, correoCliente;
     String impuestoDB, subtotalDB, totalDB;
 
     TextView tvRepNomP1, tvRepPreP1, tvRepCantP1, tvRepSubP1;
@@ -142,15 +142,16 @@ public class ActivityPedidosN extends AppCompatActivity {
     }
 
     public void infoUsuario(){
-        mDatabase.child("usuarios").child("clientes").child(identificador).addValueEventListener(new ValueEventListener() {
+        mDatabase.child("pedidos").child("nuevos").child(identificador).child("infoCliente").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if (dataSnapshot.exists()){
-                    nombreCliente = dataSnapshot.child("nombre").getValue().toString();
-                    apellidoCliente = dataSnapshot.child("apellido").getValue().toString();
-                    telefonoCliente = dataSnapshot.child("telefono").getValue().toString();
-                    direccionCliente = dataSnapshot.child("direccion").getValue().toString();
-                    correoCliente = dataSnapshot.child("correo").getValue().toString();
+                    idCliente = dataSnapshot.child("idCliente").getValue().toString();
+                    nombreCliente = dataSnapshot.child("nomCliente").getValue().toString();
+                    apellidoCliente = dataSnapshot.child("apeCliente").getValue().toString();
+                    telefonoCliente = dataSnapshot.child("telCliente").getValue().toString();
+                    direccionCliente = dataSnapshot.child("dirCliente").getValue().toString();
+                    correoCliente = dataSnapshot.child("corCliente").getValue().toString();
 
                     tvIdPedidoRNom.setText("Cliente:            " + nombreCliente + " " + apellidoCliente);
                     tvIdPedidoRTel.setText("Teléfono:         " + telefonoCliente);
@@ -617,7 +618,7 @@ public class ActivityPedidosN extends AppCompatActivity {
             pBebes.put("precUPañales", "120.00");
             pBebes.put("imgUrlBebes", "https://firebasestorage.googleapis.com/v0/b/appsupermercado-37259.appspot.com/o/img_productos%2Fpaniales.png?alt=media&token=cd9f01a7-1159-49d5-9f2c-5a791793e0c6");
             mDatabase.child("pedidos").child("cerrados").child(identificador).child("catBebes").setValue(pBebes);
-        }
+            }
 
         if (!NomProBebidas.isEmpty()) {
             Map<String, Object> pBebidas = new HashMap<>();
@@ -666,12 +667,18 @@ public class ActivityPedidosN extends AppCompatActivity {
         mDatabase.child("pedidos").child("cerrados").child(identificador).child("infoPedido").setValue(pPedidoInfo);
 
         Map<String, Object> pClienteInfo = new HashMap<>();
+        pClienteInfo.put("idCliente", idCliente);
         pClienteInfo.put("nomCliente", nombreCliente);
         pClienteInfo.put("apeCliente", apellidoCliente);
         pClienteInfo.put("telCliente", telefonoCliente);
         pClienteInfo.put("dirCliente", direccionCliente);
         pClienteInfo.put("corCliente", correoCliente);
         mDatabase.child("pedidos").child("cerrados").child(identificador).child("infoCliente").setValue(pClienteInfo);
+
+        Map<String, Object> pClienteEva = new HashMap<>();
+        pClienteEva.put("comentario", "---");
+        pClienteEva.put("evaluacion", "No Evaluado");
+        mDatabase.child("pedidos").child("cerrados").child(identificador).child("infoEva").setValue(pClienteEva);
 
         controlPedidos();
         eliminarPedido();
@@ -686,11 +693,12 @@ public class ActivityPedidosN extends AppCompatActivity {
 
         Map<String, Object> RegConpedido = new HashMap<>();
         RegConpedido.put(identificador, identificador);
-        mDatabase.child("pedidos").child("registroCli").child(identificador).updateChildren(RegConpedido);
+        mDatabase.child("pedidos").child("registroCli").child(idCliente).updateChildren(RegConpedido);
     }
 
     public void eliminarPedido(){
         mDatabase.child("pedidos").child("nuevos").child(identificador).removeValue();
         mDatabase.child("pedidos").child("registroNue").child(identificador).removeValue();
+        mDatabase.child("pedidos").child("registroNueID").child(idCliente).child(identificador).removeValue();
     }
 }

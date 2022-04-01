@@ -3,6 +3,7 @@ package com.aplicacion.proyectofinalpm1.ActivityClientes;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.os.Handler;
@@ -67,12 +68,16 @@ public class ActivityPedidosRegistro extends AppCompatActivity {
     double totalBebes = 0, totalBebidas = 0, totalCarnes = 0, totalGranosB = 0, totalLacteos = 0, total = 0;
     double precUBebes = 0, precUBebidas = 0, PrecUCarnes = 0, precGranosB = 0, precULacteos = 0;
     String subtotalDB, impuestoDB, totalDB;
-    String nombreCliente, apellidoCliente, telefonoCliente, direccionCliente, correoCliente;
+    String idCliente, nombreCliente, apellidoCliente, telefonoCliente, direccionCliente, correoCliente;
+    String identificador = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pedidos_registro);
+
+        Intent intent = getIntent();
+        identificador = (intent.getStringExtra("identificador"));
 
         mAuth = FirebaseAuth.getInstance();
         idUsuario = mAuth.getCurrentUser().getUid();
@@ -112,15 +117,16 @@ public class ActivityPedidosRegistro extends AppCompatActivity {
     }
 
     public void infoUsuario(){
-        mDatabase.child("usuarios").child("clientes").child(idUsuario).addValueEventListener(new ValueEventListener() {
+        mDatabase.child("pedidos").child("nuevos").child(identificador).child("infoCliente").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if (dataSnapshot.exists()){
-                    nombreCliente = dataSnapshot.child("nombre").getValue().toString();
-                    apellidoCliente = dataSnapshot.child("apellido").getValue().toString();
-                    telefonoCliente = dataSnapshot.child("telefono").getValue().toString();
-                    direccionCliente = dataSnapshot.child("direccion").getValue().toString();
-                    correoCliente = dataSnapshot.child("correo").getValue().toString();
+                    idCliente = dataSnapshot.child("idCliente").getValue().toString();
+                    nombreCliente = dataSnapshot.child("nomCliente").getValue().toString();
+                    apellidoCliente = dataSnapshot.child("apeCliente").getValue().toString();
+                    telefonoCliente = dataSnapshot.child("telCliente").getValue().toString();
+                    direccionCliente = dataSnapshot.child("dirCliente").getValue().toString();
+                    correoCliente = dataSnapshot.child("corCliente").getValue().toString();
                 }
             }
 
@@ -132,7 +138,7 @@ public class ActivityPedidosRegistro extends AppCompatActivity {
     }
 
     public void infoPedido(){
-        mDatabase.child("pedidos").child("nuevos").child(idUsuario).child("infoPedido").addValueEventListener(new ValueEventListener() {
+        mDatabase.child("pedidos").child("nuevos").child(identificador).child("infoPedido").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if (dataSnapshot.exists()){
@@ -154,7 +160,7 @@ public class ActivityPedidosRegistro extends AppCompatActivity {
     }
 
     public void catBebidas(){
-        mDatabase.child("pedidos").child("nuevos").child(idUsuario).child("catBebidas").addValueEventListener(new ValueEventListener() {
+        mDatabase.child("pedidos").child("nuevos").child(identificador).child("catBebidas").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if (dataSnapshot.exists()){
@@ -216,7 +222,7 @@ public class ActivityPedidosRegistro extends AppCompatActivity {
     }
 
     public void catBebes(){
-        mDatabase.child("pedidos").child("nuevos").child(idUsuario).child("catBebes").addValueEventListener(new ValueEventListener() {
+        mDatabase.child("pedidos").child("nuevos").child(identificador).child("catBebes").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if (dataSnapshot.exists()){
@@ -278,7 +284,7 @@ public class ActivityPedidosRegistro extends AppCompatActivity {
     }
 
     public void catCarnes(){
-        mDatabase.child("pedidos").child("nuevos").child(idUsuario).child("catCarnes").addValueEventListener(new ValueEventListener() {
+        mDatabase.child("pedidos").child("nuevos").child(identificador).child("catCarnes").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if (dataSnapshot.exists()){
@@ -340,7 +346,7 @@ public class ActivityPedidosRegistro extends AppCompatActivity {
     }
 
     public void catGranosB(){
-        mDatabase.child("pedidos").child("nuevos").child(idUsuario).child("catGranosB").addValueEventListener(new ValueEventListener() {
+        mDatabase.child("pedidos").child("nuevos").child(identificador).child("catGranosB").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if (dataSnapshot.exists()){
@@ -402,7 +408,7 @@ public class ActivityPedidosRegistro extends AppCompatActivity {
     }
 
     public void catLacteos(){
-        mDatabase.child("pedidos").child("nuevos").child(idUsuario).child("catLacteos").addValueEventListener(new ValueEventListener() {
+        mDatabase.child("pedidos").child("nuevos").child(identificador).child("catLacteos").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if (dataSnapshot.exists()){

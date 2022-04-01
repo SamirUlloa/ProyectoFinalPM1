@@ -106,7 +106,7 @@ public class ActivityDashboard extends AppCompatActivity {
         listaDashboarC.setVisibility(View.VISIBLE);
 
         DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
-        DatabaseReference mRootChild = mDatabase.child("pedidos").child("registroNue");
+        DatabaseReference mRootChild = mDatabase.child("pedidos").child("registroNueID").child(idUsuario);
 
         adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, arrayList);
 
@@ -152,7 +152,7 @@ public class ActivityDashboard extends AppCompatActivity {
         listaDashboarC.setVisibility(View.VISIBLE);
 
         DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
-        DatabaseReference mRootChild = mDatabase.child("pedidos").child("registroCli");
+        DatabaseReference mRootChild = mDatabase.child("pedidos").child("registroNueID").child(idUsuario);
 
         adapter.clear(); adapter.notifyDataSetChanged();
         adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, arrayList);

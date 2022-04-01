@@ -87,6 +87,32 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.975" />
 
+    <TextView
+        android:id="@+id/tvEvaDBEvaluacion"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="10dp"
+        android:layout_marginTop="5dp"
+        android:ems="10"
+        android:hint="Evaluación:"
+        android:inputType="textPersonName"
+        android:textColor="#A04B09"
+        android:textColorHint="@android:color/black"
+        android:textSize="15sp" />
+
+    <TextView
+        android:id="@+id/tvEvaDBComentario"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="10dp"
+        android:layout_marginTop="0dp"
+        android:ems="10"
+        android:hint="Comentario"
+        android:inputType="textPersonName"
+        android:textColor="#A04B09"
+        android:textColorHint="@android:color/black"
+        android:textSize="15sp" />
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="400dp"

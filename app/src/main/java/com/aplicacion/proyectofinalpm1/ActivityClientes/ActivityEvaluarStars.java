@@ -3,6 +3,7 @@ package com.aplicacion.proyectofinalpm1.ActivityClientes;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.os.Handler;
@@ -46,6 +47,7 @@ public class ActivityEvaluarStars extends AppCompatActivity {
     TextView tvCantPdes1, tvCantPdes2, tvCantPdes3, tvCantPdes4, tvCantPdes5;
     TextView tvSubPdes1, tvSubPdes2, tvSubPdes3, tvSubPdes4, tvSubPdes5;
     TextView tvEvaSubT, tVEvaImp, tvEvaTotal;
+    TextView tvEvaDBEvaluacion, tvEvaDBComentario;
     EditText txtEvaComentario;
 
     ImageView imgP1, imgP2, imgP3, imgP4, imgP5;
@@ -66,7 +68,9 @@ public class ActivityEvaluarStars extends AppCompatActivity {
     double totalBebes = 0, totalBebidas = 0, totalCarnes = 0, totalGranosB = 0, totalLacteos = 0, total = 0;
     double precUBebes = 0, precUBebidas = 0, PrecUCarnes = 0, precGranosB = 0, precULacteos = 0;
     String subtotalDB, impuestoDB, totalDB;
-    String nombreCliente, apellidoCliente, telefonoCliente, direccionCliente, correoCliente;
+    String idCliente, nombreCliente, apellidoCliente, telefonoCliente, direccionCliente, correoCliente;
+    String comentarioDB = "", evaluaciionDB = "";
+    String identificador = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,6 +79,9 @@ public class ActivityEvaluarStars extends AppCompatActivity {
 
         ratingBar = (RatingBar) findViewById(R.id.ratingBar);
         btnEvaluar = (Button) findViewById(R.id.btnEvaluarS);
+
+        Intent intent = getIntent();
+        identificador = (intent.getStringExtra("identificador"));
 
         //Id de usuario
         mAuth = FirebaseAuth.getInstance();
@@ -94,6 +101,7 @@ public class ActivityEvaluarStars extends AppCompatActivity {
         catLacteos();
         infoUsuario();
         infoPedido();
+        infoEvaluacion();
 
         //Evalua la cantidad de estrellas seleccionadas
         btnEvaluar.setOnClickListener(new View.OnClickListener() {
@@ -112,16 +120,37 @@ public class ActivityEvaluarStars extends AppCompatActivity {
         });
     }
 
-    public void infoUsuario(){
-        mDatabase.child("usuarios").child("clientes").child(idUsuario).addValueEventListener(new ValueEventListener() {
+    public void infoEvaluacion(){
+        mDatabase.child("pedidos").child("cerrados").child(identificador).child("infoEva").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if (dataSnapshot.exists()){
-                    nombreCliente = dataSnapshot.child("nombre").getValue().toString();
-                    apellidoCliente = dataSnapshot.child("apellido").getValue().toString();
-                    telefonoCliente = dataSnapshot.child("telefono").getValue().toString();
-                    direccionCliente = dataSnapshot.child("direccion").getValue().toString();
-                    correoCliente = dataSnapshot.child("correo").getValue().toString();
+                    comentarioDB = dataSnapshot.child("comentario").getValue().toString();
+                    evaluaciionDB = dataSnapshot.child("evaluacion").getValue().toString();
+
+                    tvEvaDBEvaluacion.setText("Evaluación: " + evaluaciionDB + " Estrellas");
+                    tvEvaDBComentario.setText("Comentario: " + comentarioDB);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
+
+    public void infoUsuario(){
+        mDatabase.child("pedidos").child("cerrados").child(identificador).child("infoCliente").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if (dataSnapshot.exists()){
+                    idCliente = dataSnapshot.child("idCliente").getValue().toString();
+                    nombreCliente = dataSnapshot.child("nomCliente").getValue().toString();
+                    apellidoCliente = dataSnapshot.child("apeCliente").getValue().toString();
+                    telefonoCliente = dataSnapshot.child("telCliente").getValue().toString();
+                    direccionCliente = dataSnapshot.child("dirCliente").getValue().toString();
+                    correoCliente = dataSnapshot.child("corCliente").getValue().toString();
                 }
             }
 
@@ -133,7 +162,7 @@ public class ActivityEvaluarStars extends AppCompatActivity {
     }
 
     public void infoPedido(){
-        mDatabase.child("pedidos").child("cerrados").child(idUsuario).child("infoPedido").addValueEventListener(new ValueEventListener() {
+        mDatabase.child("pedidos").child("cerrados").child(identificador).child("infoPedido").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if (dataSnapshot.exists()){
@@ -155,7 +184,7 @@ public class ActivityEvaluarStars extends AppCompatActivity {
     }
 
     public void catBebidas(){
-        mDatabase.child("pedidos").child("cerrados").child(idUsuario).child("catBebidas").addValueEventListener(new ValueEventListener() {
+        mDatabase.child("pedidos").child("cerrados").child(identificador).child("catBebidas").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if (dataSnapshot.exists()){
@@ -217,7 +246,7 @@ public class ActivityEvaluarStars extends AppCompatActivity {
     }
 
     public void catBebes(){
-        mDatabase.child("pedidos").child("cerrados").child(idUsuario).child("catBebes").addValueEventListener(new ValueEventListener() {
+        mDatabase.child("pedidos").child("cerrados").child(identificador).child("catBebes").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if (dataSnapshot.exists()){
@@ -279,7 +308,7 @@ public class ActivityEvaluarStars extends AppCompatActivity {
     }
 
     public void catCarnes(){
-        mDatabase.child("pedidos").child("cerrados").child(idUsuario).child("catCarnes").addValueEventListener(new ValueEventListener() {
+        mDatabase.child("pedidos").child("cerrados").child(identificador).child("catCarnes").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if (dataSnapshot.exists()){
@@ -341,7 +370,7 @@ public class ActivityEvaluarStars extends AppCompatActivity {
     }
 
     public void catGranosB(){
-        mDatabase.child("pedidos").child("cerrados").child(idUsuario).child("catGranosB").addValueEventListener(new ValueEventListener() {
+        mDatabase.child("pedidos").child("cerrados").child(identificador).child("catGranosB").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if (dataSnapshot.exists()){
@@ -403,7 +432,7 @@ public class ActivityEvaluarStars extends AppCompatActivity {
     }
 
     public void catLacteos(){
-        mDatabase.child("pedidos").child("cerrados").child(idUsuario).child("catLacteos").addValueEventListener(new ValueEventListener() {
+        mDatabase.child("pedidos").child("cerrados").child(identificador).child("catLacteos").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if (dataSnapshot.exists()){
@@ -473,7 +502,7 @@ public class ActivityEvaluarStars extends AppCompatActivity {
             pBebes.put("precioPañales", precioPañales);
             pBebes.put("precUPañales", "120.00");
             pBebes.put("imgUrlBebes", "https://firebasestorage.googleapis.com/v0/b/appsupermercado-37259.appspot.com/o/img_productos%2Fpaniales.png?alt=media&token=cd9f01a7-1159-49d5-9f2c-5a791793e0c6");
-            mDatabase.child("pedidos").child("evaluados").child(idUsuario).child("catBebes").setValue(pBebes);
+            mDatabase.child("pedidos").child("evaluados").child(identificador).child("catBebes").setValue(pBebes);
         }
 
         if (!NomProBebidas.isEmpty()) {
@@ -483,7 +512,7 @@ public class ActivityEvaluarStars extends AppCompatActivity {
             pBebidas.put("precioBebidas", precioBebidas);
             pBebidas.put("precUBebidas", "150.00");
             pBebidas.put("imgUrlBebidas", "https://firebasestorage.googleapis.com/v0/b/appsupermercado-37259.appspot.com/o/img_productos%2FbebidaCoronaC.png?alt=media&token=6805fb9f-3bdd-4541-90c7-95e8a9dcec20");
-            mDatabase.child("pedidos").child("evaluados").child(idUsuario).child("catBebidas").setValue(pBebidas);
+            mDatabase.child("pedidos").child("evaluados").child(identificador).child("catBebidas").setValue(pBebidas);
         }
 
         if(!NomProCarnes.isEmpty()) {
@@ -493,7 +522,7 @@ public class ActivityEvaluarStars extends AppCompatActivity {
             pCarnes.put("precioCarnes", precioCarnes);
             pCarnes.put("precUCarnes", "100.00");
             pCarnes.put("imgUrlCarnes", "https://firebasestorage.googleapis.com/v0/b/appsupermercado-37259.appspot.com/o/img_productos%2Fchuleta.jpg?alt=media&token=36715cc1-23ee-43b6-92ab-a6d5a2a258d4");
-            mDatabase.child("pedidos").child("evaluados").child(idUsuario).child("catCarnes").setValue(pCarnes);
+            mDatabase.child("pedidos").child("evaluados").child(identificador).child("catCarnes").setValue(pCarnes);
         }
 
         if(!NomProGranosB.isEmpty()) {
@@ -503,7 +532,7 @@ public class ActivityEvaluarStars extends AppCompatActivity {
             pGranosB.put("precioGranosB", precioGranosB);
             pGranosB.put("precUGranosB", "14.00");
             pGranosB.put("imgUrlGranosB", "https://firebasestorage.googleapis.com/v0/b/appsupermercado-37259.appspot.com/o/img_productos%2Farroz.jpg?alt=media&token=8e691cc4-1b32-4cd8-bb6f-7e07e07f6831");
-            mDatabase.child("pedidos").child("evaluados").child(idUsuario).child("catGranosB").setValue(pGranosB);
+            mDatabase.child("pedidos").child("evaluados").child(identificador).child("catGranosB").setValue(pGranosB);
         }
 
         if (!NomProLacteos.isEmpty()) {
@@ -513,7 +542,7 @@ public class ActivityEvaluarStars extends AppCompatActivity {
             pLacteos.put("precioLacteos", precioLacteos);
             pLacteos.put("precULacteos", "30.00");
             pLacteos.put("imgUrlLacteos", "https://firebasestorage.googleapis.com/v0/b/appsupermercado-37259.appspot.com/o/img_productos%2FlecheCeteco.png?alt=media&token=7bc5a649-956e-42e7-b00b-adf651115661");
-            mDatabase.child("pedidos").child("evaluados").child(idUsuario).child("catLacteos").setValue(pLacteos);
+            mDatabase.child("pedidos").child("evaluados").child(identificador).child("catLacteos").setValue(pLacteos);
         }
 
         Map<String, Object> pPedidoInfo = new HashMap<>();
@@ -522,27 +551,35 @@ public class ActivityEvaluarStars extends AppCompatActivity {
         pPedidoInfo.put("total", total);
         pPedidoInfo.put("evaluacion", estrella);
         pPedidoInfo.put("comentario", comentarioEva);
-        mDatabase.child("pedidos").child("evaluados").child(idUsuario).child("infoPedido").setValue(pPedidoInfo);
+        mDatabase.child("pedidos").child("evaluados").child(identificador).child("infoPedido").setValue(pPedidoInfo);
+
+        Map<String, Object> pPedidoEva = new HashMap<>();
+        pPedidoEva.put("evaluacion", estrella);
+        pPedidoEva.put("comentario", comentarioEva);
+        mDatabase.child("pedidos").child("cerrados").child(identificador).child("infoEva").updateChildren(pPedidoEva);
 
         Map<String, Object> pClienteInfo = new HashMap<>();
+        pClienteInfo.put("idCliente",  idCliente);
         pClienteInfo.put("nomCliente", nombreCliente);
         pClienteInfo.put("apeCliente", apellidoCliente);
         pClienteInfo.put("telCliente", telefonoCliente);
         pClienteInfo.put("dirCliente", direccionCliente);
         pClienteInfo.put("corCliente", correoCliente);
-        mDatabase.child("pedidos").child("evaluados").child(idUsuario).child("infoCliente").setValue(pClienteInfo);
+        mDatabase.child("pedidos").child("evaluados").child(identificador).child("infoCliente").setValue(pClienteInfo);
 
         registroPedidos();
     }
 
     public void registroPedidos(){
         Map<String, Object> EvaPedido = new HashMap<>();
-        EvaPedido.put(idUsuario, idUsuario);
+        EvaPedido.put(identificador, identificador);
         mDatabase.child("pedidos").child("registroEva").updateChildren(EvaPedido);
     }
 
     public void instanciarTextos(){
         //Cuadros de Texto
+        tvEvaDBComentario = (TextView) findViewById(R.id.tvEvaDBComentario);
+        tvEvaDBEvaluacion = (TextView) findViewById(R.id.tvEvaDBEvaluacion);
         txtEvaComentario = (EditText) findViewById(R.id.txtEvaComentario);
 
         tvEvaSubT = (TextView) findViewById(R.id.tvEvaSubT);
