@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -20,7 +21,7 @@ import java.util.Map;
 
 public class ActivityBebidasA extends AppCompatActivity {
     int contador,preciou;
-    Button btnMenosBC, btnMasBC, btnACarritoBC;
+    Button btnMenosBC, btnMasBC, btnACarritoBC, btnvolver;
     TextView txvCantidadBC,txvPTotalBAC;
 
     FirebaseAuth mAuth;
@@ -43,6 +44,15 @@ public class ActivityBebidasA extends AppCompatActivity {
         //Cajas de Texto
         txvCantidadBC = (TextView) findViewById(R.id.txtvCantidadBC);
         txvPTotalBAC = (TextView) findViewById(R.id.txvPTotalBC);
+
+        btnvolver = (Button) findViewById(R.id.btnVolverM6);
+        btnvolver.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(ActivityBebidasA.this, ActivityCategoria.class);
+                startActivity(intent);
+            }
+        });
 
        //disminuir cantidad
         btnMenosBC = (Button) findViewById(R.id.btnMenosBC);

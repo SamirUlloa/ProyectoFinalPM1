@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@android:color/white"
+    android:background="@drawable/cut_card_backround"
     tools:context=".ActivityAdmin.ActivityRegisRepartidor">
 
     <TextView
@@ -15,8 +15,9 @@
         android:layout_margin="10dp"
         android:text="Registrar un Repartidor"
         android:textAlignment="center"
-        android:textColor="@android:color/black"
-        android:textSize="20sp" />
+        android:textColor="#605757"
+        android:textSize="30sp"
+        android:textStyle="bold" />
 
 
     <ScrollView
@@ -40,11 +41,12 @@
             <Button
                 android:id="@+id/btnRepartImagen"
                 android:layout_width="match_parent"
-                android:textColor="@android:color/black"
-                android:textColorHint="@android:color/black"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
-                android:text="Agregar Imagen" />
+                android:backgroundTint="#ABFBFBFB"
+                android:text="Agregar Imagen"
+                android:textColor="#000000"
+                android:textColorHint="@android:color/black" />
 
             <EditText
                 android:id="@+id/txtReparNombre"
@@ -118,7 +120,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
-                android:text="Crear Usuario" />
+                android:backgroundTint="#ABFBFBFB"
+                android:text="Crear Usuario"
+                android:textColor="#000000" />
 
             <Button
                 android:id="@+id/btnReparCancelar"
@@ -126,7 +130,9 @@
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="10dp"
                 android:layout_marginVertical="2dp"
-                android:text="Regresar al Menu" />
+                android:backgroundTint="#ABFBFBFB"
+                android:text="Regresar al Menu"
+                android:textColor="#000000" />
 
         </LinearLayout>
     </ScrollView>

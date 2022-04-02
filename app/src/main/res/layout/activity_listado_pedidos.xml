@@ -5,61 +5,70 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@color/white"
+    android:background="@drawable/cut_card_backround"
     tools:context=".ActivityAdmin.ActivityListadoPedidos">
 
     <TextView
         android:id="@+id/textView40"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="22dp"
         android:layout_margin="10dp"
+        android:text="Listado de Pedidos"
         android:textAlignment="center"
-        android:textColor="@color/black"
-        android:text="Listado de Pedidos" />
+        android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+        android:textColor="#605757"
+        android:textSize="30dp"
+        android:textStyle="bold" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:orientation="horizontal"
         android:layout_height="75dp">
 
-    <Button
-        android:id="@+id/btnAdminPPen"
-        android:layout_width="110dp"
-        android:layout_margin="5dp"
-        android:layout_height="match_parent"
-        android:text="Pedidos Nuevos" />
+        <Button
+            android:id="@+id/btnAdminPPen"
+            android:layout_width="121dp"
+            android:layout_height="63dp"
+            android:layout_margin="5dp"
+            android:backgroundTint="#ABFBFBFB"
+            android:text="Pedidos Nuevos"
+            android:textColor="#000000" />
 
-    <Button
-        android:id="@+id/btnAdminPCer"
-        android:layout_width="120dp"
-        android:layout_margin="5dp"
-        android:layout_height="match_parent"
-        android:text="Pedidos Cerrados" />
+        <Button
+            android:id="@+id/btnAdminPCer"
+            android:layout_width="131dp"
+            android:layout_height="match_parent"
+            android:layout_margin="5dp"
+            android:backgroundTint="#ABFBFBFB"
+            android:text="Pedidos Cerrados"
+            android:textColor="#000000" />
 
-    <Button
-        android:id="@+id/btnAdminPEva"
-        android:layout_width="120dp"
-        android:layout_margin="5dp"
-        android:layout_height="match_parent"
-        android:text="Pedidos Evaluados" />
+        <Button
+            android:id="@+id/btnAdminPEva"
+            android:layout_width="132dp"
+            android:layout_height="64dp"
+            android:layout_margin="5dp"
+            android:backgroundTint="#ABFBFBFB"
+            android:text="Pedidos Evaluados"
+            android:textColor="#000000" />
     </LinearLayout>
 
     <TextView
         android:id="@+id/tvTipoPedido"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:text="Pedidos Pendientes"
+        android:textAlignment="center"
         android:textColor="@color/black"
         android:textSize="22dp"
-        android:layout_margin="10dp"
-        android:textAlignment="center"
-        android:text="Pedidos Pendientes" />
+        android:textStyle="bold" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="550dp"
         android:orientation="vertical"
-        android:background="#4282DA">
+        android:background="#A1009688">
 
         <ListView
             android:id="@+id/listaPedidosPenA"

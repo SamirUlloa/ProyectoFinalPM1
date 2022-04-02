@@ -14,15 +14,25 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
 import com.aplicacion.proyectofinalpm1.ActivityClientes.ActivityCarritoCompras;
 import com.aplicacion.proyectofinalpm1.R;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.messaging.FirebaseMessaging;
 import com.squareup.picasso.Picasso;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -108,6 +118,15 @@ public class ActivityPedidosN extends AppCompatActivity {
         },cargaDatos);
         //Termina carga de Datos
 
+        //SUSCRIBIR A UNA PERSONA AL TOPICO
+        FirebaseMessaging.getInstance().subscribeToTopic("enviaratodos").addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+                Toast.makeText(ActivityPedidosN.this,"Suscrito al enviar a todos!",Toast.LENGTH_SHORT).show();
+
+            }
+        });
+
         btnCerrarPRep = (Button) findViewById(R.id.btnCerrarPRep);
         btnCerrarPRep.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -115,9 +134,45 @@ public class ActivityPedidosN extends AppCompatActivity {
                 tvEstadoPRep = (TextView) findViewById(R.id.tvEstadoPRep);
                 tvEstadoPRep.setText("Estado del Pedido: Entregado");
                 cerrarPedido();
+                llamaratopico("Compra Cerrada","Su pedido a sido entregado","enviaratodos");
             }
         });
     }
+
+    // ESTE ENVIARIA UN MENSAJE PUSH A TODOS LOS USUARIOS QUE TENGAN INSTALADOS LA APLICACION
+    // AQUI SOLAMENTE SE TIENE  QUE SUSCRIBIR A LOS USUARIOS EN UN TOPICO ASI UNA VEZ QUE ESLLOS SE SUSCRIBAN SE LE ENVIA LA NOTIFICACION A TODOS LOS USUARIOS
+    private void llamaratopico(String titulo,String mensaje, String topico) {
+        RequestQueue myrequest = Volley.newRequestQueue(getApplicationContext());
+        JSONObject json =new JSONObject();
+
+        try {
+            //String token ="dOkBWZjISe-B_TFO_5Uixl:APA91bGAOtVp48blQksEY7uP54zQaoLFUrOFaPYsSWxup1jGMjrU9I8FZkngImYqcuLPEdZ1ZVnbTep-v6Aj5NngWejK29RwotqTHoxbv2fw8240zBcYonx40zCbp5HbrJME7hYTypFM";
+
+            json.put("to","/topics/"+topico);
+            JSONObject notificacion = new JSONObject();
+            notificacion.put("titulo ",titulo);
+            notificacion.put("detalle",mensaje);
+            json.put("data",notificacion);
+
+            String URL = "https://fcm.googleapis.com/fcm/send";
+            JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST,URL,json,null,null){
+                @Override
+                public Map<String, String> getHeaders()  {
+                    Map<String,String> header = new HashMap<>();
+
+                    header.put("content-type", "application/json");
+                    header.put("authorization","key=AAAAh3G9j9U:APA91bEy8uCRppmLZ4EUhfe8tbLb4NwQ__l_DpJxcrYDe8pOQddHSvXocXgHYc8-2emAeR6G6ei2TjHjC8x6t2WG0yEM2rBKLa95K7dKhkhD9kJOVrCXrLj9Zrjzi-O66CR91lRlRJBw");
+
+                    return header;
+                }
+            };
+            myrequest.add(request);
+
+        }catch (JSONException e){
+            e.printStackTrace();
+        }
+    }
+
 
     public void infoPedido(){
         mDatabase.child("pedidos").child("nuevos").child(identificador).child("infoPedido").addValueEventListener(new ValueEventListener() {

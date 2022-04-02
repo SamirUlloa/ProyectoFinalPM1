@@ -5,19 +5,20 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@android:color/white"
+    android:background="@drawable/cut_card_backround"
     tools:context=".ActivityControl.ActivityRestablecer">
 
     <TextView
         android:id="@+id/textView3"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Restablezca si Contraseña"
-        android:textColor="@android:color/black"
-        android:textColorHint="@android:color/black"
         android:layout_margin="10dp"
+        android:text="Restablezca su Contraseña"
         android:textAlignment="center"
-        android:textSize="20sp" />
+        android:textColor="#605757"
+        android:textColorHint="@android:color/black"
+        android:textSize="30sp"
+        android:textStyle="bold" />
 
     <EditText
         android:id="@+id/txtRestCorreo"
@@ -35,5 +36,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
-        android:text="Restablecer Contraseña" />
+        android:backgroundTint="#ABFBFBFB"
+        android:text="Restablecer Contraseña"
+        android:textColor="#000000" />
 </LinearLayout>

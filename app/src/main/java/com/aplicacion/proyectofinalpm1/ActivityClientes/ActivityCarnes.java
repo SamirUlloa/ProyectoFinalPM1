@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -22,7 +23,7 @@ public class ActivityCarnes extends AppCompatActivity {
 
     int contador;
     int preciou;
-    Button btnMenosCA, btnMasCA, btnACarritoCA;
+    Button btnMenosCA, btnMasCA, btnACarritoCA,btnvolver;
     TextView txvCantidadCA,txvPTotalCA;
 
     FirebaseAuth mAuth;
@@ -44,6 +45,15 @@ public class ActivityCarnes extends AppCompatActivity {
 
         txvCantidadCA = (TextView) findViewById(R.id.txtvCantidadC);
         txvPTotalCA = (TextView) findViewById(R.id.txvPTotalC);
+
+        btnvolver = (Button) findViewById(R.id.btnVolverM4);
+        btnvolver.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(ActivityCarnes.this, ActivityCategoria.class);
+                startActivity(intent);
+            }
+        });
 
 
         btnMenosCA = (Button) findViewById(R.id.btnmenosC);

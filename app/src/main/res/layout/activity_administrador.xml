@@ -5,29 +5,32 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@android:color/white"
+    android:background="@drawable/cut_card_backround"
     tools:context=".ActivityAdmin.ActivityAdministrador">
 
     <TextView
         android:id="@+id/textView6"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Perfil Administrador"
         android:layout_margin="10dp"
-        android:textColor="@android:color/black"
-        android:textColorHint="@android:color/black"
+        android:text="Perfil Administrador"
         android:textAlignment="center"
-        android:textSize="20sp" />
+        android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+        android:textColor="#605757"
+        android:textColorHint="@android:color/black"
+        android:textSize="30sp"
+        android:textStyle="bold" />
 
     <TextView
         android:id="@+id/textViewAdmin"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textColor="@android:color/black"
-        android:textColorHint="@android:color/black"
-        android:text="Bienvenido: "
         android:layout_margin="10dp"
+        android:text="Bienvenido: "
+        android:textColor="#222121"
+        android:textColorHint="@android:color/black"
         android:textSize="20sp"
+        android:textStyle="bold"
         tools:layout_editor_absoluteX="208dp"
         tools:layout_editor_absoluteY="162dp" />
 
@@ -36,34 +39,59 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
-        android:text="Pedidos" />
+        android:backgroundTint="#ABFBFBFB"
+        android:text="Pedidos"
+        android:textColor="#000000"
+        app:icon="@drawable/orden"
+        app:iconTint="@color/common_google_signin_btn_text_dark_disabled"
+        app:iconTintMode="screen" />
 
     <Button
         android:id="@+id/btnRegisRepartidor"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
-        android:text="Registrar Repartidor" />
+        android:backgroundTint="#ABFBFBFB"
+        android:text="Registrar Repartidor"
+        android:textColor="#020202"
+        app:icon="@drawable/repartidor"
+        app:iconTint="@color/common_google_signin_btn_text_dark_disabled"
+        app:iconTintMode="screen" />
 
     <Button
         android:id="@+id/btnRegisAdmin"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
-        android:text="Registrar Administrador" />
+        android:backgroundTint="#ABFBFBFB"
+        android:text="Registrar Administrador"
+        android:textColor="#020202"
+        app:icon="@drawable/administrador"
+        app:iconTint="@color/common_google_signin_btn_text_dark_disabled"
+        app:iconTintMode="screen" />
 
     <Button
         android:id="@+id/btnAdminPerfil"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
-        android:text="Mi Perfil" />
+        android:backgroundTint="#ABFBFBFB"
+        android:text="Mi Perfil"
+        android:textColor="#020202"
+        app:icon="@drawable/ordenador_portatil"
+        app:iconTint="@color/common_google_signin_btn_text_dark_disabled"
+        app:iconTintMode="screen" />
 
     <Button
         android:id="@+id/btnAdminCerrar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
-        android:text="Cerrar Sesión" />
+        android:backgroundTint="#ABFBFBFB"
+        android:text="Cerrar Sesión"
+        android:textColor="#020202"
+        app:icon="?attr/actionModeCloseDrawable"
+        app:iconTint="@color/common_google_signin_btn_text_dark_disabled"
+        app:iconTintMode="screen" />
 
 </LinearLayout>

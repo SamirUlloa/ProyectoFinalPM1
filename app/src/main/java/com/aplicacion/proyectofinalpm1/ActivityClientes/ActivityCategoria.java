@@ -1,6 +1,7 @@
 package com.aplicacion.proyectofinalpm1.ActivityClientes;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -11,7 +12,8 @@ import com.aplicacion.proyectofinalpm1.R;
 
 public class ActivityCategoria extends AppCompatActivity {
 
-    Button btnvolver,btnCarnes,btnLacteos,btnGranosB,btnBebidasA,btnAreaBebe;
+    Button btnvolver;
+    CardView btnLacteos,btnGranosB,btnBebidasA,btnAreaBebe, btnCarnes;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,7 +30,7 @@ public class ActivityCategoria extends AppCompatActivity {
             }
         });
 
-        btnCarnes = (Button) findViewById(R.id.btncarnes);
+        btnCarnes = (CardView) findViewById(R.id.btncarnes);
         btnCarnes.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -37,7 +39,7 @@ public class ActivityCategoria extends AppCompatActivity {
             }
         });
 
-        btnLacteos = (Button) findViewById(R.id.btnlacteos);
+        btnLacteos = (CardView) findViewById(R.id.btnlacteos);
         btnLacteos.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -46,7 +48,7 @@ public class ActivityCategoria extends AppCompatActivity {
             }
         });
 
-        btnGranosB = (Button) findViewById(R.id.btngranos);
+        btnGranosB = (CardView) findViewById(R.id.btngranos);
         btnGranosB.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -55,7 +57,7 @@ public class ActivityCategoria extends AppCompatActivity {
             }
         });
 
-        btnBebidasA = (Button) findViewById(R.id.btnbebidas);
+        btnBebidasA = (CardView) findViewById(R.id.btnbebidas);
         btnBebidasA.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -64,7 +66,7 @@ public class ActivityCategoria extends AppCompatActivity {
             }
         });
 
-        btnAreaBebe = (Button) findViewById(R.id.btnbebes);
+        btnAreaBebe = (CardView) findViewById(R.id.btnbebes);
         btnAreaBebe.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

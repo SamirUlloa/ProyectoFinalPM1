@@ -4,8 +4,26 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
+    android:background="@drawable/cut_card_backround"
     tools:context=".ActivityClientes.ActivityGranosB">
+
+    <Button
+        android:id="@+id/btnVolverM3"
+        android:layout_width="wrap_content"
+        android:layout_height="37dp"
+        android:backgroundTint="@color/teal_700"
+        android:text="Volver"
+        app:icon="?attr/actionModeCloseDrawable"
+        app:iconPadding="5dp"
+        app:iconTint="#F41010"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.004">
+
+    </Button>
 
     <TextView
         android:id="@+id/txtvCantidadG"
@@ -36,10 +54,12 @@
 
     <Button
         android:id="@+id/btnmenosG"
-        android:layout_width="48dp"
-        android:layout_height="41dp"
-        android:backgroundTint="#009688"
+        android:layout_width="56dp"
+        android:layout_height="46dp"
+        android:backgroundTint="#4CAF50"
         android:text="-"
+        android:textSize="16sp"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.068"
@@ -51,9 +71,9 @@
         android:id="@+id/btnAggCarritoG"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:backgroundTint="#335EFF"
-        android:textColor="@android:color/white"
+        android:backgroundTint="#ABFBFBFB"
         android:text="Añadir al Carrito"
+        android:textColor="#070707"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"

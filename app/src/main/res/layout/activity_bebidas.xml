@@ -4,17 +4,35 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
+    android:background="@drawable/cut_card_backround"
     tools:context=".ActivityClientes.ActivityBebidasA">
 
+
+    <Button
+        android:id="@+id/btnVolverM6"
+        android:layout_width="wrap_content"
+        android:layout_height="37dp"
+        android:backgroundTint="@color/teal_700"
+        android:text="Volver"
+        app:icon="?attr/actionModeCloseDrawable"
+        app:iconPadding="5dp"
+        app:iconTint="#F41010"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.004">
+
+    </Button>
 
     <Button
         android:id="@+id/btnAggCaritoBC"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:backgroundTint="#335EFF"
+        android:backgroundTint="#ABFBFBFB"
         android:text="Añadir al Carrito"
-        android:textColor="@android:color/white"
+        android:textColor="#000000"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
@@ -79,8 +97,9 @@
 
     <TextView
         android:id="@+id/textView13"
-        android:layout_width="398dp"
-        android:layout_height="97dp"
+        android:layout_width="409dp"
+        android:layout_height="99dp"
+        android:fontFamily="sans-serif-condensed"
         android:text="Lleva a casa los mejores ingredientes para las más deliciosas recetas y haz de cada momento algo inolvidable."
         android:textAlignment="center"
         android:textColor="#040404"
@@ -140,6 +159,7 @@
         android:layout_height="44dp"
         android:backgroundTint="#4CAF50"
         android:text="+"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.41"
@@ -151,8 +171,9 @@
         android:id="@+id/btnMenosBC"
         android:layout_width="48dp"
         android:layout_height="44dp"
-        android:backgroundTint="#009688"
+        android:backgroundTint="#4CAF50"
         android:text="-"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.041"

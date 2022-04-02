@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@android:color/white"
+    android:background="@drawable/cut_card_backround"
     tools:context=".ActivityControl.ActivityLogin">
 
     <TextView
@@ -15,8 +15,9 @@
         android:layout_margin="10dp"
         android:text="Inicia Sesión"
         android:textAlignment="center"
-        android:textColor="#000000"
-        android:textSize="20sp"
+        android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+        android:textColor="#605757"
+        android:textSize="34sp"
         android:textStyle="bold|italic" />
 
     <ImageView
@@ -53,7 +54,9 @@
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="10dp"
         android:layout_marginVertical="2dp"
+        android:backgroundTint="#ABFBFBFB"
         android:text="Ingresar"
+        android:textColor="#000000"
         app:icon="@drawable/telefono_inteligente"
         app:iconTint="@color/common_google_signin_btn_text_dark_disabled"
         app:iconTintMode="screen" />
@@ -64,7 +67,9 @@
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="10dp"
         android:layout_marginVertical="2dp"
+        android:backgroundTint="#ABFBFBFB"
         android:text="Crear Usuario"
+        android:textColor="#000000"
         app:icon="@drawable/agregar_usuario"
         app:iconTint="@color/common_google_signin_btn_text_dark_disabled"
         app:iconTintMode="screen" />
@@ -75,7 +80,9 @@
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="10dp"
         android:layout_marginVertical="2dp"
+        android:backgroundTint="#ABFBFBFB"
         android:text="Recuperar Contraseña"
+        android:textColor="#000000"
         app:icon="@drawable/contrasena"
         app:iconTint="@color/common_google_signin_btn_text_dark_disabled"
         app:iconTintMode="screen" />

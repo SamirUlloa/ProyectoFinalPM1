@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@android:color/white"
+    android:background="@drawable/cut_card_backround"
     tools:context=".ActivityAdmin.ActivityRegisAdmin">
 
     <TextView
@@ -13,10 +13,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
-        android:textAlignment="center"
-        android:textColor="@android:color/black"
         android:text="Registrar un Administrador"
-        android:textSize="20sp" />
+        android:textAlignment="center"
+        android:textColor="#605757"
+        android:textSize="30sp"
+        android:textStyle="bold" />
 
     <ScrollView
         android:id="@+id/scrollAdm"
@@ -38,10 +39,11 @@
                 android:id="@+id/btnAdminImage"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textColor="@android:color/black"
-                android:textColorHint="@android:color/black"
                 android:layout_margin="10dp"
-                android:text="Agregar Foto de Perfil" />
+                android:backgroundTint="#ABFBFBFB"
+                android:text="Agregar Foto de Perfil"
+                android:textColor="#000000"
+                android:textColorHint="@android:color/black" />
 
             <EditText
                 android:id="@+id/txtAdminNombre"
@@ -113,19 +115,21 @@
                 android:id="@+id/btnAdminCrear"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textColor="@android:color/black"
-                android:textColorHint="@android:color/black"
                 android:layout_margin="10dp"
-                android:text="Registrar el Usuario" />
+                android:backgroundTint="#ABFBFBFB"
+                android:text="Registrar el Usuario"
+                android:textColor="#000000"
+                android:textColorHint="@android:color/black" />
 
             <Button
                 android:id="@+id/btnAdminCancelar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textColor="@android:color/black"
-                android:textColorHint="@android:color/black"
                 android:layout_margin="10dp"
-                android:text="Regresar al Menú" />
+                android:backgroundTint="#ABFBFBFB"
+                android:text="Regresar al Menú"
+                android:textColor="#000000"
+                android:textColorHint="@android:color/black" />
         </LinearLayout>
 
     </ScrollView>

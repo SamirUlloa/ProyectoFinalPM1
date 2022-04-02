@@ -5,19 +5,20 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@android:color/white"
+    android:background="@drawable/cut_card_backround"
     tools:context=".ActivityAdmin.ActivityPerfilAdmin">
 
     <TextView
         android:id="@+id/textV1252"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textAlignment="center"
-        android:text="Perfil de Administrador"
         android:layout_marginTop="10dp"
-        android:textColor="@android:color/black"
+        android:text="Perfil de Administrador"
+        android:textAlignment="center"
+        android:textColor="#605757"
         android:textColorHint="@android:color/black"
-        android:textSize="20sp" />
+        android:textSize="30sp"
+        android:textStyle="bold" />
 
     <ScrollView
         android:layout_width="match_parent"
@@ -43,7 +44,9 @@
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="10dp"
                 android:layout_marginTop="0dp"
-                android:text="Cambiar magen" />
+                android:backgroundTint="#ABFBFBFB"
+                android:text="Cambiar magen"
+                android:textColor="#000000" />
 
             <TextView
                 android:id="@+id/txtAdminNombre1"
@@ -174,23 +177,29 @@
                 android:id="@+id/btnAdminRCon"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
                 android:layout_marginHorizontal="10dp"
-                android:text="Cambiar Contraseña" />
+                android:layout_marginTop="20dp"
+                android:backgroundTint="#ABFBFBFB"
+                android:text="Cambiar Contraseña"
+                android:textColor="#000000" />
 
             <Button
                 android:id="@+id/btnAdminGua"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="10dp"
-                android:text="Guardar Cambios" />
+                android:backgroundTint="#ABFBFBFB"
+                android:text="Guardar Cambios"
+                android:textColor="#000000" />
 
             <Button
                 android:id="@+id/btnAdminRegrM"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="10dp"
-                android:text="Regresar Al Menu" />
+                android:backgroundTint="#ABFBFBFB"
+                android:text="Regresar Al Menu(Repartidor)"
+                android:textColor="#000000" />
         </LinearLayout>
     </ScrollView>
 

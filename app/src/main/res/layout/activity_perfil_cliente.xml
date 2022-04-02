@@ -5,19 +5,38 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@android:color/white"
+    android:background="@drawable/cut_card_backround"
     tools:context=".ActivityClientes.ActivityPerfilCliente">
+
+    <Button
+        android:id="@+id/btnClienteRegrM"
+        android:layout_width="wrap_content"
+        android:layout_height="37dp"
+        android:backgroundTint="@color/teal_700"
+        android:text="Menu"
+        app:icon="?attr/actionModeCloseDrawable"
+        app:iconPadding="5dp"
+        app:iconTint="#F41010"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.004">
+
+    </Button>
 
     <TextView
         android:id="@+id/textView9"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textAlignment="center"
-        android:text="Perfil de Usuario"
         android:layout_marginTop="10dp"
-        android:textColor="@android:color/black"
+        android:text="Perfil de Usuario"
+        android:textAlignment="center"
+        android:textColor="#605757"
         android:textColorHint="@android:color/black"
-        android:textSize="20sp" />
+        android:textSize="30sp"
+        android:textStyle="bold" />
 
     <ScrollView
         android:layout_width="match_parent"
@@ -43,7 +62,9 @@
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="10dp"
                 android:layout_marginTop="0dp"
-                android:text="Cambiar magen" />
+                android:backgroundTint="#ABFDFDFD"
+                android:text="Cambiar magen"
+                android:textColor="#050505" />
 
             <TextView
                 android:id="@+id/txtClienteNombre1"
@@ -162,35 +183,33 @@
                 android:id="@+id/txtClienteCorreo"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:ems="10"
-                android:textSize="20sp"
-                android:hint="Correo"
                 android:layout_marginHorizontal="10dp"
+                android:ems="10"
+                android:hint="Correo"
+                android:inputType="textPersonName"
                 android:textColor="@android:color/black"
                 android:textColorHint="@android:color/black"
-                android:inputType="textPersonName" />
+                android:textSize="20sp" />
 
             <Button
                 android:id="@+id/btnClienteRCon"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
                 android:layout_marginHorizontal="10dp"
-                android:text="Cambiar Contraseña" />
+                android:layout_marginTop="20dp"
+                android:backgroundTint="#ABFBFBFB"
+                android:text="Cambiar Contraseña"
+                android:textColor="#0B0B0B" />
 
             <Button
                 android:id="@+id/btnClienteGua"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="10dp"
-                android:text="Guardar Cambios" />
+                android:backgroundTint="#ABFBFBFB"
+                android:text="Guardar Cambios"
+                android:textColor="#000000" />
 
-            <Button
-                android:id="@+id/btnClienteRegrM"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="10dp"
-                android:text="Regresar Al Menu" />
         </LinearLayout>
     </ScrollView>
 

@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.aplicacion.proyectofinalpm1.ActivityControl.ActivityLogin;
@@ -21,8 +22,7 @@ import com.google.firebase.database.ValueEventListener;
 public class ActivityMenu extends AppCompatActivity {
 
     Button btnCerrarSesion;
-    Button btnPerfilClientes;
-    Button btnCategorias,btnAcercaDe,btnCarrito, btndash;
+    LinearLayout btnPerfilClientes,btnCategorias,btnAcercaDe,btnCarrito, btndash;
     TextView tvMenuUsuario;
 
     FirebaseAuth mAuth;
@@ -36,7 +36,7 @@ public class ActivityMenu extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
         mDatabase = FirebaseDatabase.getInstance().getReference();
 
-        btnPerfilClientes = (Button) findViewById(R.id.btnPerfilCliente);
+        btnPerfilClientes = (LinearLayout) findViewById(R.id.btnPerfilCliente);
         btnCerrarSesion = (Button) findViewById(R.id.btnCerrarSesion);
         tvMenuUsuario = (TextView) findViewById(R.id.tvMenuUser);
 
@@ -61,7 +61,7 @@ public class ActivityMenu extends AppCompatActivity {
             }
         });
 
-        btnCategorias = (Button) findViewById(R.id.btnCategoria);
+        btnCategorias = (LinearLayout) findViewById(R.id.btnCategoria);
         btnCategorias.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -70,7 +70,7 @@ public class ActivityMenu extends AppCompatActivity {
             }
         });
 
-        btndash = (Button) findViewById(R.id.btnDashb);
+        btndash = (LinearLayout) findViewById(R.id.btnDashb);
         btndash.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -80,7 +80,7 @@ public class ActivityMenu extends AppCompatActivity {
         });
 
 
-        btnAcercaDe = (Button) findViewById(R.id.btnAcercaD);
+        btnAcercaDe = (LinearLayout) findViewById(R.id.btnAcercaD);
         btnAcercaDe.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -89,7 +89,7 @@ public class ActivityMenu extends AppCompatActivity {
             }
         });
 
-        btnCarrito = (Button) findViewById(R.id.btnVerCarrito);
+        btnCarrito = (LinearLayout) findViewById(R.id.btnVerCarrito);
         btnCarrito.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -112,7 +112,8 @@ public class ActivityMenu extends AppCompatActivity {
 
                 if (dataSnapshot.exists()) {
                     String nombre = dataSnapshot.child("nombre").getValue().toString();
-                    tvMenuUsuario.setText("Bienvenido: "+ nombre);
+                    String apellido = dataSnapshot.child("apellido").getValue().toString();
+                    tvMenuUsuario.setText("Bienvenido: "+ nombre+" "+apellido);
                 }
             }
 

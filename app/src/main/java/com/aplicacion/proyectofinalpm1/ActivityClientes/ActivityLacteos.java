@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -21,7 +22,7 @@ import java.util.Map;
 public class ActivityLacteos extends AppCompatActivity {
 
     int contador,preciou;
-    Button btnMenosLA, btnMasLA, btnACarritoLA;
+    Button btnMenosLA, btnMasLA, btnACarritoLA,btnvolver;
     TextView txvCantidadLA,txvPTotalLA;
 
     FirebaseAuth mAuth;
@@ -43,6 +44,15 @@ public class ActivityLacteos extends AppCompatActivity {
 
         txvCantidadLA = (TextView) findViewById(R.id.txtvCantidadL);
         txvPTotalLA = (TextView) findViewById(R.id.txvPTotalL);
+
+        btnvolver = (Button) findViewById(R.id.btnVolverM5);
+        btnvolver.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(ActivityLacteos.this, ActivityCategoria.class);
+                startActivity(intent);
+            }
+        });
 
         btnMenosLA = (Button) findViewById(R.id.btnMenosL);
         btnMenosLA.setOnClickListener(new View.OnClickListener() {
