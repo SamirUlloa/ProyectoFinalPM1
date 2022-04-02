@@ -225,7 +225,7 @@ public class ActivityPerfilAdmin extends AppCompatActivity {
         btnAdminRegrM.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(ActivityPerfilAdmin.this, ActivityRepartidor.class));
+                startActivity(new Intent(ActivityPerfilAdmin.this, ActivityAdministrador.class));
             }
         });
     }

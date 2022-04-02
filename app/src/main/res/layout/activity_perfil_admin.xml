@@ -198,7 +198,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="10dp"
                 android:backgroundTint="#ABFBFBFB"
-                android:text="Regresar Al Menu(Repartidor)"
+                android:text="Regresar Al Menu"
                 android:textColor="#000000" />
         </LinearLayout>
     </ScrollView>
