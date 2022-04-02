@@ -237,7 +237,7 @@
                 </LinearLayout>
 
                 <LinearLayout
-                    android:layout_width="match_parent"
+                    android:layout_width="180dp"
                     android:layout_height="match_parent"
                     android:layout_marginLeft="-20dp"
                     android:orientation="vertical">
@@ -293,6 +293,24 @@
                         android:textColor="@android:color/black"
                         android:textColorHint="@android:color/darker_gray"
                         android:textSize="15sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <Button
+                        android:id="@+id/btnCaEliminarP1"
+                        android:layout_width="36dp"
+                        android:layout_height="wrap_content"
+                        android:backgroundTint="#FF0000"
+                        android:layout_marginTop="5dp"
+                        android:textSize="16dp"
+                        android:textColorHint="@color/white"
+                        android:textColor="@color/white"
+                        android:text="X" />
+
                 </LinearLayout>
             </LinearLayout>
 
@@ -374,7 +392,7 @@
                 </LinearLayout>
 
                 <LinearLayout
-                    android:layout_width="match_parent"
+                    android:layout_width="180dp"
                     android:layout_height="match_parent"
                     android:layout_marginLeft="-20dp"
                     android:orientation="vertical">
@@ -430,6 +448,24 @@
                         android:textColorHint="@android:color/darker_gray"
                         android:textSize="15sp" />
                 </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <Button
+                        android:id="@+id/btnCaEliminarP2"
+                        android:layout_width="36dp"
+                        android:layout_height="wrap_content"
+                        android:backgroundTint="#FF0000"
+                        android:textSize="16dp"
+                        android:layout_marginTop="5dp"
+                        android:textColorHint="@color/white"
+                        android:textColor="@color/white"
+                        android:text="X" />
+
+                </LinearLayout>
+
             </LinearLayout>
 
             <LinearLayout
@@ -511,7 +547,7 @@
                 </LinearLayout>
 
                 <LinearLayout
-                    android:layout_width="match_parent"
+                    android:layout_width="180dp"
                     android:layout_height="match_parent"
                     android:layout_marginLeft="-20dp"
                     android:orientation="vertical">
@@ -567,6 +603,24 @@
                         android:textColor="@android:color/black"
                         android:textColorHint="@android:color/darker_gray"
                         android:textSize="15sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <Button
+                        android:id="@+id/btnCaEliminarP3"
+                        android:layout_width="36dp"
+                        android:layout_height="wrap_content"
+                        android:backgroundTint="#FF0000"
+                        android:textSize="16dp"
+                        android:layout_marginTop="5dp"
+                        android:textColorHint="@color/white"
+                        android:textColor="@color/white"
+                        android:text="X" />
+
                 </LinearLayout>
             </LinearLayout>
 
@@ -649,7 +703,7 @@
                 </LinearLayout>
 
                 <LinearLayout
-                    android:layout_width="match_parent"
+                    android:layout_width="180dp"
                     android:layout_height="match_parent"
                     android:layout_marginLeft="-20dp"
                     android:orientation="vertical">
@@ -705,6 +759,24 @@
                         android:textColor="@android:color/black"
                         android:textColorHint="@android:color/darker_gray"
                         android:textSize="15sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <Button
+                        android:id="@+id/btnCaEliminarP4"
+                        android:layout_width="36dp"
+                        android:layout_height="wrap_content"
+                        android:backgroundTint="#FF0000"
+                        android:textSize="16dp"
+                        android:layout_marginTop="5dp"
+                        android:textColorHint="@color/white"
+                        android:textColor="@color/white"
+                        android:text="X" />
+
                 </LinearLayout>
             </LinearLayout>
 
@@ -787,7 +859,7 @@
                 </LinearLayout>
 
                 <LinearLayout
-                    android:layout_width="match_parent"
+                    android:layout_width="180dp"
                     android:layout_height="match_parent"
                     android:layout_marginLeft="-20dp"
                     android:orientation="vertical">
@@ -843,6 +915,24 @@
                         android:textColor="@android:color/black"
                         android:textColorHint="@android:color/darker_gray"
                         android:textSize="15sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <Button
+                        android:id="@+id/btnCaEliminarP5"
+                        android:layout_width="36dp"
+                        android:layout_height="wrap_content"
+                        android:backgroundTint="#FF0000"
+                        android:textSize="16dp"
+                        android:layout_marginTop="5dp"
+                        android:textColorHint="@color/white"
+                        android:textColor="@color/white"
+                        android:text="X" />
+
                 </LinearLayout>
             </LinearLayout>
 

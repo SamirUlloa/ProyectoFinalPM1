@@ -41,10 +41,11 @@ public class ActivityCarritoCompras extends AppCompatActivity {
     TextView tvPrePdes1, tvPrePdes2, tvPrePdes3, tvPrePdes4, tvPrePdes5;
     TextView tvCantPdes1, tvCantPdes2, tvCantPdes3, tvCantPdes4, tvCantPdes5;
     TextView tvSubPdes1, tvSubPdes2, tvSubPdes3, tvSubPdes4, tvSubPdes5;
+    String prod1, prod2, prod3, prod4, prod5;
 
     ImageView imgP1, imgP2, imgP3, imgP4, imgP5;
 
-    Button btnCerrarP;
+    Button btnCerrarP, btnCaEliminarP1, btnCaEliminarP2, btnCaEliminarP3, btnCaEliminarP4, btnCaEliminarP5;
 
     DatabaseReference mDatabase;
     FirebaseAuth mAuth;
@@ -110,16 +111,165 @@ public class ActivityCarritoCompras extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
+                if (tvNomP1.getText().toString().isEmpty() && tvNomP2.getText().toString().isEmpty() &&
+                        tvNomP3.getText().toString().isEmpty() && tvNomP4.getText().toString().isEmpty() &&
+                        tvNomP5.getText().toString().isEmpty()) {
+
+                    AlertDialog.Builder builder = new AlertDialog.Builder(ActivityCarritoCompras.this);
+                    builder.setMessage("Para Realizar una Compra, Primero debe agregar Productos al Carrito!!!")
+                            .setTitle("Carrito Vacio");
+
+                    builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            dialogInterface.dismiss();
+                        }
+                    });
+                    AlertDialog dialog = builder.create();
+                    dialog.show();
+
+                } else {
+                    AlertDialog.Builder builder = new AlertDialog.Builder(ActivityCarritoCompras.this);
+                    builder.setMessage("¿Desea Realizar el Pedido?")
+                            .setTitle("Atención");
+
+                    builder.setPositiveButton("SI", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            realizarPedido();
+                            eliminarCarrito();
+                            onBackPressed();
+                        }
+                    });
+                    builder.setNegativeButton("NO", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            dialogInterface.dismiss();
+                        }
+                    });
+                    AlertDialog dialog = builder.create();
+                    dialog.show();
+                }
+            }
+        });
+
+        //Boton para Eliminar pedido 1
+        btnCaEliminarP1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
                 AlertDialog.Builder builder = new AlertDialog.Builder(ActivityCarritoCompras.this);
-                builder.setMessage("¿Desea Realizar el Pedido?")
-                        .setTitle("Atención");
+                builder.setMessage("¿Desea Eliminar este Producto del Carrito?")
+                        .setTitle(tvNomP1.getText().toString());
 
                 builder.setPositiveButton("SI", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-                        realizarPedido();
-                        eliminarCarrito();
-                        onBackPressed();
+                        eliminarP1();
+                        Toast.makeText(ActivityCarritoCompras.this, "Producto Eliminado del Carrito", Toast.LENGTH_LONG).show();
+                    }
+                });
+                builder.setNegativeButton("NO", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        dialogInterface.dismiss();
+                    }
+                });
+                AlertDialog dialog = builder.create();
+                dialog.show();
+            }
+        });
+
+        //Boton para Eliminar pedido 2
+        btnCaEliminarP2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(ActivityCarritoCompras.this);
+                builder.setMessage("¿Desea Eliminar este Producto del Carrito?")
+                        .setTitle(tvNomP2.getText().toString());
+
+                builder.setPositiveButton("SI", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        eliminarP2();
+                        Toast.makeText(ActivityCarritoCompras.this, "Producto Eliminado del Carrito", Toast.LENGTH_LONG).show();
+                    }
+                });
+                builder.setNegativeButton("NO", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        dialogInterface.dismiss();
+                    }
+                });
+                AlertDialog dialog = builder.create();
+                dialog.show();
+            }
+        });
+
+        //Boton para Eliminar pedido 3
+        btnCaEliminarP3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(ActivityCarritoCompras.this);
+                builder.setMessage("¿Desea Eliminar este Producto del Carrito?")
+                        .setTitle(tvNomP3.getText().toString());
+
+                builder.setPositiveButton("SI", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        eliminarP3();
+                        Toast.makeText(ActivityCarritoCompras.this, "Producto Eliminado del Carrito", Toast.LENGTH_LONG).show();
+                    }
+                });
+                builder.setNegativeButton("NO", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        dialogInterface.dismiss();
+                    }
+                });
+                AlertDialog dialog = builder.create();
+                dialog.show();
+            }
+        });
+
+        //Boton para Eliminar pedido 4
+        btnCaEliminarP4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(ActivityCarritoCompras.this);
+                builder.setMessage("¿Desea Eliminar este Producto del Carrito?")
+                        .setTitle(tvNomP4.getText().toString());
+
+                builder.setPositiveButton("SI", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        eliminarP4();
+                        Toast.makeText(ActivityCarritoCompras.this, "Producto Eliminado del Carrito", Toast.LENGTH_LONG).show();
+                    }
+                });
+                builder.setNegativeButton("NO", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        dialogInterface.dismiss();
+                    }
+                });
+                AlertDialog dialog = builder.create();
+                dialog.show();
+            }
+        });
+
+        //Boton para Eliminar pedido 5
+        btnCaEliminarP5.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(ActivityCarritoCompras.this);
+                builder.setMessage("¿Desea Eliminar este Producto del Carrito?")
+                        .setTitle(tvNomP5.getText().toString());
+
+                builder.setPositiveButton("SI", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        eliminarP5();
+                        Toast.makeText(ActivityCarritoCompras.this, "Producto Eliminado del Carrito", Toast.LENGTH_LONG).show();
                     }
                 });
                 builder.setNegativeButton("NO", new DialogInterface.OnClickListener() {
@@ -176,6 +326,7 @@ public class ActivityCarritoCompras extends AppCompatActivity {
                         tvCantP1.setText(cantidadBebidas);
                         tvSubP1.setText(precioBebidas + ".00 Lps");
                         Picasso.with(ActivityCarritoCompras.this).load(imagenURL).into(imgP1);
+                        prod1 = "bebidas";
                         productoUno();
                     } else if (tvNomP2.getText().toString().isEmpty()) {
                         tvNomP2.setText(NomProBebidas);
@@ -183,6 +334,7 @@ public class ActivityCarritoCompras extends AppCompatActivity {
                         tvCantP2.setText(cantidadBebidas);
                         tvSubP2.setText(precioBebidas + ".00 .Lps");
                         Picasso.with(ActivityCarritoCompras.this).load(imagenURL).into(imgP2);
+                        prod2 = "bebidas";
                         productoDos();
                     } else if (tvNomP3.getText().toString().isEmpty()) {
                         tvNomP3.setText(NomProBebidas);
@@ -190,6 +342,7 @@ public class ActivityCarritoCompras extends AppCompatActivity {
                         tvCantP3.setText(cantidadBebidas);
                         tvSubP3.setText(precioBebidas + ".00 Lps");
                         Picasso.with(ActivityCarritoCompras.this).load(imagenURL).into(imgP3);
+                        prod3 = "bebidas";
                         productoTres();
                     } else if (tvNomP4.getText().toString().isEmpty()) {
                         tvNomP4.setText(NomProBebidas);
@@ -197,6 +350,7 @@ public class ActivityCarritoCompras extends AppCompatActivity {
                         tvCantP4.setText(cantidadBebidas);
                         tvSubP4.setText(precioBebidas + ".00 Lps");
                         Picasso.with(ActivityCarritoCompras.this).load(imagenURL).into(imgP4);
+                        prod4 = "bebidas";
                         productoCuatro();
                     } else if (tvNomP5.getText().toString().isEmpty()) {
                         tvNomP5.setText(NomProBebidas);
@@ -204,6 +358,7 @@ public class ActivityCarritoCompras extends AppCompatActivity {
                         tvCantP5.setText(cantidadBebidas);
                         tvSubP5.setText(precioBebidas + "00. Lps");
                         Picasso.with(ActivityCarritoCompras.this).load(imagenURL).into(imgP5);
+                        prod5 = "bebidas";
                         productoCinco();
                     }
                 }
@@ -238,6 +393,7 @@ public class ActivityCarritoCompras extends AppCompatActivity {
                         tvCantP1.setText(cantidadPañales);
                         tvSubP1.setText(precioPañales + ".00 Lps");
                         Picasso.with(ActivityCarritoCompras.this).load(imagenURL).into(imgP1);
+                        prod1 = "bebes";
                         productoUno();
                     } else if (tvNomP2.getText().toString().isEmpty()) {
                         tvNomP2.setText(NomProBebes);
@@ -245,6 +401,7 @@ public class ActivityCarritoCompras extends AppCompatActivity {
                         tvCantP2.setText(cantidadPañales);
                         tvSubP2.setText(precioPañales + ".00 Lps");
                         Picasso.with(ActivityCarritoCompras.this).load(imagenURL).into(imgP2);
+                        prod2 = "bebes";
                         productoDos();
                     } else if (tvNomP3.getText().toString().isEmpty()) {
                         tvNomP3.setText(NomProBebes);
@@ -252,6 +409,7 @@ public class ActivityCarritoCompras extends AppCompatActivity {
                         tvCantP3.setText(cantidadPañales);
                         tvSubP3.setText(precioPañales + ".00 Lps");
                         Picasso.with(ActivityCarritoCompras.this).load(imagenURL).into(imgP3);
+                        prod3 = "bebes";
                         productoTres();
                     } else if (tvNomP4.getText().toString().isEmpty()) {
                         tvNomP4.setText(NomProBebes);
@@ -259,6 +417,7 @@ public class ActivityCarritoCompras extends AppCompatActivity {
                         tvCantP4.setText(cantidadPañales);
                         tvSubP4.setText(precioPañales + ".00 Lps");
                         Picasso.with(ActivityCarritoCompras.this).load(imagenURL).into(imgP4);
+                        prod4 = "bebes";
                         productoCuatro();
                     } else if (tvNomP5.getText().toString().isEmpty()) {
                         tvNomP5.setText(NomProBebes);
@@ -266,6 +425,7 @@ public class ActivityCarritoCompras extends AppCompatActivity {
                         tvCantP5.setText(cantidadPañales);
                         tvSubP5.setText(precioPañales + ".00 Lps");
                         Picasso.with(ActivityCarritoCompras.this).load(imagenURL).into(imgP5);
+                        prod5 = "bebes";
                         productoCinco();
                     }
                 }
@@ -300,6 +460,7 @@ public class ActivityCarritoCompras extends AppCompatActivity {
                         tvCantP1.setText(cantidadCarnes);
                         tvSubP1.setText(precioCarnes + ".00 Lps");
                         Picasso.with(ActivityCarritoCompras.this).load(imagenURL).into(imgP1);
+                        prod1 = "carnes";
                         productoUno();
                     } else if (tvNomP2.getText().toString().isEmpty()) {
                         tvNomP2.setText(NomProCarnes);
@@ -307,6 +468,7 @@ public class ActivityCarritoCompras extends AppCompatActivity {
                         tvCantP2.setText(cantidadCarnes);
                         tvSubP2.setText(precioCarnes + ".00 Lps");
                         Picasso.with(ActivityCarritoCompras.this).load(imagenURL).into(imgP2);
+                        prod2 = "carnes";
                         productoDos();
                     } else if (tvNomP3.getText().toString().isEmpty()) {
                         tvNomP3.setText(NomProCarnes);
@@ -314,6 +476,7 @@ public class ActivityCarritoCompras extends AppCompatActivity {
                         tvCantP3.setText(cantidadCarnes);
                         tvSubP3.setText(precioCarnes + ".00 Lps");
                         Picasso.with(ActivityCarritoCompras.this).load(imagenURL).into(imgP3);
+                        prod3 = "carnes";
                         productoTres();
                     } else if (tvNomP4.getText().toString().isEmpty()) {
                         tvNomP4.setText(NomProCarnes);
@@ -321,6 +484,7 @@ public class ActivityCarritoCompras extends AppCompatActivity {
                         tvCantP4.setText(cantidadCarnes);
                         tvSubP4.setText(precioCarnes + ".00 Lps");
                         Picasso.with(ActivityCarritoCompras.this).load(imagenURL).into(imgP4);
+                        prod4 = "carnes";
                         productoCuatro();
                     } else if (tvNomP5.getText().toString().isEmpty()) {
                         tvNomP5.setText(NomProCarnes);
@@ -328,6 +492,7 @@ public class ActivityCarritoCompras extends AppCompatActivity {
                         tvCantP5.setText(cantidadCarnes);
                         tvSubP5.setText(precioCarnes + ".00 Lps");
                         Picasso.with(ActivityCarritoCompras.this).load(imagenURL).into(imgP5);
+                        prod5 = "carnes";
                         productoCinco();
                     }
                 }
@@ -362,6 +527,7 @@ public class ActivityCarritoCompras extends AppCompatActivity {
                         tvCantP1.setText(cantidadGranosB);
                         tvSubP1.setText(precioGranosB + ".00 Lps");
                         Picasso.with(ActivityCarritoCompras.this).load(imagenURL).into(imgP1);
+                        prod1 = "granosB";
                         productoUno();
                     } else if (tvNomP2.getText().toString().isEmpty()) {
                         tvNomP2.setText(NomProGranosB);
@@ -369,6 +535,7 @@ public class ActivityCarritoCompras extends AppCompatActivity {
                         tvCantP2.setText(cantidadGranosB);
                         tvSubP2.setText(precioGranosB + ".00 Lps");
                         Picasso.with(ActivityCarritoCompras.this).load(imagenURL).into(imgP2);
+                        prod2 = "granosB";
                         productoDos();
                     } else if (tvNomP3.getText().toString().isEmpty()) {
                         tvNomP3.setText(NomProGranosB);
@@ -376,6 +543,7 @@ public class ActivityCarritoCompras extends AppCompatActivity {
                         tvCantP3.setText(cantidadGranosB);
                         tvSubP3.setText(precioGranosB + ".00 Lps");
                         Picasso.with(ActivityCarritoCompras.this).load(imagenURL).into(imgP3);
+                        prod3 = "granosB";
                         productoTres();
                     } else if (tvNomP4.getText().toString().isEmpty()) {
                         tvNomP4.setText(NomProGranosB);
@@ -383,6 +551,7 @@ public class ActivityCarritoCompras extends AppCompatActivity {
                         tvCantP4.setText(cantidadGranosB);
                         tvSubP4.setText(precioGranosB + ".00 Lps");
                         Picasso.with(ActivityCarritoCompras.this).load(imagenURL).into(imgP4);
+                        prod4 = "granosB";
                         productoCuatro();
                     } else if (tvNomP5.getText().toString().isEmpty()) {
                         tvNomP5.setText(NomProGranosB);
@@ -390,6 +559,7 @@ public class ActivityCarritoCompras extends AppCompatActivity {
                         tvCantP5.setText(cantidadGranosB);
                         tvSubP5.setText(precioGranosB + ".00 Lps");
                         Picasso.with(ActivityCarritoCompras.this).load(imagenURL).into(imgP5);
+                        prod5 = "granosB";
                         productoCinco();
                     }
                 }
@@ -424,6 +594,7 @@ public class ActivityCarritoCompras extends AppCompatActivity {
                         tvCantP1.setText(cantidadLacteos);
                         tvSubP1.setText(precioLacteos + ".00 Lps");
                         Picasso.with(ActivityCarritoCompras.this).load(imagenURL).into(imgP1);
+                        prod1 = "lacteos";
                         productoUno();
                     } else if (tvNomP2.getText().toString().isEmpty()) {
                         tvNomP2.setText(NomProLacteos);
@@ -431,6 +602,7 @@ public class ActivityCarritoCompras extends AppCompatActivity {
                         tvCantP2.setText(cantidadLacteos);
                         tvSubP2.setText(precioLacteos + ".00 Lps");
                         Picasso.with(ActivityCarritoCompras.this).load(imagenURL).into(imgP2);
+                        prod2 = "lacteos";
                         productoDos();
                     } else if (tvNomP3.getText().toString().isEmpty()) {
                         tvNomP3.setText(NomProLacteos);
@@ -438,6 +610,7 @@ public class ActivityCarritoCompras extends AppCompatActivity {
                         tvCantP3.setText(cantidadLacteos);
                         tvSubP3.setText(precioLacteos + ".00 Lps");
                         Picasso.with(ActivityCarritoCompras.this).load(imagenURL).into(imgP3);
+                        prod3 = "lacteos";
                         productoTres();
                     } else if (tvNomP4.getText().toString().isEmpty()) {
                         tvNomP4.setText(NomProLacteos);
@@ -445,6 +618,7 @@ public class ActivityCarritoCompras extends AppCompatActivity {
                         tvCantP4.setText(cantidadLacteos);
                         tvSubP4.setText(precioLacteos + ".00 Lps");
                         Picasso.with(ActivityCarritoCompras.this).load(imagenURL).into(imgP4);
+                        prod4 = "lacteos";
                         productoCuatro();
                     } else if (tvNomP5.getText().toString().isEmpty()) {
                         tvNomP5.setText(NomProLacteos);
@@ -452,6 +626,7 @@ public class ActivityCarritoCompras extends AppCompatActivity {
                         tvCantP5.setText(cantidadLacteos);
                         tvSubP5.setText(precioLacteos + ".00 Lps");
                         Picasso.with(ActivityCarritoCompras.this).load(imagenURL).into(imgP5);
+                        prod5 = "lacteos";
                         productoCinco();
                     }
                 }
@@ -566,6 +741,13 @@ public class ActivityCarritoCompras extends AppCompatActivity {
 
     public void instanciarTextos(){
         //Cuadros de Texto
+
+        btnCaEliminarP1 = (Button) findViewById(R.id.btnCaEliminarP1);
+        btnCaEliminarP2 = (Button) findViewById(R.id.btnCaEliminarP2);
+        btnCaEliminarP3 = (Button) findViewById(R.id.btnCaEliminarP3);
+        btnCaEliminarP4 = (Button) findViewById(R.id.btnCaEliminarP4);
+        btnCaEliminarP5 = (Button) findViewById(R.id.btnCaEliminarP5);
+
         tvSubtotal = (TextView) findViewById(R.id.tvSubtotal);
         tvImpuesto = (TextView) findViewById(R.id.tvImpuesto);
         tvTotal = (TextView) findViewById(R.id.tvTotal);
@@ -628,6 +810,12 @@ public class ActivityCarritoCompras extends AppCompatActivity {
 
     public void limpiar(){
         instanciarTextos();
+        btnCaEliminarP1.setVisibility(View.INVISIBLE);
+        btnCaEliminarP2.setVisibility(View.INVISIBLE);
+        btnCaEliminarP3.setVisibility(View.INVISIBLE);
+        btnCaEliminarP4.setVisibility(View.INVISIBLE);
+        btnCaEliminarP5.setVisibility(View.INVISIBLE);
+
         tvNomP1.setVisibility(View.INVISIBLE);
         tvNomP2.setVisibility(View.INVISIBLE);
         tvNomP3.setVisibility(View.INVISIBLE);
@@ -685,6 +873,7 @@ public class ActivityCarritoCompras extends AppCompatActivity {
 
     public void productoUno(){
         imgP1.setVisibility(View.VISIBLE);
+        btnCaEliminarP1.setVisibility(View.VISIBLE);
 
         tvNomP1.setVisibility(View.VISIBLE);
         tvPreP1.setVisibility(View.VISIBLE);
@@ -699,6 +888,7 @@ public class ActivityCarritoCompras extends AppCompatActivity {
 
     public void productoDos(){
         imgP2.setVisibility(View.VISIBLE);
+        btnCaEliminarP2.setVisibility(View.VISIBLE);
 
         tvNomP2.setVisibility(View.VISIBLE);
         tvPreP2.setVisibility(View.VISIBLE);
@@ -713,6 +903,7 @@ public class ActivityCarritoCompras extends AppCompatActivity {
 
     public void productoTres(){
         imgP3.setVisibility(View.VISIBLE);
+        btnCaEliminarP3.setVisibility(View.VISIBLE);
 
         tvNomP3.setVisibility(View.VISIBLE);
         tvPreP3.setVisibility(View.VISIBLE);
@@ -727,6 +918,7 @@ public class ActivityCarritoCompras extends AppCompatActivity {
 
     public void productoCuatro(){
         imgP4.setVisibility(View.VISIBLE);
+        btnCaEliminarP4.setVisibility(View.VISIBLE);
 
         tvNomP4.setVisibility(View.VISIBLE);
         tvPreP4.setVisibility(View.VISIBLE);
@@ -741,6 +933,7 @@ public class ActivityCarritoCompras extends AppCompatActivity {
 
     public void productoCinco(){
         imgP5.setVisibility(View.VISIBLE);
+        btnCaEliminarP5.setVisibility(View.VISIBLE);
 
         tvNomP5.setVisibility(View.VISIBLE);
         tvPreP5.setVisibility(View.VISIBLE);
@@ -751,5 +944,310 @@ public class ActivityCarritoCompras extends AppCompatActivity {
         tvPrePdes5.setVisibility(View.VISIBLE);
         tvCantPdes5.setVisibility(View.VISIBLE);
         tvSubPdes5.setVisibility(View.VISIBLE);
+    }
+
+    public void eliminarP1() {
+        if (prod1 == "bebidas") {
+            NomProBebidas = "";
+            cantidadBebidas = "";
+            precioBebidas = "";
+            impBebidas = 0;
+            subtotalBebidas = 0;
+            totalBebidas = 0;
+            mDatabase.child("carrito").child(idUsuario).child("catBebidas").removeValue();
+        } else if (prod1 == "bebes") {
+            NomProBebes = "";
+            cantidadPañales = "";
+            precioPañales = "";
+            impBebes = 0;
+            subtotalBebes = 0;
+            totalBebes = 0;
+            mDatabase.child("carrito").child(idUsuario).child("catBebes").removeValue();
+        } else if (prod1 == "carnes") {
+            NomProCarnes = "";
+            cantidadCarnes = "";
+            precioCarnes = "";
+            impCarnes = 0;
+            subtotalCarnes = 0;
+            totalCarnes = 0;
+            mDatabase.child("carrito").child(idUsuario).child("catCarnes").removeValue();
+        } else if (prod1 == "granosB") {
+            NomProGranosB = "";
+            cantidadGranosB = "";
+            precioGranosB = "";
+            impGranosB = 0;
+            subtotalGranosB = 0;
+            totalGranosB = 0;
+            mDatabase.child("carrito").child(idUsuario).child("catGranosB").removeValue();
+        } else if (prod1 == "lacteos") {
+            NomProLacteos = "";
+            cantidadLacteos = "";
+            precioLacteos = "";
+            impLacteos = 0;
+            subtotalLacteos = 0;
+            totalLacteos = 0;
+            mDatabase.child("carrito").child(idUsuario).child("catLacteos").removeValue();
+        }
+
+        calcularTotal();
+
+        imgP1.setVisibility(View.GONE);
+        btnCaEliminarP1.setVisibility(View.GONE);
+
+        tvNomP1.setVisibility(View.GONE);
+        tvPreP1.setVisibility(View.GONE);
+        tvCantP1.setVisibility(View.GONE);
+        tvSubP1.setVisibility(View.GONE);
+
+        tvNomPdes1.setVisibility(View.GONE);
+        tvPrePdes1.setVisibility(View.GONE);
+        tvCantPdes1.setVisibility(View.GONE);
+        tvSubPdes1.setVisibility(View.GONE);
+    }
+
+    public void eliminarP2() {
+        if (prod2 == "bebidas") {
+            NomProBebidas = "";
+            cantidadBebidas = "";
+            precioBebidas = "";
+            impBebidas = 0;
+            subtotalBebidas = 0;
+            totalBebidas = 0;
+            mDatabase.child("carrito").child(idUsuario).child("catBebidas").removeValue();
+        } else if (prod2 == "bebes") {
+            NomProBebes = "";
+            cantidadPañales = "";
+            precioPañales = "";
+            impBebes = 0;
+            subtotalBebes = 0;
+            totalBebes = 0;
+            mDatabase.child("carrito").child(idUsuario).child("catBebes").removeValue();
+        } else if (prod2 == "carnes") {
+            NomProCarnes = "";
+            cantidadCarnes = "";
+            precioCarnes = "";
+            impCarnes = 0;
+            subtotalCarnes = 0;
+            totalCarnes = 0;
+            mDatabase.child("carrito").child(idUsuario).child("catCarnes").removeValue();
+        } else if (prod2 == "granosB") {
+            NomProGranosB = "";
+            cantidadGranosB = "";
+            precioGranosB = "";
+            impGranosB = 0;
+            subtotalGranosB = 0;
+            totalGranosB = 0;
+            mDatabase.child("carrito").child(idUsuario).child("catGranosB").removeValue();
+        } else if (prod2 == "lacteos") {
+            NomProLacteos = "";
+            cantidadLacteos = "";
+            precioLacteos = "";
+            impLacteos = 0;
+            subtotalLacteos = 0;
+            totalLacteos = 0;
+            mDatabase.child("carrito").child(idUsuario).child("catLacteos").removeValue();
+        }
+
+        calcularTotal();
+
+        imgP2.setVisibility(View.GONE);
+        btnCaEliminarP2.setVisibility(View.GONE);
+
+        tvNomP2.setVisibility(View.GONE);
+        tvPreP2.setVisibility(View.GONE);
+        tvCantP2.setVisibility(View.GONE);
+        tvSubP2.setVisibility(View.GONE);
+
+        tvNomPdes2.setVisibility(View.GONE);
+        tvPrePdes2.setVisibility(View.GONE);
+        tvCantPdes2.setVisibility(View.GONE);
+        tvSubPdes2.setVisibility(View.GONE);
+    }
+
+    public void eliminarP3() {
+        if (prod3 == "bebidas") {
+            NomProBebidas = "";
+            cantidadBebidas = "";
+            precioBebidas = "";
+            impBebidas = 0;
+            subtotalBebidas = 0;
+            totalBebidas = 0;
+            mDatabase.child("carrito").child(idUsuario).child("catBebidas").removeValue();
+        } else if (prod3 == "bebes") {
+            NomProBebes = "";
+            cantidadPañales = "";
+            precioPañales = "";
+            impBebes = 0;
+            subtotalBebes = 0;
+            totalBebes = 0;
+            mDatabase.child("carrito").child(idUsuario).child("catBebes").removeValue();
+        } else if (prod3 == "carnes") {
+            NomProCarnes = "";
+            cantidadCarnes = "";
+            precioCarnes = "";
+            impCarnes = 0;
+            subtotalCarnes = 0;
+            totalCarnes = 0;
+            mDatabase.child("carrito").child(idUsuario).child("catCarnes").removeValue();
+        } else if (prod3 == "granosB") {
+            NomProGranosB = "";
+            cantidadGranosB = "";
+            precioGranosB = "";
+            impGranosB = 0;
+            subtotalGranosB = 0;
+            totalGranosB = 0;
+            mDatabase.child("carrito").child(idUsuario).child("catGranosB").removeValue();
+        } else if (prod3 == "lacteos") {
+            NomProLacteos = "";
+            cantidadLacteos = "";
+            precioLacteos = "";
+            impLacteos = 0;
+            subtotalLacteos = 0;
+            totalLacteos = 0;
+            mDatabase.child("carrito").child(idUsuario).child("catLacteos").removeValue();
+        }
+
+        calcularTotal();
+
+        imgP3.setVisibility(View.GONE);
+        btnCaEliminarP3.setVisibility(View.GONE);
+
+        tvNomP3.setVisibility(View.GONE);
+        tvPreP3.setVisibility(View.GONE);
+        tvCantP3.setVisibility(View.GONE);
+        tvSubP3.setVisibility(View.GONE);
+
+        tvNomPdes3.setVisibility(View.GONE);
+        tvPrePdes3.setVisibility(View.GONE);
+        tvCantPdes3.setVisibility(View.GONE);
+        tvSubPdes3.setVisibility(View.GONE);
+    }
+
+    public void eliminarP4() {
+        if (prod4 == "bebidas") {
+            NomProBebidas = "";
+            cantidadBebidas = "";
+            precioBebidas = "";
+            impBebidas = 0;
+            subtotalBebidas = 0;
+            totalBebidas = 0;
+            mDatabase.child("carrito").child(idUsuario).child("catBebidas").removeValue();
+        } else if (prod4 == "bebes") {
+            NomProBebes = "";
+            cantidadPañales = "";
+            precioPañales = "";
+            impBebes = 0;
+            subtotalBebes = 0;
+            totalBebes = 0;
+            mDatabase.child("carrito").child(idUsuario).child("catBebes").removeValue();
+        } else if (prod4 == "carnes") {
+            NomProCarnes = "";
+            cantidadCarnes = "";
+            precioCarnes = "";
+            impCarnes = 0;
+            subtotalCarnes = 0;
+            totalCarnes = 0;
+            mDatabase.child("carrito").child(idUsuario).child("catCarnes").removeValue();
+        } else if (prod4 == "granosB") {
+            NomProGranosB = "";
+            cantidadGranosB = "";
+            precioGranosB = "";
+            impGranosB = 0;
+            subtotalGranosB = 0;
+            totalGranosB = 0;
+            mDatabase.child("carrito").child(idUsuario).child("catGranosB").removeValue();
+        } else if (prod4 == "lacteos") {
+            NomProLacteos = "";
+            cantidadLacteos = "";
+            precioLacteos = "";
+            impLacteos = 0;
+            subtotalLacteos = 0;
+            totalLacteos = 0;
+            mDatabase.child("carrito").child(idUsuario).child("catLacteos").removeValue();
+        }
+
+        calcularTotal();
+
+        imgP4.setVisibility(View.GONE);
+        btnCaEliminarP4.setVisibility(View.GONE);
+
+        tvNomP4.setVisibility(View.GONE);
+        tvPreP4.setVisibility(View.GONE);
+        tvCantP4.setVisibility(View.GONE);
+        tvSubP4.setVisibility(View.GONE);
+
+        tvNomPdes4.setVisibility(View.GONE);
+        tvPrePdes4.setVisibility(View.GONE);
+        tvCantPdes4.setVisibility(View.GONE);
+        tvSubPdes4.setVisibility(View.GONE);
+    }
+
+    public void eliminarP5() {
+        if (prod5 == "bebidas") {
+            NomProBebidas = "";
+            cantidadBebidas = "";
+            precioBebidas = "";
+            impBebidas = 0;
+            subtotalBebidas = 0;
+            totalBebidas = 0;
+            mDatabase.child("carrito").child(idUsuario).child("catBebidas").removeValue();
+        } else if (prod5 == "bebes") {
+            NomProBebes = "";
+            cantidadPañales = "";
+            precioPañales = "";
+            impBebes = 0;
+            subtotalBebes = 0;
+            totalBebes = 0;
+            mDatabase.child("carrito").child(idUsuario).child("catBebes").removeValue();
+        } else if (prod5 == "carnes") {
+            NomProCarnes = "";
+            cantidadCarnes = "";
+            precioCarnes = "";
+            impCarnes = 0;
+            subtotalCarnes = 0;
+            totalCarnes = 0;
+            mDatabase.child("carrito").child(idUsuario).child("catCarnes").removeValue();
+        } else if (prod5 == "granosB") {
+            NomProGranosB = "";
+            cantidadGranosB = "";
+            precioGranosB = "";
+            impGranosB = 0;
+            subtotalGranosB = 0;
+            totalGranosB = 0;
+            mDatabase.child("carrito").child(idUsuario).child("catGranosB").removeValue();
+        } else if (prod5 == "lacteos") {
+            NomProLacteos = "";
+            cantidadLacteos = "";
+            precioLacteos = "";
+            impLacteos = 0;
+            subtotalLacteos = 0;
+            totalLacteos = 0;
+            mDatabase.child("carrito").child(idUsuario).child("catLacteos").removeValue();
+        }
+
+        calcularTotal();
+
+        imgP5.setVisibility(View.GONE);
+        btnCaEliminarP5.setVisibility(View.GONE);
+
+        tvNomP5.setVisibility(View.GONE);
+        tvPreP5.setVisibility(View.GONE);
+        tvCantP5.setVisibility(View.GONE);
+        tvSubP5.setVisibility(View.GONE);
+
+        tvNomPdes5.setVisibility(View.GONE);
+        tvPrePdes5.setVisibility(View.GONE);
+        tvCantPdes5.setVisibility(View.GONE);
+        tvSubPdes5.setVisibility(View.GONE);
+    }
+
+    public void calcularTotal(){
+        impuesto = impBebes + impBebidas + impCarnes + impGranosB + impLacteos;
+        subtotal = subtotalBebes + subtotalBebidas + subtotalCarnes + subtotalGranosB + subtotalLacteos;
+        total = totalBebes + totalBebidas + totalCarnes + totalGranosB + totalLacteos;
+
+        tvSubtotal.setText(subtotal + " Lps");
+        tvImpuesto.setText(impuesto + " Lps");
+        tvTotal.setText(total + " Lps");
     }
 }
