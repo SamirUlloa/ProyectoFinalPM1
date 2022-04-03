@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import com.aplicacion.proyectofinalpm1.ActivityControl.ActivityLogin;
 import com.aplicacion.proyectofinalpm1.R;
+import com.aplicacion.proyectofinalpm1.UbicacionActivity;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -22,7 +23,7 @@ import com.google.firebase.database.ValueEventListener;
 public class ActivityMenu extends AppCompatActivity {
 
     Button btnCerrarSesion;
-    LinearLayout btnPerfilClientes,btnCategorias,btnAcercaDe,btnCarrito, btndash;
+    LinearLayout btnPerfilClientes,btnCategorias,btnUbicacion, btnAcercaDe,btnCarrito, btndash;
     TextView tvMenuUsuario;
 
     FirebaseAuth mAuth;
@@ -69,7 +70,14 @@ public class ActivityMenu extends AppCompatActivity {
                 //finish();
             }
         });
-
+        btnUbicacion = (LinearLayout) findViewById(R.id.btnUbicacion);
+        btnUbicacion.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(ActivityMenu.this, UbicacionActivity.class));
+                //finish();
+            }
+        });
         btndash = (LinearLayout) findViewById(R.id.btnDashb);
         btndash.setOnClickListener(new View.OnClickListener() {
             @Override
