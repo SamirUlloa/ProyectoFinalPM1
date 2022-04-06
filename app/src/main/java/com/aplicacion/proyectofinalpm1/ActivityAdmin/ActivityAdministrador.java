@@ -20,13 +20,8 @@ import com.google.firebase.database.ValueEventListener;
 
 public class ActivityAdministrador extends AppCompatActivity {
 
-    TextView textViewAdmin;
-    Button btnAdminCerrar;
-    Button btnRegisRepartidor;
-    Button btnRegisAdmin;
-    Button btnPedidosPendientes;
-    Button btnPedidosEntregados;
-    Button btnAdminPerfil;
+    TextView textViewAdmin, tvAdminCantClientes, tvAdminCantRepartidores, tvAdminCantAdmin;
+    Button btnAdminCerrar, btnRegisRepartidor, btnRegisAdmin, btnPedidosPendientes, btnAdminPerfil;
 
     FirebaseAuth mAuth;
     DatabaseReference mDatabase;
@@ -40,6 +35,9 @@ public class ActivityAdministrador extends AppCompatActivity {
         mDatabase = FirebaseDatabase.getInstance().getReference();
 
         textViewAdmin = findViewById(R.id.textViewAdmin);
+        tvAdminCantClientes = (TextView) findViewById(R.id.tvAdminCantClientes);
+        tvAdminCantRepartidores = (TextView) findViewById(R.id.tvAdminCantRepartidores);
+        tvAdminCantAdmin = (TextView) findViewById(R.id.tvAdminCantAdmin);
 
         //Vista de Pedidos que estan pendientes de entregar
         btnPedidosPendientes = (Button) findViewById(R.id.btnPedidosPendientes);
@@ -91,6 +89,9 @@ public class ActivityAdministrador extends AppCompatActivity {
         });
 
         tipoUsuario();
+        contarClientes();
+        contarRepartidores();
+        contarAdministradores();
     }
 
     private void tipoUsuario(){
@@ -111,6 +112,48 @@ public class ActivityAdministrador extends AppCompatActivity {
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
 
+            }
+        });
+    }
+
+    private void contarClientes(){
+        mDatabase.child("usuarios").child("clientes").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                tvAdminCantClientes.setText("" + dataSnapshot.getChildrenCount());
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                System.out.println("Fallo la lectura: " + databaseError.getCode());
+            }
+        });
+    }
+
+    private void contarRepartidores(){
+        mDatabase.child("usuarios").child("repartidores").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                tvAdminCantRepartidores.setText("" + dataSnapshot.getChildrenCount());
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                System.out.println("Fallo la lectura: " + databaseError.getCode());
+            }
+        });
+    }
+
+    private void contarAdministradores(){
+        mDatabase.child("usuarios").child("administradores").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                tvAdminCantAdmin.setText("" + dataSnapshot.getChildrenCount());
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                System.out.println("Fallo la lectura: " + databaseError.getCode());
             }
         });
     }

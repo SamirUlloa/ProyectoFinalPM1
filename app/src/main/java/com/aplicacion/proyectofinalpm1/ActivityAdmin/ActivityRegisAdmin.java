@@ -23,6 +23,7 @@ import com.basgeekball.awesomevalidation.ValidationStyle;
 import com.google.android.gms.tasks.Continuation;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
@@ -45,13 +46,8 @@ import id.zelory.compressor.Compressor;
 
 public class ActivityRegisAdmin extends AppCompatActivity {
 
-    EditText txtAdminCorreo;
-    EditText txtAdminContra;
-    EditText txtAdminNombre;
-    EditText txtAdminApellido;
-    EditText txtAdminTelefono;
-    EditText txtAdminDirec;
-
+    EditText txtAdminCorreo, txtAdminNombre, txtAdminApellido, txtAdminTelefono, txtAdminDirec;
+    TextInputLayout txtAdminContra;
     Button btnAdminCrear;
     Button btnAdminCancelar;
 
@@ -124,7 +120,7 @@ public class ActivityRegisAdmin extends AppCompatActivity {
         txtAdminApellido = (EditText) findViewById(R.id.txtAdminApellido);
         txtAdminTelefono = (EditText) findViewById(R.id.txtAdminTelefono);
         txtAdminDirec = (EditText) findViewById(R.id.txtAdminDirec);
-        txtAdminContra = (EditText) findViewById(R.id.txtAdminContra);
+        txtAdminContra = (TextInputLayout) findViewById(R.id.txtAdminContra);
 
         btnAdminCrear = (Button) findViewById(R.id.btnAdminCrear);
         btnAdminCrear.setOnClickListener(new View.OnClickListener() {
@@ -220,7 +216,7 @@ public class ActivityRegisAdmin extends AppCompatActivity {
                                 apellido = txtAdminApellido.getText().toString();
                                 telefono = txtAdminTelefono.getText().toString();
                                 direccion = txtAdminDirec.getText().toString();
-                                contra = txtAdminContra.getText().toString();
+                                contra = txtAdminContra.getEditText().getText().toString();
 
                                 //Creación de usuario en la tabla de Authenticación
                                 mAuth.createUserWithEmailAndPassword(correo, contra).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
@@ -286,7 +282,7 @@ public class ActivityRegisAdmin extends AppCompatActivity {
                 Toast.makeText(ActivityRegisAdmin.this, "La contraseña no es válida o el usuario no tiene contraseña.", Toast.LENGTH_LONG).show();
                 txtAdminContra.setError("la contraseña es incorrecta ");
                 txtAdminContra.requestFocus();
-                txtAdminContra.setText("");
+                txtAdminContra.getEditText().setText("");
                 break;
 
             case "ERROR_USER_MISMATCH":
@@ -333,7 +329,7 @@ public class ActivityRegisAdmin extends AppCompatActivity {
 
             case "ERROR_WEAK_PASSWORD":
                 Toast.makeText(ActivityRegisAdmin.this, "La contraseña proporcionada no es válida..", Toast.LENGTH_LONG).show();
-                txtAdminContra.setError("La contraseña no es válida, debe tener al menos 6 caracteres");
+                txtAdminContra.setError("La contraseña no es válida, debe tener al menos 8 caracteres");
                 txtAdminContra.requestFocus();
                 break;
         }

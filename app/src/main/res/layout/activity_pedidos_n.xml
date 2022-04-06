@@ -836,6 +836,14 @@
         android:text="Estado del Pedido: Pendiente" />
 
     <Button
+        android:id="@+id/btnMostrarUbi"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:backgroundTint="#ABFBFBFB"
+        android:text="Mostrar Ubicación de Cliente"
+        android:textColor="#070707" />
+
+    <Button
         android:id="@+id/btnCerrarPRep"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

@@ -60,7 +60,7 @@ public class ActivityPedidosN extends AppCompatActivity {
     double totalBebes = 0, totalBebidas = 0, totalCarnes = 0, totalGranosB = 0, totalLacteos = 0, total = 0;
     double precUBebes = 0, precUBebidas = 0, PrecUCarnes = 0, precGranosB = 0, precULacteos = 0;
     String idCliente, nombreCliente, apellidoCliente, telefonoCliente, direccionCliente, correoCliente;
-    String impuestoDB, subtotalDB, totalDB;
+    String impuestoDB, subtotalDB, totalDB, latitud, longitud;
 
     TextView tvRepNomP1, tvRepPreP1, tvRepCantP1, tvRepSubP1;
     TextView tvNomP2, tvPreP2, tvCantP2;
@@ -76,7 +76,7 @@ public class ActivityPedidosN extends AppCompatActivity {
 
     ImageView imgRepP1, imgP2, imgP3, imgP4, imgP5;
 
-    Button btnCerrarPRep;
+    Button btnCerrarPRep, btnMostrarUbi;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -137,6 +137,18 @@ public class ActivityPedidosN extends AppCompatActivity {
                 llamaratopico("Compra Cerrada","Su pedido a sido entregado","enviaratodos");
             }
         });
+
+        //mostrar ubicación dl cliene
+        btnMostrarUbi = (Button) findViewById(R.id.btnMostrarUbi);
+        btnMostrarUbi.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), MapsActivity.class);
+                intent.putExtra("latitud", latitud);
+                intent.putExtra("longitud", longitud);
+                startActivity(intent);
+            }
+        });
     }
 
     // ESTE ENVIARIA UN MENSAJE PUSH A TODOS LOS USUARIOS QUE TENGAN INSTALADOS LA APLICACION
@@ -182,6 +194,9 @@ public class ActivityPedidosN extends AppCompatActivity {
                     subtotalDB = dataSnapshot.child("subtotal").getValue().toString();
                     impuestoDB = dataSnapshot.child("impuesto").getValue().toString();
                     totalDB = dataSnapshot.child("total").getValue().toString();
+
+                    latitud = dataSnapshot.child("latitud").getValue().toString();
+                    longitud = dataSnapshot.child("longitud").getValue().toString();
 
                     tvRepSubT.setText(subtotalDB + ".00 Lps");
                     tVRepImp.setText(impuestoDB + ".00 Lps");

@@ -22,6 +22,7 @@ import com.basgeekball.awesomevalidation.AwesomeValidation;
 import com.basgeekball.awesomevalidation.ValidationStyle;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthException;
@@ -34,7 +35,7 @@ import com.google.firebase.database.ValueEventListener;
 public class ActivityLogin extends AppCompatActivity {
 
     EditText txtLoginCorreo;
-    EditText txtLoginContra;
+    TextInputLayout txtLoginContra;
     Button btnLoginIng;
     Button btnLoginReg;
     Button btnLoginRest;
@@ -49,7 +50,7 @@ public class ActivityLogin extends AppCompatActivity {
         setContentView(R.layout.activity_login);
 
         txtLoginCorreo = (EditText) findViewById(R.id.txtLoginCorreo);
-        txtLoginContra = (EditText) findViewById(R.id.txtLoginContra);
+        txtLoginContra = (TextInputLayout) findViewById(R.id.txtLoginContra);
 
         firebaseAuth = FirebaseAuth.getInstance();
         mDatabase = FirebaseDatabase.getInstance().getReference();
@@ -65,7 +66,7 @@ public class ActivityLogin extends AppCompatActivity {
             public void onClick(View view) {
                 if (awesomeValidation.validate()) { //Verifica el tipo de datos ingresados
                     String mail = txtLoginCorreo.getText().toString();
-                    String pass = txtLoginContra.getText().toString();
+                    String pass = txtLoginContra.getEditText().getText().toString();
 
                     if (!mail.isEmpty() && !pass.isEmpty()){ //Verifica si los campos estan llenos
                         firebaseAuth.signInWithEmailAndPassword(mail, pass).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
@@ -208,7 +209,7 @@ public class ActivityLogin extends AppCompatActivity {
                 Toast.makeText(ActivityLogin.this, "La contraseña no es válida o el usuario no tiene contraseña.", Toast.LENGTH_LONG).show();
                 txtLoginContra.setError("la contraseña es incorrecta ");
                 txtLoginContra.requestFocus();
-                txtLoginContra.setText("");
+                txtLoginContra.getEditText().setText("");
                 break;
 
             case "ERROR_USER_MISMATCH":
@@ -255,7 +256,7 @@ public class ActivityLogin extends AppCompatActivity {
 
             case "ERROR_WEAK_PASSWORD":
                 Toast.makeText(ActivityLogin.this, "La contraseña proporcionada no es válida..", Toast.LENGTH_LONG).show();
-                txtLoginContra.setError("La contraseña no es válida, debe tener al menos 6 caracteres");
+                txtLoginContra.setError("La contraseña no es válida, debe tener al menos 8 caracteres");
                 txtLoginContra.requestFocus();
                 break;
         }

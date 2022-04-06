@@ -23,6 +23,7 @@ import com.basgeekball.awesomevalidation.ValidationStyle;
 import com.google.android.gms.tasks.Continuation;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
@@ -45,13 +46,8 @@ import id.zelory.compressor.Compressor;
 
 public class ActivityRegisRepartidor extends AppCompatActivity {
 
-    EditText txtReparCorreo;
-    EditText txtReparContra;
-    EditText txtReparNombre;
-    EditText txtReparApellido;
-    EditText txtReparTelefono;
-    EditText txtReparDirec;
-
+    EditText txtReparCorreo, txtReparNombre, txtReparApellido, txtReparTelefono, txtReparDirec;
+    TextInputLayout txtReparContra;
     Button btnReparCrear;
     Button btnReparCancelar;
 
@@ -124,7 +120,7 @@ public class ActivityRegisRepartidor extends AppCompatActivity {
         txtReparApellido = (EditText) findViewById(R.id.txtReparApellido);
         txtReparTelefono = (EditText) findViewById(R.id.txtReparTelefono);
         txtReparDirec = (EditText) findViewById(R.id.txtReparDirec);
-        txtReparContra = (EditText) findViewById(R.id.txtReparContra);
+        txtReparContra = (TextInputLayout) findViewById(R.id.txtReparContra);
 
         btnReparCrear = (Button) findViewById(R.id.btnReparCrear);
         btnReparCrear.setOnClickListener(new View.OnClickListener() {
@@ -221,7 +217,7 @@ public class ActivityRegisRepartidor extends AppCompatActivity {
                                 apellido = txtReparApellido.getText().toString();
                                 telefono = txtReparTelefono.getText().toString();
                                 direccion = txtReparDirec.getText().toString();
-                                contra = txtReparContra.getText().toString();
+                                contra = txtReparContra.getEditText().getText().toString();
 
                                 //Creación de usuario en la tabla de Authenticación
                                 mAuth.createUserWithEmailAndPassword(correo, contra).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
@@ -287,7 +283,7 @@ public class ActivityRegisRepartidor extends AppCompatActivity {
                 Toast.makeText(ActivityRegisRepartidor.this, "La contraseña no es válida o el usuario no tiene contraseña.", Toast.LENGTH_LONG).show();
                 txtReparContra.setError("la contraseña es incorrecta ");
                 txtReparContra.requestFocus();
-                txtReparContra.setText("");
+                txtReparContra.getEditText().setText("");
                 break;
 
             case "ERROR_USER_MISMATCH":
@@ -334,7 +330,7 @@ public class ActivityRegisRepartidor extends AppCompatActivity {
 
             case "ERROR_WEAK_PASSWORD":
                 Toast.makeText(ActivityRegisRepartidor.this, "La contraseña proporcionada no es válida..", Toast.LENGTH_LONG).show();
-                txtReparContra.setError("La contraseña no es válida, debe tener al menos 6 caracteres");
+                txtReparContra.setError("La contraseña no es válida, debe tener al menos 8 caracteres");
                 txtReparContra.requestFocus();
                 break;
         }

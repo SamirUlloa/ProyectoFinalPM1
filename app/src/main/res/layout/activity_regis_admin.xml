@@ -72,6 +72,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
+                android:maxLength="8"
                 android:layout_margin="10dp"
                 android:textColor="@android:color/black"
                 android:textColorHint="@android:color/black"
@@ -100,16 +101,25 @@
                 android:hint="Correo"
                 android:inputType="textEmailAddress" />
 
-            <EditText
+            <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/txtAdminContra"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:ems="10"
                 android:layout_margin="10dp"
-                android:textColor="@android:color/black"
-                android:textColorHint="@android:color/black"
-                android:hint="Contraseña"
-                android:inputType="textPassword" />
+                android:textColorHint="@color/black"
+                app:endIconMode="password_toggle">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textPassword"
+                    android:textColor="@color/black"
+                    android:textColorHint="@android:color/black"
+                    android:background="@drawable/cut_card_backround"
+                    android:hint="Contraseña:" />
+            </com.google.android.material.textfield.TextInputLayout>
+
 
             <Button
                 android:id="@+id/btnAdminCrear"

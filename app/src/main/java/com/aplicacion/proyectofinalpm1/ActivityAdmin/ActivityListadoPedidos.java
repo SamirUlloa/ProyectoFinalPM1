@@ -19,6 +19,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
@@ -33,6 +34,7 @@ public class ActivityListadoPedidos extends AppCompatActivity {
 
     Button btnAdminPPen, btnAdminPCer, btnAdminPEva;
     TextView tvTipoPedido;
+    long cantPendiente, cantCerrados, cantEvaluados;
 
     private ArrayAdapter<String> adapter;
     private ArrayList<String> arrayList =new ArrayList<>();
@@ -134,7 +136,7 @@ public class ActivityListadoPedidos extends AppCompatActivity {
 
     public void mostrarPedidos(){
 
-        tvTipoPedido.setText("Pedidos Pendientes");
+        contarPendientes();
 
         listaPedidosCerrA.setVisibility(View.GONE);
         listaPedidosPenA.setVisibility(View.VISIBLE);
@@ -143,7 +145,6 @@ public class ActivityListadoPedidos extends AppCompatActivity {
         DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
         DatabaseReference mRootChild = mDatabase.child("pedidos").child("registroNue");
 
-        //adapter.clear(); adapter.notifyDataSetChanged();
         adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, arrayList);
 
         listaPedidosPenA = (ListView) findViewById(R.id.listaPedidosPenA);
@@ -179,7 +180,7 @@ public class ActivityListadoPedidos extends AppCompatActivity {
 
     public void mostrarPedidosPend(){
 
-        tvTipoPedido.setText("Pedidos Pendientes");
+        contarPendientes();
 
         listaPedidosCerrA.setVisibility(View.GONE);
         listaPedidosPenA.setVisibility(View.VISIBLE);
@@ -200,6 +201,7 @@ public class ActivityListadoPedidos extends AppCompatActivity {
                 String string = dataSnapshot.getValue(String.class);
                 arrayList.add(string);
                 adapter.notifyDataSetChanged();
+                contarPendientes();
             }
             @Override
             public void onChildChanged(DataSnapshot dataSnapshot, String s){
@@ -210,6 +212,7 @@ public class ActivityListadoPedidos extends AppCompatActivity {
                 String string = dataSnapshot.getValue(String.class);
                 arrayList.remove(string);
                 adapter.notifyDataSetChanged();
+                contarPendientes();
             }
             @Override
             public void onChildMoved(DataSnapshot dataSnapshot, String s){
@@ -224,7 +227,7 @@ public class ActivityListadoPedidos extends AppCompatActivity {
 
     public void mostrarPedidosCerrados(){
 
-        tvTipoPedido.setText("Pedidos Cerrados");
+        contarCerrados();
 
         listaPedidosCerrA.setVisibility(View.VISIBLE);
         listaPedidosPenA.setVisibility(View.GONE);
@@ -245,6 +248,7 @@ public class ActivityListadoPedidos extends AppCompatActivity {
                 String string = dataSnapshot.getValue(String.class);
                 arrayList.add(string);
                 adapter.notifyDataSetChanged();
+                contarCerrados();
             }
             @Override
             public void onChildChanged(DataSnapshot dataSnapshot, String s){
@@ -255,6 +259,7 @@ public class ActivityListadoPedidos extends AppCompatActivity {
                 String string = dataSnapshot.getValue(String.class);
                 arrayList.remove(string);
                 adapter.notifyDataSetChanged();
+                contarCerrados();
             }
             @Override
             public void onChildMoved(DataSnapshot dataSnapshot, String s){
@@ -269,7 +274,7 @@ public class ActivityListadoPedidos extends AppCompatActivity {
 
     public void mostrarPedidosEvaluados(){
 
-        tvTipoPedido.setText("Pedidos Evaluados");
+        contarEvaluados();
 
         listaPedidosCerrA.setVisibility(View.GONE);
         listaPedidosPenA.setVisibility(View.GONE);
@@ -290,6 +295,7 @@ public class ActivityListadoPedidos extends AppCompatActivity {
                 String string = dataSnapshot.getValue(String.class);
                 arrayList.add(string);
                 adapter.notifyDataSetChanged();
+                contarEvaluados();
             }
             @Override
             public void onChildChanged(DataSnapshot dataSnapshot, String s){
@@ -300,6 +306,7 @@ public class ActivityListadoPedidos extends AppCompatActivity {
                 String string = dataSnapshot.getValue(String.class);
                 arrayList.remove(string);
                 adapter.notifyDataSetChanged();
+                contarEvaluados();
             }
             @Override
             public void onChildMoved(DataSnapshot dataSnapshot, String s){
@@ -312,5 +319,48 @@ public class ActivityListadoPedidos extends AppCompatActivity {
         });
     }
 
+    private void contarPendientes(){
+        mDatabase.child("pedidos").child("registroNue").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                cantPendiente = dataSnapshot.getChildrenCount();
+                tvTipoPedido.setText(cantPendiente + " Pedidos Pendientes");
+            }
 
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                System.out.println("Fallo la lectura: " + databaseError.getCode());
+            }
+        });
+    }
+
+    private void contarCerrados(){
+        mDatabase.child("pedidos").child("registroCer").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                cantCerrados = dataSnapshot.getChildrenCount();
+                tvTipoPedido.setText(cantCerrados + " Pedidos Cerrados");
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                System.out.println("Fallo la lectura: " + databaseError.getCode());
+            }
+        });
+    }
+
+    private void contarEvaluados(){
+        mDatabase.child("pedidos").child("registroEva").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                cantEvaluados = dataSnapshot.getChildrenCount();
+                tvTipoPedido.setText(cantEvaluados + " Pedidos Evaluados");
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                System.out.println("Fallo la lectura: " + databaseError.getCode());
+            }
+        });
+    }
 }

@@ -19,6 +19,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
@@ -100,7 +101,7 @@ public class ActivityDashboard extends AppCompatActivity {
 
     private void mostrarPedidos() {
 
-        tvTipoPedidoP.setText("Pedidos Pendientes");
+        contarPendientes();
 
         listaDashboarHis.setVisibility(View.GONE);
         listaDashboarC.setVisibility(View.VISIBLE);
@@ -119,6 +120,7 @@ public class ActivityDashboard extends AppCompatActivity {
                 String string = dataSnapshot.getValue(String.class);
                 arrayList.add(string);
                 adapter.notifyDataSetChanged();
+                contarPendientes();
             }
 
             @Override
@@ -131,6 +133,7 @@ public class ActivityDashboard extends AppCompatActivity {
                 String string = dataSnapshot.getValue(String.class);
                 arrayList.remove(string);
                 adapter.notifyDataSetChanged();
+                contarPendientes();
             }
 
             @Override
@@ -146,7 +149,7 @@ public class ActivityDashboard extends AppCompatActivity {
     }
 
     private void mostrarPedientes() {
-        tvTipoPedidoP.setText("Pedidos Pendientes");
+        contarPendientes();
 
         listaDashboarHis.setVisibility(View.GONE);
         listaDashboarC.setVisibility(View.VISIBLE);
@@ -166,6 +169,7 @@ public class ActivityDashboard extends AppCompatActivity {
                 String string = dataSnapshot.getValue(String.class);
                 arrayList.add(string);
                 adapter.notifyDataSetChanged();
+                contarPendientes();
             }
             @Override
             public void onChildChanged(DataSnapshot dataSnapshot, String s){
@@ -176,6 +180,7 @@ public class ActivityDashboard extends AppCompatActivity {
                 String string = dataSnapshot.getValue(String.class);
                 arrayList.remove(string);
                 adapter.notifyDataSetChanged();
+                contarPendientes();
             }
             @Override
             public void onChildMoved(DataSnapshot dataSnapshot, String s){
@@ -189,7 +194,7 @@ public class ActivityDashboard extends AppCompatActivity {
     }
 
     private void mostrarHistorial() {
-        tvTipoPedidoP.setText("Historial de Pedidos Recibidos");
+        contarCerrados();
 
         listaDashboarHis.setVisibility(View.VISIBLE);
         listaDashboarC.setVisibility(View.GONE);
@@ -209,6 +214,7 @@ public class ActivityDashboard extends AppCompatActivity {
                 String string = dataSnapshot.getValue(String.class);
                 arrayList.add(string);
                 adapter.notifyDataSetChanged();
+                contarCerrados();
             }
             @Override
             public void onChildChanged(DataSnapshot dataSnapshot, String s){
@@ -219,6 +225,7 @@ public class ActivityDashboard extends AppCompatActivity {
                 String string = dataSnapshot.getValue(String.class);
                 arrayList.remove(string);
                 adapter.notifyDataSetChanged();
+                contarCerrados();
             }
             @Override
             public void onChildMoved(DataSnapshot dataSnapshot, String s){
@@ -227,6 +234,34 @@ public class ActivityDashboard extends AppCompatActivity {
             @Override
             public void onCancelled(DatabaseError databaseError){
 
+            }
+        });
+    }
+
+    private void contarPendientes(){
+        mDatabase.child("pedidos").child("registroNueID").child(idUsuario).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                tvTipoPedidoP.setText("(" + dataSnapshot.getChildrenCount() + ") Pedidos Pendientes");
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                System.out.println("Fallo la lectura: " + databaseError.getCode());
+            }
+        });
+    }
+
+    private void contarCerrados(){
+        mDatabase.child("pedidos").child("registroCli").child(idUsuario).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                tvTipoPedidoP.setText("(" + dataSnapshot.getChildrenCount() + ") Historial de Pedidos Recibidos");
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                System.out.println("Fallo la lectura: " + databaseError.getCode());
             }
         });
     }

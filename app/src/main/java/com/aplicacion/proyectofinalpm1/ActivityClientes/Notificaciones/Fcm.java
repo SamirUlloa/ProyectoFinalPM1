@@ -5,6 +5,7 @@ import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Build;
 import android.util.Log;
 
@@ -35,7 +36,11 @@ public class Fcm extends FirebaseMessagingService {
     private void guardartoken(String s){
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference().child("token");
         ref.child("tipoUsuario()").setValue(s);
+        SharedPreferences.Editor editor = getSharedPreferences("unique_name", MODE_PRIVATE).edit();
+        editor.putString("token", s);
+        editor.commit();
     }
+
 
     //recibimos todas las notificaciones o todos los datos que lleguen sera aqui
     @Override

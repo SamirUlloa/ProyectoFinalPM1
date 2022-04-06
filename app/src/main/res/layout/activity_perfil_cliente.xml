@@ -135,6 +135,7 @@
                 android:layout_height="wrap_content"
                 android:ems="10"
                 android:hint="Telefono"
+                android:maxLength="8"
                 android:textSize="20sp"
                 android:layout_marginHorizontal="10dp"
                 android:textColor="@android:color/black"
@@ -186,6 +187,7 @@
                 android:layout_marginHorizontal="10dp"
                 android:ems="10"
                 android:hint="Correo"
+                android:enabled="false"
                 android:inputType="textPersonName"
                 android:textColor="@android:color/black"
                 android:textColorHint="@android:color/black"
@@ -199,6 +201,7 @@
                 android:layout_marginTop="20dp"
                 android:backgroundTint="#ABFBFBFB"
                 android:text="Cambiar Contraseña"
+                android:enabled="false"
                 android:textColor="#0B0B0B" />
 
             <Button

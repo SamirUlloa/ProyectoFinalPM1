@@ -2,10 +2,19 @@ package com.aplicacion.proyectofinalpm1.ActivityClientes;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
+import android.Manifest;
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
+import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
+import android.content.pm.PackageManager;
+import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
@@ -73,6 +82,7 @@ public class ActivityCarritoCompras extends AppCompatActivity {
     double totalBebes = 0, totalBebidas = 0, totalCarnes = 0, totalGranosB = 0, totalLacteos = 0, total = 0;
     double precUBebes = 0, precUBebidas = 0, PrecUCarnes = 0, precGranosB = 0, precULacteos = 0;
     String nombreCliente, apellidoCliente, telefonoCliente, direccionCliente, correoCliente;
+    String latitud, longitud;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -157,7 +167,8 @@ public class ActivityCarritoCompras extends AppCompatActivity {
                         public void onClick(DialogInterface dialogInterface, int i) {
                             realizarPedido();
                             eliminarCarrito();
-                            llamaratopico("Compra Realizada","En procesa de entrega","enviaratodos");
+                            //llamaratopico("Compra Realizada","En procesa de entrega","enviaratodos");
+                            llamarespecifico();
                             onBackPressed();
                         }
                     });
@@ -172,6 +183,26 @@ public class ActivityCarritoCompras extends AppCompatActivity {
                 }
             }
         });
+
+        ///// Permisos de ubicación
+
+        int permissionCheck = ContextCompat.checkSelfPermission(this,
+                Manifest.permission.ACCESS_FINE_LOCATION);
+
+        if (permissionCheck == PackageManager.PERMISSION_DENIED){
+            if (ActivityCompat.shouldShowRequestPermissionRationale(this,
+                    Manifest.permission.ACCESS_FINE_LOCATION));
+
+            else {
+
+                ActivityCompat.requestPermissions(this,
+                        new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
+                        1);
+            }
+        }
+
+
+        /////
 
         //Boton para Eliminar pedido 1
         btnCaEliminarP1.setOnClickListener(new View.OnClickListener() {
@@ -302,7 +333,7 @@ public class ActivityCarritoCompras extends AppCompatActivity {
                 dialog.show();
             }
         });
-    }
+    }////////////////////
 
     // ESTE ENVIARIA UN MENSAJE PUSH A TODOS LOS USUARIOS QUE TENGAN INSTALADOS LA APLICACION
     // AQUI SOLAMENTE SE TIENE  QUE SUSCRIBIR A LOS USUARIOS EN UN TOPICO ASI UNA VEZ QUE ESLLOS SE SUSCRIBAN SE LE ENVIA LA NOTIFICACION A TODOS LOS USUARIOS
@@ -337,6 +368,49 @@ public class ActivityCarritoCompras extends AppCompatActivity {
             e.printStackTrace();
         }
     }
+
+
+
+    //INICIA CODIGO ESPECIFICO MENSAJE SI SE ESTA UTILIZANDO
+    //CODIGO PARA ENVIAR NOTIFICACION PUSH A UN USUARIO EN ESPECIFICO OSEA AL USUARIO QUE TENGA ESE TOKEN
+    // Se puede utilizar para que le envie un mensje a solamente un usuario
+    private void llamarespecifico() {
+
+        RequestQueue myrequest = Volley.newRequestQueue(getApplicationContext());
+        JSONObject json =new JSONObject();
+
+        try {
+            // String token ="dJWgzZJgxoU:APA91bHCrssO8p_WNjezcgiD6bYcp57bq6HExP_lqScwElHSTlVsDmgJfUXAor-i4ZcWvkXucSivCLcsgJsYPAm4-7CmTdqJeM37eM3RV6nSA7VGWatwJvkBDMzu704AWY5EVFyEkjMp";
+            //String token = FirebaseMessaging.getInstance().getToken().toString();
+            //String token= new MyAplication().getSomeVariable();
+            SharedPreferences prefs = getSharedPreferences("unique_name", MODE_PRIVATE);
+            String token = prefs.getString("token", ""); // will return 0 if no  value is saved
+            json.put("to",token);
+
+            JSONObject notificacion = new JSONObject();
+            notificacion.put("titulo ","Compra Realizada ");
+            notificacion.put("detalle","En procesa de entrega");
+            json.put("data",notificacion);
+
+            String URL = "https://fcm.googleapis.com/fcm/send";
+            JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST,URL,json,null,null){
+                @Override
+                public Map<String, String> getHeaders()  {
+                    Map<String,String> header = new HashMap<>();
+
+                    header.put("content-type", "application/json");
+                    header.put("authorization","key=AAAAh3G9j9U:APA91bEy8uCRppmLZ4EUhfe8tbLb4NwQ__l_DpJxcrYDe8pOQddHSvXocXgHYc8-2emAeR6G6ei2TjHjC8x6t2WG0yEM2rBKLa95K7dKhkhD9kJOVrCXrLj9Zrjzi-O66CR91lRlRJBw");
+
+                    return header;
+                }
+            };
+            myrequest.add(request);
+
+        }catch (JSONException e){
+            e.printStackTrace();
+        }
+    }//FINAL DE CODIGO ESPECIFICO
+
 
     public void infoUsuario(){
         mDatabase.child("usuarios").child("clientes").child(idUsuario).addValueEventListener(new ValueEventListener() {
@@ -724,7 +798,7 @@ public class ActivityCarritoCompras extends AppCompatActivity {
             pCarnes.put("cantidadCarnes", cantidadCarnes);
             pCarnes.put("precioCarnes", precioCarnes);
             pCarnes.put("precUCarnes", "100.00");
-            pCarnes.put("imgUrlCarnes", "https://firebasestorage.googleapis.com/v0/b/appsupermercado-37259.appspot.com/o/img_productos%2Fchuleta.jpg?alt=media&token=36715cc1-23ee-43b6-92ab-a6d5a2a258d4");
+            pCarnes.put("imgUrlCarnes", "https://firebasestorage.googleapis.com/v0/b/appsupermercado-37259.appspot.com/o/img_productos%2Fchuleta.png?alt=media&token=76be6ed9-ae5f-4d92-b97d-a069709a3b69");
             mDatabase.child("pedidos").child("nuevos").child(idGenerado).child("catCarnes").setValue(pCarnes);
         }
 
@@ -766,6 +840,35 @@ public class ActivityCarritoCompras extends AppCompatActivity {
         registroPedidos();
 
         Toast.makeText(ActivityCarritoCompras.this, "Pedido Realizado", Toast.LENGTH_LONG).show();
+
+
+        //datos de ubicación a la bd
+
+        LocationManager locationManager = (LocationManager) ActivityCarritoCompras.this.getSystemService(Context.LOCATION_SERVICE);
+
+        LocationListener locationListener = new LocationListener() {
+            @Override
+            public void onLocationChanged(@NonNull Location location) {
+                latitud = "" + location.getLatitude();
+                longitud = "" + location.getLongitude();
+
+                Map<String, Object> ubicaInfo = new HashMap<>();
+                ubicaInfo.put("latitud", latitud);
+                ubicaInfo.put("longitud", longitud);
+                mDatabase.child("pedidos").child("nuevos").child(idGenerado).child("infoPedido").updateChildren(ubicaInfo);
+            }
+
+            public void onStatusChanged(String provider, int status, Bundle extras){}
+
+            public void onProviderEnabled(String provider){}
+
+            public void onProviderDisabled(String provider){}
+        };
+        int permissionCheck = ContextCompat.checkSelfPermission(ActivityCarritoCompras.this,
+                Manifest.permission.ACCESS_FINE_LOCATION);
+        locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0,0, locationListener);
+
+        //
     }
 
     public void registroPedidos(){

@@ -24,6 +24,7 @@ import com.basgeekball.awesomevalidation.ValidationStyle;
 import com.google.android.gms.tasks.Continuation;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
@@ -46,14 +47,9 @@ import id.zelory.compressor.Compressor;
 
 public class ActivityRegisUsu extends AppCompatActivity {
 
+    EditText txtRegisCorreo, txtRegisNombre, txtRegisApellido, txtRegisTelefono, txtRegisDirec;
 
-    EditText txtRegisCorreo;
-    EditText txtRegisContra;
-    EditText txtRegisNombre;
-    EditText txtRegisApellido;
-    EditText txtRegisTelefono;
-    EditText txtRegisDirec;
-
+    TextInputLayout txtRegisContra;
     Button btnRegisCrear;
     Button btnRegisCancelar;
 
@@ -116,7 +112,7 @@ public class ActivityRegisUsu extends AppCompatActivity {
         txtRegisApellido = (EditText) findViewById(R.id.txtRegisApellido);
         txtRegisTelefono = (EditText) findViewById(R.id.txtRegisTelefono);
         txtRegisDirec = (EditText) findViewById(R.id.txtRegisDirec);
-        txtRegisContra = (EditText) findViewById(R.id.txtRegisContra);
+        txtRegisContra = (TextInputLayout) findViewById(R.id.txtRegisContra);
 
         //Cancela la creación del usuario
         btnRegisCancelar = (Button) findViewById(R.id.btnRegisCancelar);
@@ -232,7 +228,7 @@ public class ActivityRegisUsu extends AppCompatActivity {
                                 apellido = txtRegisApellido.getText().toString();
                                 telefono = txtRegisTelefono.getText().toString();
                                 direccion = txtRegisDirec.getText().toString();
-                                contra = txtRegisContra.getText().toString();
+                                contra = txtRegisContra.getEditText().getText().toString().trim();
 
                                 //Creación de usuario en la tabla de Authenticación
                                 mAuth.createUserWithEmailAndPassword(correo, contra).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
@@ -251,9 +247,7 @@ public class ActivityRegisUsu extends AppCompatActivity {
 
                                             String id = mAuth.getCurrentUser().getUid();
 
-                                            //imgref.child(id).setValue(map);
                                             imgref.child("clientes").child(id).setValue(map);
-                                            //imgref.push().child("usuarios").setValue(map);
                                             cargando.dismiss();
                                             Toast.makeText(ActivityRegisUsu.this, "Usuario Creado con Exito", Toast.LENGTH_LONG).show();
 
@@ -300,7 +294,7 @@ public class ActivityRegisUsu extends AppCompatActivity {
                 Toast.makeText(ActivityRegisUsu.this, "La contraseña no es válida o el usuario no tiene contraseña.", Toast.LENGTH_LONG).show();
                 txtRegisContra.setError("la contraseña es incorrecta ");
                 txtRegisContra.requestFocus();
-                txtRegisContra.setText("");
+                //txtRegisContra.setText("");
                 break;
 
             case "ERROR_USER_MISMATCH":
@@ -351,6 +345,5 @@ public class ActivityRegisUsu extends AppCompatActivity {
                 txtRegisContra.requestFocus();
                 break;
         }
-
     }
 }

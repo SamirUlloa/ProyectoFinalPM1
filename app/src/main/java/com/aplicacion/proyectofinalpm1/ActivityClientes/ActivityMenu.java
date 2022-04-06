@@ -2,8 +2,12 @@ package com.aplicacion.proyectofinalpm1.ActivityClientes;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
+import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -11,6 +15,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.aplicacion.proyectofinalpm1.ActivityControl.ActivityLogin;
+import com.aplicacion.proyectofinalpm1.ActivityRepartidor.MapsActivity;
 import com.aplicacion.proyectofinalpm1.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -22,7 +27,7 @@ import com.google.firebase.database.ValueEventListener;
 public class ActivityMenu extends AppCompatActivity {
 
     Button btnCerrarSesion;
-    LinearLayout btnPerfilClientes,btnCategorias,btnAcercaDe,btnCarrito, btndash;
+    LinearLayout btnPerfilClientes,btnCategorias,btnAcercaDe,btnCarrito, btndash, btnubica;
     TextView tvMenuUsuario;
 
     FirebaseAuth mAuth;
@@ -42,6 +47,26 @@ public class ActivityMenu extends AppCompatActivity {
 
         //Extrae de la BD el identificador del usuario logueado
         tipoUsuario();
+
+        //Permisos para obtener ubicación
+
+        int permissionCheck = ContextCompat.checkSelfPermission(this,
+                Manifest.permission.ACCESS_FINE_LOCATION);
+
+        if (permissionCheck == PackageManager.PERMISSION_DENIED){
+            if (ActivityCompat.shouldShowRequestPermissionRationale(this,
+                    Manifest.permission.ACCESS_FINE_LOCATION));
+
+            else {
+
+                ActivityCompat.requestPermissions(this,
+                        new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
+                        1);
+            }
+        }
+
+
+        //
 
         btnCerrarSesion.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -66,6 +91,15 @@ public class ActivityMenu extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(ActivityMenu.this, ActivityCategoria.class));
+                //finish();
+            }
+        });
+
+        btnubica = (LinearLayout) findViewById(R.id.btnUbicacion);
+        btnubica.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(ActivityMenu.this, MapsssActivity.class));
                 //finish();
             }
         });

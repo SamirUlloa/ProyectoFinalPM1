@@ -171,7 +171,7 @@
                 <ImageView
                     android:id="@+id/imgP1"
                     android:layout_width="60dp"
-                    android:layout_height="80dp"
+                    android:layout_height="84dp"
                     android:layout_marginHorizontal="10dp"
                     android:background="#00FFFFFF"
                     app:layout_constraintBottom_toBottomOf="parent"

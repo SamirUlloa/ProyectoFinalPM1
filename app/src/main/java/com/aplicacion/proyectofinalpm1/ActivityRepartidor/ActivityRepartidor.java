@@ -26,9 +26,8 @@ import java.util.ArrayList;
 
 public class ActivityRepartidor extends AppCompatActivity {
 
-    TextView textViewRepar;
-    Button btnReparCerrar;
-    Button btnReparPerfil;
+    TextView textViewRepar, tvRepListadoP;
+    Button btnReparCerrar, btnReparPerfil;
     String idUsuario = "";
 
     ListView listaPedidosNR;
@@ -49,6 +48,7 @@ public class ActivityRepartidor extends AppCompatActivity {
         mDatabase = FirebaseDatabase.getInstance().getReference();
 
         textViewRepar = findViewById(R.id.textViewRepar);
+        tvRepListadoP = findViewById(R.id.tvRepListadoP);
 
         tipoUsuario();
 
@@ -111,6 +111,7 @@ public class ActivityRepartidor extends AppCompatActivity {
     }
 
     public void mostrarPedidos(){
+        contarPedidos();
         DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
         DatabaseReference mRootChild = mDatabase.child("pedidos").child("registroNue");
 
@@ -125,6 +126,7 @@ public class ActivityRepartidor extends AppCompatActivity {
                 String string = dataSnapshot.getValue(String.class);
                 arrayList.add(string);
                 adapter.notifyDataSetChanged();
+                contarPedidos();
             }
             @Override
             public void onChildChanged(DataSnapshot dataSnapshot, String s){
@@ -135,6 +137,7 @@ public class ActivityRepartidor extends AppCompatActivity {
                 String string = dataSnapshot.getValue(String.class);
                 arrayList.remove(string);
                 adapter.notifyDataSetChanged();
+                contarPedidos();
             }
             @Override
             public void onChildMoved(DataSnapshot dataSnapshot, String s){
@@ -145,5 +148,20 @@ public class ActivityRepartidor extends AppCompatActivity {
 
             }
         });
+    }
+
+    public void contarPedidos(){
+        mDatabase.child("pedidos").child("registroNue").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                tvRepListadoP.setText("Listado de pedidos por ID (" + dataSnapshot.getChildrenCount() + ") Pendientes");
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                System.out.println("Fallo la lectura: " + databaseError.getCode());
+            }
+        });
+
     }
 }

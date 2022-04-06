@@ -87,7 +87,7 @@ public class ActivityCarnes extends AppCompatActivity {
                     carrito.put("cantidadCarnes", contador);
                     carrito.put("precUCarnes", "100.00");
                     carrito.put("precioCarnes", txvPTotalCA.getText().toString());
-                    carrito.put("imgUrlCarnes", "https://firebasestorage.googleapis.com/v0/b/appsupermercado-37259.appspot.com/o/img_productos%2Fchuleta.jpg?alt=media&token=36715cc1-23ee-43b6-92ab-a6d5a2a258d4");
+                    carrito.put("imgUrlCarnes", "https://firebasestorage.googleapis.com/v0/b/appsupermercado-37259.appspot.com/o/img_productos%2Fchuleta.png?alt=media&token=76be6ed9-ae5f-4d92-b97d-a069709a3b69");
                     mDatabase.child("carrito").child(idUsuario).child("catCarnes").setValue(carrito);
                     //mDatabase.child("carrito").child(idUsuario).updateChildren(carrito);
 
