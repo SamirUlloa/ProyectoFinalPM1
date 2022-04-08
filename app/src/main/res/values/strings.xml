@@ -3,5 +3,5 @@
     <string name="invalid_mail">Ingrese Mail Valido</string>
     <string name="invalid_password">Ingrese Password Mayor a 6 digitos</string>
     <string name="title_activity_maps">MapsActivity</string>
-    <string name="title_activity_mapsss">MapsssActivity</string>
+    <string name="title_activity_ubica">UbicaActivity</string>
 </resources>

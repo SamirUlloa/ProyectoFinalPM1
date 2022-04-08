@@ -2,12 +2,8 @@ package com.aplicacion.proyectofinalpm1.ActivityClientes;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
 
-import android.Manifest;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -48,26 +44,6 @@ public class ActivityMenu extends AppCompatActivity {
         //Extrae de la BD el identificador del usuario logueado
         tipoUsuario();
 
-        //Permisos para obtener ubicación
-
-        int permissionCheck = ContextCompat.checkSelfPermission(this,
-                Manifest.permission.ACCESS_FINE_LOCATION);
-
-        if (permissionCheck == PackageManager.PERMISSION_DENIED){
-            if (ActivityCompat.shouldShowRequestPermissionRationale(this,
-                    Manifest.permission.ACCESS_FINE_LOCATION));
-
-            else {
-
-                ActivityCompat.requestPermissions(this,
-                        new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
-                        1);
-            }
-        }
-
-
-        //
-
         btnCerrarSesion.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -99,7 +75,7 @@ public class ActivityMenu extends AppCompatActivity {
         btnubica.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(ActivityMenu.this, MapsssActivity.class));
+                startActivity(new Intent(ActivityMenu.this, UbicaActivity.class));
                 //finish();
             }
         });

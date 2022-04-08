@@ -35,9 +35,9 @@
             android:value="AIzaSyCmZqDa-oIrQQSZI5jAD_BLMll8bkRx67Y" />
 
         <activity
-            android:name=".ActivityClientes.MapsssActivity"
+            android:name=".ActivityClientes.UbicaActivity"
             android:exported="false"
-            android:label="MapsssActivity" />
+            android:label="@string/title_activity_ubica" />
         <activity
             android:name=".ActivityRepartidor.MapsActivity"
             android:exported="false"

@@ -48,7 +48,7 @@ import java.util.Map;
 
 public class ActivityCarritoCompras extends AppCompatActivity {
 
-    private final int cargaDatos = 400;
+    private final int cargaDatos = 2500;
 
     TextView tvSubtotal, tvImpuesto, tvTotal;
     TextView tvNomP1, tvPreP1, tvCantP1, tvSubP1;
